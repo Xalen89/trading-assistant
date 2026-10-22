@@ -29,14 +29,14 @@ Fibonacci levels: OTE, Quarters, STDV
 
 ## Turtle Soup
 
-Sweeping a high/low into a bearish/bullish Power of 3 (PD) array followed by distribution. Highly effective when paired with:
-- SMT (Synchro Market Transformation)
+Sweeping a high/low into a bearish/bullish PD array followed by distribution. Highly effective when paired with:
+- SMT
 - Wyckoff spring schematics
 
 ## Confluence Factors
 
 ### Core Levels
-- **FVG C.E.** - Fair Value Gap midpoints
+- **FVG C.E.** - Fair Value Gap midpoints (C.E. = "Middle")
 - **IFVG C.E.** - Inverse Fair Value Gap midpoints
 - **RDRB** - Re-deliver Re-balance
 - **Overlap C.E. (HIPPOs)** - Overlapping candle wicks
@@ -83,4 +83,4 @@ Formed by aligning multiple confluences:
 - FVG C.E.
 - MOP
 
-These confluences create clear, simplified zones for entry.
+These confluences create clear, simplified zones.
