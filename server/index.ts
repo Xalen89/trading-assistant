@@ -1,0 +1,51 @@
+import dotenv from 'dotenv';
+import path from 'node:path';
+import { Pool } from 'pg';
+import { AIService } from './ai.js';
+import { createApp } from './app.js';
+import { PriceService, type OandaConfig } from './prices.js';
+import { MemoryRepository, PostgresRepository, type Repository } from './repository.js';
+
+dotenv.config({ path: path.join(__dirname, '.env'), quiet: true });
+async function main() {
+  const mode = process.env.DATABASE_URL ? 'live' : 'demo';
+  let repository: Repository;
+  if (process.env.DATABASE_URL) {
+    const pg = new PostgresRepository(new Pool({ connectionString: process.env.DATABASE_URL, max: 5,
+      connectionTimeoutMillis: 5000, idleTimeoutMillis: 30000, statement_timeout: 10000 }));
+    await pg.init(); repository = pg;
+  } else repository = new MemoryRepository();
+  const environment = process.env.OANDA_ENVIRONMENT ?? 'practice';
+  if (!['practice', 'live'].includes(environment)) throw new Error('Invalid configuration');
+  const instrumentName = (value: string) => {
+    if (!/^[A-Z0-9_]{2,40}$/.test(value)) throw new Error('Invalid configuration');
+    return value;
+  };
+  const oanda: OandaConfig | undefined = process.env.OANDA_API_TOKEN ? {
+    token: process.env.OANDA_API_TOKEN, environment: environment as OandaConfig['environment'],
+    nas100: instrumentName(process.env.OANDA_NAS100_INSTRUMENT ?? 'NAS100_USD'),
+    xauusd: instrumentName(process.env.OANDA_XAUUSD_INSTRUMENT ?? 'XAU_USD'),
+  } : undefined;
+  const ai = new AIService({ apiKey: process.env.ANTHROPIC_API_KEY, model: process.env.ANTHROPIC_MODEL });
+  const app = createApp({ repository, prices: new PriceService(repository, mode, oanda), ai, mode, apiToken: process.env.API_TOKEN });
+  const host = process.env.HOST ?? '127.0.0.1';
+  const port = Number(process.env.PORT ?? 3001);
+  if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error('Invalid configuration');
+  const server = app.listen(port, host, () => {
+    console.log(`Trading API listening on ${host}:${port} (${mode}; ${ai.configured ? 'AI configured' : 'AI demonstration only'}).`);
+    if (mode === 'demo') console.log('DEMO MODE: synthetic candles and in-memory storage; all data is lost on restart.');
+    if (!process.env.API_TOKEN && host !== '127.0.0.1' && host !== 'localhost' && host !== '::1') console.warn('Warning: API_TOKEN is not set for a non-loopback listener.');
+  });
+  server.requestTimeout = 30000;
+  server.headersTimeout = 10000;
+  server.on('error', () => { console.error('API listener failed. Check host and port configuration.'); process.exitCode = 1; void repository.close(); });
+  let closing = false;
+  const shutdown = () => {
+    if (closing) return; closing = true;
+    const timer = setTimeout(() => { server.closeAllConnections(); void repository.close(); }, 5000);
+    timer.unref();
+    server.close(() => { clearTimeout(timer); void repository.close(); });
+  };
+  process.once('SIGTERM', shutdown); process.once('SIGINT', shutdown);
+}
+void main().catch(() => { console.error('API startup failed. Check database connectivity and environment configuration.'); process.exitCode = 1; });
