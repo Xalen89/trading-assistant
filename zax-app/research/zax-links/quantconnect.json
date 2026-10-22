@@ -1,0 +1,30 @@
+{
+  "id": "quantconnect-research",
+  "name": "QuantConnect Research",
+  "url": "https://github.com/QuantConnect/Research",
+  "license": "Apache License 2.0",
+  "exists": true,
+  "methods": [
+    "Static cointegration pairs: log-price OLS spread, ADF stationarity test, 250-session rolling regression, and 1.5-standard-deviation divergence marker in the educational notebook.",
+    "Dynamic two-state Kalman-filter hedge ratio: beta and intercept update with delta=1e-4 and observation variance=1e-3 in the Python Research2Production example.",
+    "Stationarity and z-score teaching helper, which Zax should not use as a whole-sample forward signal."
+  ],
+  "reuseDecision": "Implement the published statistical methods independently in TypeScript; do not copy notebook source or integrate QuantBook, LEAN, QuantConnect Cloud/API, or QuantConnect data. If source is later copied, Apache-2.0 redistribution notices and modification notices apply.",
+  "requirements": [
+    "For independent pairs research: Zax-permitted aligned historical bars, declared as-of cut-offs, and corporate-action-consistent equity prices or venue-specific crypto mids/closes; no QuantConnect account, provider registration, credential, or data transfer is needed.",
+    "QuantConnect local research uses Docker and its CLI documentation says paid organization-tier membership is required; it is not suitable as an Expo client dependency.",
+    "QuantConnect REST API access is documented for the Quant Researcher tier and requires a User ID, emailed API token, timestamp, SHA-256-derived Basic authorization, and secure server-side credential storage if ever elected.",
+    "No authoritative general QuantConnect REST request-rate number was verified in the official API index/authentication documentation reviewed; do not propagate the unrelated Composer 500 req/sec claim.",
+    "Do not use QuantConnect Download-licensed data in Zax: the documented license is for the licensed organization's internal LEAN use only and prohibits redistribution or conversion."
+  ],
+  "sources": [
+    "https://api.github.com/repos/QuantConnect/Research",
+    "https://raw.githubusercontent.com/QuantConnect/Research/master/LICENSE",
+    "https://raw.githubusercontent.com/QuantConnect/Research/master/Analysis/05%20Pairs%20Trading%20Strategy%20Based%20on%20Cointegration.ipynb",
+    "https://raw.githubusercontent.com/QuantConnect/Research/master/Research2Production/Python/04%20Kalman%20Filters%20and%20Pairs%20Trading.ipynb",
+    "https://www.quantconnect.com/docs/v2/cloud-platform/api-reference/authentication",
+    "https://www.quantconnect.com/docs/v2/cloud-platform/datasets/licensing",
+    "https://www.quantconnect.com/docs/v2/cloud-platform/organizations/tier-features"
+  ],
+  "reportPath": "/home/ubuntu/stratdesk/research/zax-links/quantconnect.md"
+}

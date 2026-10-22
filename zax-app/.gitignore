@@ -1,0 +1,130 @@
+# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
+
+# dependencies
+node_modules/
+.pnpm-store/
+*.manus-starter-[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f]
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# Native
+.kotlin/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Metro
+.metro-health-check*
+
+# debug
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# macOS
+.DS_Store
+*.pem
+
+# local env files
+.env*.local
+
+# typescript
+*.tsbuildinfo
+
+app-example
+
+# generated native folders
+/ios
+/android
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+logs
+*.log
+
+# OS
+Thumbs.db
+
+# Build files
+*.tgz
+*.tar.gz
+.cache/
+
+# Webdev artifacts (checkpoint zips, migrations, etc.)
+.webdev/
+
+# Local validation exports and protected environment inputs
+/artifacts/expo-export/
+/artifacts/tradelocker-export/
+/artifacts/tradelocker-final-export/
+.env
+.env.*
+!.env.example
+/artifacts/signin-fix-export/
+
+# Private/rebuildable Python cache and finite validation exports
+.venv/
+__pycache__/
+*.pyc
+/artifacts/resource-export/
+/deliverables/
+/artifacts/owner-setup-export/
+
+# Large raw public-source research inventories; compact complete registry is committed
+/research/strategy-inventory/paperswithbacktest.json
+/research/strategy-inventory/quant-vault.json
+/artifacts/catalog-export/
+/artifacts/scenario-export/
+
+# Rebuildable private release/publication output
+/artifacts/private-release-export/
+/web-dist/
+/artifacts/preview-routing-export/
+
+# Rebuildable finite Lightweight Charts validation output
+/artifacts/lightweight-chart-check/
+/artifacts/lightweight-export/
+
+# Rebuildable mobile decluttering validation exports
+/artifacts/declutter-export/
+/artifacts/declutter-browser/
+
+# Rebuildable workbench browser verification
+/artifacts/quant-workbench-fixture/
+/artifacts/purpose-export/
+
+# Rebuildable optional session overlay platform source exports
+/artifacts/session-export/
+
+# Rebuildable 18 October platform-source exports
+/artifacts/zax-oct18-export/
+/artifacts/zax-oct18-web-final/
+
+# Rebuildable multi-timeframe scenario source export
+/artifacts/scenario-layer-export/
+
+# Rebuildable current-scenario recovery export
+/artifacts/current-scenario-fix-export/
+
+# Private repository sync: runtime data and generated artifacts are never code exports
+/artifacts/
+/completion/
+/uploads/
+/downloads/
+*.keystore
+*.sqlite
+*.sqlite3
+*.db

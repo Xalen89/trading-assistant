@@ -1,0 +1,30 @@
+I need it to stop saying live quote unavailable so much. Also my app name is Zax. I will give you the symbol later. The phrase "implemented in source, not device-verified" appears dozens of times. That's a distribution and trust problem masquerading as a feature problem.
+
+Pairs cointegration + Engle-Granger ADF
+github.com/QuantConnect/Research (notebook 05: Pairs Trading Strategy Based on Cointegration)
+github.com/nirajneupane17/Statistical-Arbitrage-Pairs-Trading
+github.com/Mavarun/stat-arb-pairs
+Goes further: Johansen trace cross-check, Benjamini-Hochberg FDR correction across the pair universe, Kalman-filtered time-varying hedge ratio, non-overlapping 252-bar formation / 63-bar trading blocks.
+Cross-sectional momentum, quintile ranking
+github.com/quantopian/alphalens — literally ships "Cumulative Returns by Quantile" tear sheets, quantiles=5
+Goes further: quantile turnover, sector-neutral grouping, factor decay curves, IC analysis. Your quintile long/short is one function in their tear sheet.
+Multi-asset trend with inverse-volatility weighting
+github.com/pst-group/pysystemtrade — Rob Carver's open-sourced live system
+Goes further: volatility targeting at instrument and portfolio level, forecast scalar estimation, EWMAC crossover families, a full production engine that actually trades. Inverse-vol is the foundation of the whole thing, not a module.
+Forward-return classifier with walk-forward + holdout
+github.com/hudson-and-thames/mlfinlab — PurgedKFold, embargo, CPCV
+github.com/hudson-and-thames/example-notebooks — Chapter 7 notebook on purging & embargo
+Goes further — this is your weakest module: purged K-fold with embargo and combinatorial purged CV are the standard for financial labels. Plain walk-forward + one holdout leaks information through overlapping label windows. Note mlfinlab has gone partly closed-source; the free fork is danielfzhang-clearmind/purged-cross-validation.
+Decision-stump classification
+github.com/scikit-learn/scikit-learn — DecisionTreeClassifier(max_depth=1)
+Goes further: built-in calibration, GridSearchCV, class weighting, probability outputs. A stump is one constructor argument for them.
+L2 market making with inventory quoting
+github.com/hummingbot/hummingbot — pure_market_making strategy with inventory skew
+Goes further: live venue connectors, real order placement, inventory limits, spread management. Yours models it; theirs does it.
+Order-book imbalance / label classification
+github.com/nautechsystems/nautilus_trader — backtest_orderbook_binance.py replays real L2 deltas and fires FOK orders on book imbalance
+Goes further: nanosecond-resolution L2/L3 replay, real depth archives, not 3-snapshot uploads. Your "offline classifier" is their Tuesday.
+The no-code endgame: Composer
+composer.trade — "inverse volatility" is a dropdown in the weighting menu
+api.composer.trade/docs — public backtest endpoint at 500 req/sec
+Closed source, but: a visual editor, 50+ weighting/conditional blocks, and a searchable database of thousands of pre-backtested strategies. This is the closest thing to your "no-code quant studio" and it has a nine-year head start.

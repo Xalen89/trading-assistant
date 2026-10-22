@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "sourceRecords": 11374,
+  "catalogRecords": 11374,
+  "identityDuplicates": 0,
+  "semanticDeduplicationComplete": false,
+  "summaries": [
+    {
+      "collection": "paperswithbacktest",
+      "label": "PapersWithBacktest",
+      "entries": 5546,
+      "coverage": "5546/5546 sitemap detail pages retrieved",
+      "limitations": "Complete code/pseudocode gated. Public backtest sections are third-party claims, not StratDesk tests."
+    },
+    {
+      "collection": "quant-vault",
+      "label": "The Quant Trading Vault",
+      "entries": 5808,
+      "coverage": "5806 unique local document blobs +2 index-only records; complete recursive tree",
+      "limitations": "Source license not established. Metadata is not proof of complete rules, authorized copying or runnable strategy."
+    },
+    {
+      "collection": "sgx-orderbook",
+      "label": "SGX order-book methods",
+      "entries": 20,
+      "coverage": "Complete tree;20unique methods/references,5classifier families; zero deployable strategies",
+      "limitations": "Source license not established. Metadata is not proof of complete rules, authorized copying or runnable strategy."
+    }
+  ]
+}

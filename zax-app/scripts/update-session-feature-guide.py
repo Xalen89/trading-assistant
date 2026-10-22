@@ -1,0 +1,24 @@
+import json
+from pathlib import Path
+
+root = Path(__file__).resolve().parents[1]
+p = root / 'lib/trading/feature-purpose-data.json'
+groups = json.loads(p.read_text())
+items = [
+ ('strategies', 'London Breakout AI-assisted source', 'Detect a complete Asian-range 15m closed breakout with source stop/TP choices.', 'Strategies → Session & pivot strategies → London', 'Add/apply 15m; configure midpoint/opposite stop and 1.5R/2R/range-height target; save/approve the source gate.', 'Exact 00:00–03:00 fixed EST high/low/midpoint, post-03:00 close and source geometry.', 'Review source blockers before deliberately arming paper.', 'Data required', 'No coarse H1/H4 three-hour inference, missing bars, invented volume filter or predictive validation.'),
+ ('strategies', 'Initial Balance AI-assisted source', 'Detect the exact first-hour range then a 15m/30m closed break using the explicitly selected volume basis.', 'Strategies → Session & pivot strategies → Initial Balance', 'Choose 15m/30m; midpoint stop and one-range-height target beyond the broken edge. Detect instrument and fill missing verified settings; choose venue-only or explicitly labelled broker reported proxy. Approved volume≥1.5×prior20 and app11:30 cutoff.', '09:30–10:30 fixed EST reference, truthful volume/clock/risk, actual tick when required, exact source levels and remaining blockers.', 'Save the source revision, approve the current same-direction gate, then deliberately arm paper if wanted.', 'Data required', 'Broker reported proxy is not exchange/venue volume and is never auto-selected. Missing/zero volume and incomplete30m periods remain blocked. No institutional/statistical edge claim.'),
+ ('strategies', 'Red-to-Green / Green-to-Red AI-assisted source', 'Detect an observed same-source PDC quote cross with actual opening, selected relative-volume basis and complete morning risk.', 'Strategies → Session & pivot strategies → R2G/G2R', 'Choose1m/5m; Detect instrument → Fill missing verified settings → Save. Supported price tick/provider-day PDC/dynamic actual PDH/PDL populate without freezing target prices. Personal session, tick and key-target overrides remain.', 'One timestamped sampled crossing, transparent provider-day PDC, actual morning extreme plus true tick, dynamic/manual source targets and precise blockers.', 'Deliberately choose broker reported proxy only if desired; save/reapprove native source and arm paper separately.', 'Data required', 'Provider UTC trading-day close is not US RTH or settlement. No invented calendar/previous quote/key/premarket level, first-tick guarantee or stale crossing reuse. Actual source volume/tick/daily data must exist.'),
+ ('paper', 'Optional automatic session paper entries', 'Create one canonical source-bracket simulated trade per event under deliberate bounded consent.', 'Strategies → selected London/IB/PDC → Automatic paper', 'Save approved source/gate; choose1–2% realized-balance risk and1–3daily cap; arm<=24hours. Foreground default; closed-app permission is separate.', 'Fresh source/quote checks, shared lock, durable signal/proposal/order ID, full-position source SL/TP and journal.', 'Review simulated positions or turn Off.', 'Data required', 'Paper-only; no LLM execution authority, real broker order, generic target substitution or practice fallback. Original ORB consent is not widened.'),
+ ('alerts', 'Published session monitoring and setup alerts', 'Monitor enabled source watches from the private published backend and expose actual callback/device states.', 'Strategies → Watch this strategy; Alerts → Background strategy monitoring', 'Publish current handler; activate monitoring; verify completed mapped callback; register native device. Then separately arm Also when closed if wanted.', 'Owner/taskUID mapping, deduplicated events, heartbeat/registration and bounded sampled scanning.', 'Receive a real device alert before claiming native delivery.', 'Deployment required', 'No development schedule created; publication/registration is not callback or push proof. Polling/rotation can miss fast moves; actual native build/permissions/device proof remain needed.')
+]
+for group_id, name, purpose, location, how, output, next_action, status, limits in items:
+    group = next(group for group in groups if group['id'] == group_id)
+    entry = dict(name=name, purpose=purpose, location=location, how_to_use=how,
+                 output=output, next_action=next_action, status=status, limits=limits)
+    existing = next((feature for feature in group['features'] if feature['name'] == name), None)
+    if existing is None:
+        group['features'].append(entry)
+    else:
+        existing.update(entry)
+p.write_text(json.dumps(groups, indent=2, ensure_ascii=False) + '\n')
+print('Feature inventory:', sum(len(group['features']) for group in groups))

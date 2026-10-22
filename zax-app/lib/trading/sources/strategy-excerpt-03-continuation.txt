@@ -1,0 +1,19 @@
+User-supplied continuation — 2026-10-15
+
+Key Execution Rules
+1. Entry (Oversold Bounce): Wait for price to close back inside the lower Bollinger Band while RSI crosses back above 30.
+2. Stop Loss: Placed a fixed distance below the recent extreme price wick.
+3. Exit Target: The middle band (20-period Simple Moving Average) serves as the primary profit target.
+
+4. Scalping
+Core Mechanics
+Scalping is an ultra-fast strategy focused on capturing tiny price moves repeatedly throughout the trading day. Scalpers focus on immediate market microstructure and liquidity imbalances rather than long-term chart trends.
+Timeframe: 5-second, 15-second, or 1-minute tick charts.
+Holding Period: Seconds to a few minutes.
+How It Looks On Your Screen
+Workstation Layout: Dominated by a Direct Market Access (DMA) Order Entry Ticket, a Level 2 depth-of-market ladder, and real-time Time & Sales stream.
+Chart Setup: Very few indicators; focus is on tick-by-tick order flow and sudden shifts in bid/ask sizing.
+Key Execution Rules
+1. Entry: Buy at the Bid price when a large buyer wall appears on Level 2 or heavy green prints sweep the Tape.
+2. Stop Loss: Tight stop loss (often 2–5 ticks) placed immediately upon execution.
+3. Exit: Limit order placed 3 to 10 ticks higher to lock in immediate gains before price momentum slows.

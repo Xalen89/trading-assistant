@@ -1,0 +1,14 @@
+# Breakout & momentum — audit (2026-10-17)
+
+**Status: structural watch; not executable or validated.** The preset is a user-uploaded reference (`indicator-presets.ts:70–122`; source `strategy-excerpt-03.txt:17–28`). Detector (`indicator-setups.ts:201–303`) computes completed 1/5/15m prior-10-bar resistance/range, width ≤2× prior ATR14, lower range-volume mean, green close above resistance, and prior-20-bar RVOL—not a flag/wedge. Coinbase volume alone is “known”; catalyst, real tick/stop-limit, L2/tape/profile are unknown. `ready` stays false. Close/low references do not implement stop-limit entry, source stop below range/breakout low, or 2R/3R target; shorts are not inferred. Chart layers are declarations (`strategy-indicators.ts:4,48–50`).
+
+**Feed reality.** Per scope, history/candles are selected TradeLocker or public Coinbase crypto. `client.ts:13–14` polls quotes 15s, TradeLocker candles 20s; Coinbase ticker WebSocket is price-only and ticker-created bars get zero volume (`client.ts:40–48`). Use completed candles for RVOL: Coinbase supplied volume is same-frame venue volume, not consolidated/TOD-normalized; broker volume semantics are unknown, indicative—not verified exchange volume (`indicators.ts:145–173`). Missing: L2/NBBO, catalyst/news, historical ticks, confirmed 5–10-year macro/PIT total-return universe.
+
+**Falsifiable confluence candidates (research hypotheses only; closed bars, configurable weights):**
+1. Trigger: green 1/5/15m close above previous 10 completed highs; range width ≤2× ATR14 measured before trigger (`indicator-setups.ts:202–218`).
+2. Coinbase RVOL ≥2: trigger-bar completed volume / mean of previous 20 same-frame completed volumes (`indicators.ts:145–154`); exclude broker volume.
+3. Coinbase consolidation-volume contraction: prior-10 mean < preceding-20 mean, known volumes only (`indicator-setups.ts:220–245`).
+4. Directional context: last completed 1h close above/below close six completed hours earlier, aligned to breakout side (`setup-engine.ts:176–204`); hypothesis, not presently attached to this detector.
+5. Retest persistence: within next 3 completed bars, trade within 0.25× pre-break ATR14 of resistance and close back beyond it; candle source/timestamps required; not implemented.
+
+**Promotion gates:** ≥100 independently timestamped qualifying outcomes per asset/setup; less is insufficient (`foundry-scope-04.txt:54–63`). Log point-in-time per-condition state/source/latency and outcomes; analyze expectancy, win rate, PF, MAE by condition/score, >0.9 condition correlations and multiple-hypothesis correction (`confluence-scope-05.txt:10–49`). Use closed bars/no look-ahead, costs, rolling train→next-window tests, and untouched latest holdout; require walk-forward plus holdout before promotion. `research_engine.py:18,38–54,90–120` only tests MA-cross/FVG, not breakout. No 100 outcomes or validated model; no synthetic validation used.

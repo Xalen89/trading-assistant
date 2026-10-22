@@ -1,0 +1,71 @@
+CONFLUENCE REQUIREMENTS
+
+Definition
+Every strategy must be defined as three parts, not one:
+  (1) trigger condition
+  (2) a named set of confluence conditions, each with an explicit weight
+      and an explicit data source
+  (3) a minimum confluence gate that must be met before the trade is valid
+
+Structural rules
+- No strategy may fire on the trigger alone. The gate is mandatory.
+- Every confluence condition must be falsifiable and sourced from real,
+  point-in-time data. No vague conditions ("looks strong", "good momentum").
+- Weights are configuration, not hardcoded. They must be tunable and must
+  be validated out-of-sample like any other parameter.
+- Condition weights must be independent enough to be informative. Flag any
+  two conditions that are >0.9 correlated, since they double-count.
+
+Runtime behaviour
+- Before entry, render the live confluence checklist: each condition with
+  met / not met / pending status and its data source visible.
+- Show the running confluence score against the strategy's gate.
+- Alert when the trigger fires but confluence is below the gate.
+- On every trade taken, log the confluence score AND the per-condition
+  state at entry time. This is non-negotiable — no logging, no learning.
+
+Analytics requirements
+- Measure win rate, expectancy, profit factor, and max adverse excursion
+  broken down by confluence score bucket.
+- Measure win rate and expectancy broken down by EACH individual
+  confluence condition (present vs absent).
+- Rank conditions by measured contribution to expectancy.
+- Flag conditions that add no measurable edge, with sample size shown.
+- Flag conditions that are inversely correlated with wins.
+- Report the optimal gate threshold and how much it moves expectancy.
+
+AI advisor requirements
+- The AI must explain which confluences correlated with wins, always
+  citing sample size and out-of-sample confirmation status.
+- The AI must never state an edge for a condition with < 100 samples
+  without labelling it unconfirmed.
+- When proposing a rule change, the AI must state which condition it is
+  adding, removing, or reweighting, and the measured effect.
+
+Validation
+- The whole confluence model for a strategy must pass walk-forward with a
+  holdout set before being promoted from paper to live.
+- A condition that fails out-of-sample must be demoted to "watch" rather
+  than silently kept.
+Your Confluence Requirements spec is exceptionally rigorous—it reads like a professional-grade quant fund's risk and validation playbook. It completely solves the "journaling vs. data" problem by forcing objective quantification and strict out-of-sample discipline.
+While the spec is already solid enough to hand directly to an AI or developer, four minor technical blind spots can be added to bulletproof it against runtime edge-cases, data leaks, and UI friction.
+Recommended Additions & Improvements
+1. Weight Normalization (UX & Logic)
+* The Gap: If weights are arbitrary numbers (e.g., Condition A = 3, Condition B = 2, Gate = 4), the scoring math becomes hard to interpret quickly on a live mobile screen.
+* The Fix: Require that all condition weights for a strategy normalize to a 0–100% scale (or sum to a fixed base like 10.0). This makes the live confluence score instantly readable as a percentage (e.g., "78% Confluence Met").
+2. Stale Data & Latency Fallback Handling
+* The Gap: In live streaming, what happens if a specific data source (e.g., an L2 order book feed or volume profile API) lags, drops, or loses connection right when a trigger fires?
+* The Fix: Add a runtime fallback rule: "If any data source feeding an active confluence condition has a latency greater than X milliseconds or loses connection, the condition defaults to 'Pending / Stale', and the trade is blocked from auto-executing until resolved."
+3. Look-Ahead Bias and Repainting Protection
+* The Gap: The spec mentions "point-in-time data," but in backtesting, indicators like MACD or moving averages can sometimes use future bar closes or repaint if not strictly isolated.
+* The Fix: Explicitly mandate that historical feature calculation use strictly closed-bar data (e.g., indicator values evaluated at the close of candle t-1 for execution at the open of candle t) to prevent look-ahead bias during walk-forward optimization.
+4. Regime Interaction Layer
+* The Gap: A confluence condition might have a high win-rate contribution overall, but perform terribly during specific market states (e.g., a momentum confluence failing entirely in a choppy consolidation range).
+* The Fix: Require that individual condition analytics break down performance by market regime (Trending vs. Choppy, High vs. Low Volatility), ensuring the AI doesn't recommend a confluence that only worked during a specific past market phase.
+Suggested Text to Append to Your Spec
+- **Weight Normalization:** All strategy condition weights must normalize to a total scale of 100%, allowing the live confluence score to be displayed intuitively as an aggregate percentage against the gate threshold.
+- **Latency & Stale Data Guard:** If a live data source feeding a confluence condition is stale or disconnected at trigger time, the condition defaults to "Pending" and blocks entry execution.
+- **No-Repaint Historical Rule:** All backtest and historical feature calculations must use strictly closed-bar data ($t-1$) to eliminate look-ahead bias.
+- **Regime-Conditioned Confluence:** Per-condition contribution analytics must be segmented by market regime (Trending/Choppy) to avoid false edges tied to specific past market states.
+
+Design a dark-mode UI with a sharp, sleek, modern aesthetic. Use a dark charcoal and deep slate color palette with subtle high-contrast accents. Keep layouts clean, minimalistic, and functional, with sharp corners and crisp line work. high-density typography, and flat surfaces with zero clutter. Compact layout. Technical.

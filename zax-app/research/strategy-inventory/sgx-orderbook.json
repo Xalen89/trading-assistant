@@ -1,0 +1,444 @@
+{
+  "inventory_id": "sgx-orderbook-tick-data-trading-strategy-master-2026-10-15",
+  "collection": {
+    "owner": "rorysroes",
+    "repository": "SGX-Full-OrderBook-Tick-Data-Trading-Strategy",
+    "url": "https://github.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy",
+    "default_branch": "master",
+    "research_mode": "static public-source discovery only; no repository code was executed and no large repository data CSV was downloaded"
+  },
+  "coverage": {
+    "basis": "GitHub recursive tree for master returned truncated=false; this is tree coverage, not a homepage/README list.",
+    "tree_entries": 38,
+    "tree_blobs": 27,
+    "tree_directories": 11,
+    "notebook_paths": 13,
+    "unique_notebook_blob_hashes": 8,
+    "csv_paths": 4,
+    "png_paths": 7,
+    "text_paths": 1,
+    "reviewed_unique_notebooks": [
+      "Data_Transformation/.ipynb_checkpoints/Untitled-checkpoint.ipynb (empty)",
+      "Data_Transformation/Train_Test_Builder/.ipynb_checkpoints/Train_Test_Builder-checkpoint.ipynb (source-equivalent to primary except cell index)",
+      "Data_Transformation/Train_Test_Builder/Train_Test_Builder.ipynb",
+      "Data_Transformation/order book data/Data_Transformation_Code.ipynb",
+      "Feature_Selection/SGX_A50_Market_Feature.ipynb",
+      "Feature_Selection/Train_Test_Data_Builder_Feature_Depth_Extractor.ipynb",
+      "Feature_Selection/Train_Test_Data_Builder_Feature_Rise_Extractor.ipynb",
+      "Model_Selection/Model_Selection.ipynb"
+    ],
+    "duplicate_checkpoint_coverage": "Five checkpoint paths share the exact blob SHA of their corresponding main notebook. The remaining Train_Test_Builder checkpoint differs only by an empty-cell position in statically extracted source.",
+    "data_downloads": [
+      "Only the 3,290-byte transformed order-book sample was read to verify schema.",
+      "The three larger CSV files (6,217,396; 6,752,803; and 8,193,762 bytes) were not downloaded."
+    ],
+    "excluded_as_nonmethods": [
+      "Seven PNG output/illustration files",
+      "Empty Untitled checkpoint",
+      "Duplicated checkpoint blobs",
+      "README graphics"
+    ],
+    "source_tree_url": "https://api.github.com/repos/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/git/trees/master?recursive=1"
+  },
+  "license_and_data_rights": {
+    "code_license": "No repository license is declared: repository API license is null, the complete master tree contains no path with 'license', and the GitHub license endpoint returns HTTP 404. Treat code as unlicensed; no reuse permission is inferred.",
+    "data_rights": "No provenance contract, vendor/exchange data license, redistribution authorization, or data-use grant was found in README, tree, notebooks, or Data_Transformation/Data_Problem.txt. The latter is a Big5-encoded data-quality note, not a rights statement. Treat bundled CSV data as rights-unknown/unlicensed.",
+    "data_quality_notes": "Data_Problem records timestamp-order issues before 08:45 on named 2014 dates, microsecond/Best Price/QuantityDifference corrections, missing/unreconstructible records (including 2014-05-22 and 2014-06-30), deleted first rows on several dates, filled missing best price/quantity observations on 2014-07-14, and a time-order issue for CNX14 on 2014-11-05.",
+    "sources": [
+      "https://api.github.com/repos/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy",
+      "https://api.github.com/repos/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/git/trees/master?recursive=1",
+      "https://raw.githubusercontent.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/master/Data_Transformation/Data_Problem.txt"
+    ]
+  },
+  "inventory_counts": {
+    "total_entries": 20,
+    "preprocessing_solutions": 2,
+    "offline_labels_and_dataset_methods": 4,
+    "model_input_feature_methods": 2,
+    "exploratory_feature_or_analysis_methods": 3,
+    "offline_model_selection_strategy": 1,
+    "implemented_model_candidates": 5,
+    "offline_evaluation_method": 1,
+    "context_or_unimplemented_references": 2,
+    "deployable_live_or_paper_execution_strategies": 0
+  },
+  "entries": [
+    {
+      "id": "order-book-reconstruction-best-3",
+      "name": "Event-stream order-book reconstruction and best-three snapshot writer",
+      "url": "https://github.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/blob/master/Data_Transformation/order%20book%20data/Data_Transformation_Code.ipynb",
+      "category": "offline preprocessing solution; not a trading strategy",
+      "rules": [
+        "Filter raw daily records to the requested Series.",
+        "Build bid and ask books by BidOrAsk, maintain orders by OrderBookPosition and OrderNumber, and add or reduce QuantityDifference according to its sign.",
+        "Aggregate live orders by Price, remove zero net-quantity price levels, sort bids descending and asks ascending, then write up to best_price_number levels; checked-in call sets best_price_number=3.",
+        "Output uses a TimeStamp marker row followed by Bid,Bid_Quantity,Ask,Ask_Quantity rows; price values are later divided by 100 in downstream notebooks.",
+        "The checked-in main update loop is range(index_find + 1,100), so this source is a limited prototype rather than a complete production reconstruction run."
+      ],
+      "data_requirements": "Raw order events with at least Series, TimeStamp, BidOrAsk, Price, OrderNumber, QuantityDifference, OrderBookPosition, BestPrice, and BestQuantity. Data rights are unknown/unlicensed.",
+      "accessible": true,
+      "deployment_status": "offline static transformation only; no streaming source, service, order routing, or paper-execution interface",
+      "source_urls": [
+        "https://raw.githubusercontent.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/master/Data_Transformation/order%20book%20data/Data_Transformation_Code.ipynb",
+        "https://raw.githubusercontent.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/master/Data_Transformation/order%20book%20data/order_book_3_2014_1_2.csv"
+      ]
+    },
+    {
+      "id": "three-level-snapshot-decoder-clock",
+      "name": "Three-level snapshot decoder, quantity cleanup, and market clock normalization",
+      "url": "https://github.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/blob/master/Data_Transformation/Train_Test_Builder/Train_Test_Builder.ipynb",
+      "category": "offline preprocessing solution; model-input preparation",
+      "rules": [
+        "Read transformed snapshot blocks where timestamp is taken from Bid_Quantity[0::4] and levels 1 through 3 are read from rows 1::4, 2::4, and 3::4.",
+        "Divide bid and ask prices by 100; replace NaN quantities at all three bid and ask levels with zero.",
+        "Parse timestamp character positions into seconds and express the intraday clock as seconds since 09:00 (subtract 32400)."
+      ],
+      "data_requirements": "The repository-specific four-row-per-snapshot best-three CSV layout, timestamp strings at the expected character positions, and best-three bid/ask prices and quantities. Rights unknown.",
+      "accessible": true,
+      "deployment_status": "offline notebook helper; no general schema adapter or real-time feed",
+      "source_urls": [
+        "https://raw.githubusercontent.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/master/Data_Transformation/Train_Test_Builder/Train_Test_Builder.ipynb",
+        "https://raw.githubusercontent.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/master/Data_Transformation/order%20book%20data/order_book_3_2014_1_2.csv"
+      ]
+    },
+    {
+      "id": "forward-cross-label-600s",
+      "name": "600-second forward-cross binary label",
+      "url": "https://github.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/blob/master/Data_Transformation/Train_Test_Builder/Train_Test_Builder.ipynb",
+      "category": "offline research label; not an executable entry/exit strategy",
+      "rules": [
+        "At each represented one-second time i, select the latest order-book event at or before i.",
+        "For i before 25200 minus traded_time, label 1 when current best bid is greater than the minimum best ask from the selected event through the latest event at or before i+traded_time; otherwise label 0.",
+        "The checked-in dataset build calls traded_time=600 seconds.",
+        "For the last traded_time seconds, the code compares current bid with the final ask instead of a full future window."
+      ],
+      "data_requirements": "Timestamped best bid and best ask level-1 series across the session. The label needs future observations and is therefore offline-only by construction.",
+      "accessible": true,
+      "deployment_status": "label generation only; no order instruction or live label availability",
+      "source_urls": [
+        "https://raw.githubusercontent.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/master/Data_Transformation/Train_Test_Builder/Train_Test_Builder.ipynb"
+      ]
+    },
+    {
+      "id": "forward-cross-label-900s-prototype",
+      "name": "900-second forward-cross label prototype",
+      "url": "https://github.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/blob/master/Feature_Selection/Train_Test_Data_Builder_Feature_Depth_Extractor.ipynb",
+      "category": "offline research label prototype; not used by the checked-in model-selection dataset builder",
+      "rules": [
+        "At each second, label 1 if current best bid exceeds the minimum best ask through a 900-second future window; else label 0.",
+        "The notebook also has a microsecond/event-time variant with the same 900-second look-ahead and an active 13:00-to-16:00-minus-900-seconds example.",
+        "This differs materially from the later builder's 600-second horizon."
+      ],
+      "data_requirements": "Timestamped level-1 bid/ask values and at least 900 seconds of future data; rights unknown.",
+      "accessible": true,
+      "deployment_status": "feature-exploration notebook only",
+      "source_urls": [
+        "https://raw.githubusercontent.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/master/Feature_Selection/Train_Test_Data_Builder_Feature_Depth_Extractor.ipynb"
+      ]
+    },
+    {
+      "id": "session-dataset-splits-up-down",
+      "name": "UP/DOWN session dataset split",
+      "url": "https://github.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/blob/master/Data_Transformation/Train_Test_Builder/Train_Test_Builder.ipynb",
+      "category": "offline dataset construction; names are time-session partitions, not directional strategies",
+      "rules": [
+        "Feature_DataFrame_UP builds seconds 0 to 8999, annotated 09:00 to 11:30.",
+        "Feature_DataFrame_DOWN builds seconds 14400 to 25199, annotated 13:00 to 16:00.",
+        "Both call the same forward-cross label function and use the same 64 input features; they are not long versus short rule sets.",
+        "CSV writer emits separate _UP and _DOWN files; Model_Selection loads both but assigns data_2014=data_2014_up."
+      ],
+      "data_requirements": "A full session with the coded 09:00-based time convention and all rise/depth features. Rights unknown.",
+      "accessible": true,
+      "deployment_status": "offline partitioning only",
+      "source_urls": [
+        "https://raw.githubusercontent.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/master/Data_Transformation/Train_Test_Builder/Train_Test_Builder.ipynb",
+        "https://raw.githubusercontent.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/master/Model_Selection/Model_Selection.ipynb"
+      ]
+    },
+    {
+      "id": "one-second-feature-sampler-forward-fill",
+      "name": "One-second feature sampling with carry-forward on no update",
+      "url": "https://github.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/blob/master/Data_Transformation/Train_Test_Builder/Train_Test_Builder.ipynb",
+      "category": "offline feature-alignment method",
+      "rules": [
+        "For a second containing one or more events, take the last event in that second and append its thirty rise and thirty-four depth values.",
+        "For a second with no event, append the previously appended label/feature values (carry-forward).",
+        "At the start of each configured session, calculate an index anchor at time 0 or 14400 for feature indexing."
+      ],
+      "data_requirements": "Event-timestamped level-1 through level-3 book series plus the feature arrays defined in this repository. Rights unknown.",
+      "accessible": true,
+      "deployment_status": "offline research alignment; no event-time live feature engine",
+      "source_urls": [
+        "https://raw.githubusercontent.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/master/Data_Transformation/Train_Test_Builder/Train_Test_Builder.ipynb"
+      ]
+    },
+    {
+      "id": "ask1-rise-ratio-feature-family",
+      "name": "Ask1 rolling rise-ratio feature family (30 lookbacks)",
+      "url": "https://github.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/blob/master/Data_Transformation/Train_Test_Builder/Train_Test_Builder.ipynb",
+      "category": "model-input feature method",
+      "rules": [
+        "Replace zero Ask1 values with the mean Ask1 value.",
+        "For each tick, calculate 100 times (Ask1[t]-Ask1[start])/Ask1[start], rounded to five decimals; before the lookback is available, start is the first observation, otherwise it is the first observation at or after t-lookback.",
+        "The model dataset computes 30 Ask1 features at lookbacks 6:00, 6:30, 7:00, ... , 20:30 minutes.",
+        "These thirty values are the first thirty non-label columns of the builder's feature vector."
+      ],
+      "data_requirements": "Timestamped best ask (level 1) and session-relative seconds. Rights unknown.",
+      "accessible": true,
+      "deployment_status": "offline feature calculation; no live feature service",
+      "source_urls": [
+        "https://raw.githubusercontent.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/master/Data_Transformation/Train_Test_Builder/Train_Test_Builder.ipynb",
+        "https://raw.githubusercontent.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/master/Feature_Selection/Train_Test_Data_Builder_Feature_Rise_Extractor.ipynb"
+      ]
+    },
+    {
+      "id": "market-ask-bid-10min-rise-analysis",
+      "name": "Ask1 and Bid1 10-minute rise-ratio exploration",
+      "url": "https://github.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/blob/master/Feature_Selection/SGX_A50_Market_Feature.ipynb",
+      "category": "exploratory feature analysis; not a model-input or trade-rule implementation",
+      "rules": [
+        "Apply the same percentage-change construction separately to Ask1 and Bid1 using a fixed 600-second window and first-observation fallback.",
+        "The notebook evaluates selected January 2014 dates (16,17,20,21,22,24,27,28,29) and concatenates their rise values into histograms.",
+        "Chart-only horizontal reference levels are -0.4, -0.15, 0.15, and 0.4; no coded condition maps them to an order or position."
+      ],
+      "data_requirements": "Three-level snapshots for the selected dates and an external local raw-file layout hard-coded by the notebook. Rights unknown.",
+      "accessible": false,
+      "deployment_status": "context/reference: feature calculations are present but no complete trading rule is stated",
+      "source_urls": [
+        "https://raw.githubusercontent.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/master/Feature_Selection/SGX_A50_Market_Feature.ipynb"
+      ]
+    },
+    {
+      "id": "weighted-depth-ratio-imbalance-features",
+      "name": "Weighted three-level depth ratio and imbalance feature family",
+      "url": "https://github.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/blob/master/Data_Transformation/Train_Test_Builder/Train_Test_Builder.ipynb",
+      "category": "model-input feature method",
+      "rules": [
+        "For weights (w1,w2,w3), define Weight_Ask=w1*A1+w2*A2+w3*A3 and Weight_Bid=w1*B1+w2*B2+w3*B3.",
+        "Emit both W_AB=Weight_Ask/Weight_Bid and W_A_B=(Weight_Ask-Weight_Bid)/(Weight_Ask+Weight_Bid).",
+        "The active builder uses 17 weight triplets: 100,010,001,910,820,730,640,550,721,532,111,190,280,370,460,127,235 (digits denote relative weights as coded).",
+        "Thus the builder contributes 34 depth values to each feature vector."
+      ],
+      "data_requirements": "Simultaneous best-three bid and ask quantities. No zero-division handling is specified in this method. Rights unknown.",
+      "accessible": true,
+      "deployment_status": "offline feature calculation; no real-time normalization or safeguards",
+      "source_urls": [
+        "https://raw.githubusercontent.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/master/Data_Transformation/Train_Test_Builder/Train_Test_Builder.ipynb",
+        "https://raw.githubusercontent.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/master/Feature_Selection/Train_Test_Data_Builder_Feature_Depth_Extractor.ipynb"
+      ]
+    },
+    {
+      "id": "market-depth-spread-distribution-analysis",
+      "name": "50/30/20 market-depth, Bid/Ask ratio, and spread distribution analysis",
+      "url": "https://github.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/blob/master/Feature_Selection/SGX_A50_Market_Feature.ipynb",
+      "category": "exploratory feature analysis; not an implemented strategy",
+      "rules": [
+        "Sample each best-three quantity once per second by carrying the latest snapshot at or before that second.",
+        "Compute Bid_weighted=0.50*Bid1Qty+0.30*Bid2Qty+0.20*Bid3Qty and the symmetric Ask_weighted quantity.",
+        "Compute Bid_weighted/Ask_weighted and chart reference values 0.7, 0.9, 1.1, and 1.3; compute a plotted best-level spread as Ask1/5-Bid1/5.",
+        "No entry, exit, sizing, or mapping from these reference levels to an action is coded."
+      ],
+      "data_requirements": "Three-level snapshots for the notebook's selected dates. Rights unknown.",
+      "accessible": false,
+      "deployment_status": "context/reference only; no complete decision rules",
+      "source_urls": [
+        "https://raw.githubusercontent.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/master/Feature_Selection/SGX_A50_Market_Feature.ipynb"
+      ]
+    },
+    {
+      "id": "forward-extrema-15min-exploration",
+      "name": "15-minute future min-ask / max-bid exploratory series",
+      "url": "https://github.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/blob/master/Feature_Selection/SGX_A50_Market_Feature.ipynb",
+      "category": "offline look-ahead analysis; not deployable signal logic",
+      "rules": [
+        "For the 1/16 exploration, calculate the future minimum Ask1 and maximum Bid1 over a 900-second horizon where available, then plot them beside current Ask1 and Bid1.",
+        "The notebook also computes all-remaining-session min Ask1 and max Bid1 series for charts.",
+        "Because these series explicitly use future observations and no action mapping is coded, they are labels/visual analysis rather than a deployable strategy."
+      ],
+      "data_requirements": "Complete future order-book paths for each evaluated timestamp; rights unknown.",
+      "accessible": false,
+      "deployment_status": "context/reference only; look-ahead offline analysis",
+      "source_urls": [
+        "https://raw.githubusercontent.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/master/Feature_Selection/SGX_A50_Market_Feature.ipynb"
+      ]
+    },
+    {
+      "id": "rolling-cv-best-model-classifier-signal",
+      "name": "Rolling CV-selected binary classifier research pipeline",
+      "url": "https://github.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/blob/master/Model_Selection/Model_Selection.ipynb",
+      "category": "offline research strategy; no deployable execution implementation",
+      "rules": [
+        "Use column 0 as binary label and all remaining columns as model inputs; the builder supplies 30 rise plus 34 depth features, i.e. 64 inputs.",
+        "For each window, take latest_sec=1800 rows as training data and the following pred_sec=10 rows as test data; choose hyperparameters for each candidate using five-fold GridSearchCV scored by accuracy, then fit and predict the test block.",
+        "The P&L cell chooses the candidate with the highest contemporaneous five-fold CV accuracy and uses the final prediction in its ten-row test block as submission.",
+        "The checked-in pipeline loop is range(0,10,pred_sec), so with pred_sec=10 the active example evaluates one window; a longer full-day loop is only commented out.",
+        "Although both session CSVs are loaded, the active assignment is data_2014=data_2014_up."
+      ],
+      "data_requirements": "Repository-specific labelled UP CSV with column 0 plus 64 feature columns, requiring prior top-three book reconstruction. Rights unknown.",
+      "accessible": true,
+      "deployment_status": "offline notebook research only; no model serialization, live market data, order submission, position state, risk controls, or Expo/native paper app",
+      "source_urls": [
+        "https://raw.githubusercontent.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/master/Model_Selection/Model_Selection.ipynb",
+        "https://raw.githubusercontent.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/master/Data_Transformation/Train_Test_Builder/Train_Test_Builder.ipynb"
+      ]
+    },
+    {
+      "id": "random-forest-classifier",
+      "name": "RandomForestClassifier candidate",
+      "url": "https://github.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/blob/master/Model_Selection/Model_Selection.ipynb",
+      "category": "implemented offline model candidate",
+      "rules": [
+        "RandomForestClassifier(random_state=0).",
+        "Grid contains exactly max_features=None, n_estimators=10, max_depth=10, min_samples_split=2, criterion=entropy, min_samples_leaf=3.",
+        "Participates in five-fold accuracy GridSearchCV and downstream class prediction."
+      ],
+      "data_requirements": "The 64-feature, binary-labelled offline dataset used by the rolling pipeline; rights unknown.",
+      "accessible": true,
+      "deployment_status": "offline candidate; no saved trained model or live inference service",
+      "source_urls": [
+        "https://raw.githubusercontent.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/master/Model_Selection/Model_Selection.ipynb"
+      ]
+    },
+    {
+      "id": "extra-trees-classifier",
+      "name": "ExtraTreesClassifier candidate",
+      "url": "https://github.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/blob/master/Model_Selection/Model_Selection.ipynb",
+      "category": "implemented offline model candidate",
+      "rules": [
+        "ExtraTreesClassifier(random_state=0).",
+        "Grid contains exactly max_features=None, n_estimators=10, max_depth=10, min_samples_split=2, criterion=entropy, min_samples_leaf=3.",
+        "Participates in five-fold accuracy GridSearchCV and downstream class prediction."
+      ],
+      "data_requirements": "The 64-feature, binary-labelled offline dataset used by the rolling pipeline; rights unknown.",
+      "accessible": true,
+      "deployment_status": "offline candidate; no saved trained model or live inference service",
+      "source_urls": [
+        "https://raw.githubusercontent.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/master/Model_Selection/Model_Selection.ipynb"
+      ]
+    },
+    {
+      "id": "adaboost-decision-tree-classifier",
+      "name": "AdaBoostClassifier with decision-tree base estimator candidate",
+      "url": "https://github.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/blob/master/Model_Selection/Model_Selection.ipynb",
+      "category": "implemented offline model candidate",
+      "rules": [
+        "AdaBoostClassifier(base_estimator=DecisionTreeClassifier(), n_estimators=10, random_state=0).",
+        "Grid contains base-estimator criterion=entropy, max_depth=None, min_samples_leaf=3, min_samples_split=2, and max_features=None.",
+        "Participates in five-fold accuracy GridSearchCV and downstream class prediction."
+      ],
+      "data_requirements": "The 64-feature, binary-labelled offline dataset used by the rolling pipeline; rights unknown.",
+      "accessible": true,
+      "deployment_status": "offline candidate; no saved trained model or live inference service",
+      "source_urls": [
+        "https://raw.githubusercontent.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/master/Model_Selection/Model_Selection.ipynb"
+      ]
+    },
+    {
+      "id": "gradient-boosting-classifier",
+      "name": "GradientBoostingClassifier candidate",
+      "url": "https://github.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/blob/master/Model_Selection/Model_Selection.ipynb",
+      "category": "implemented offline model candidate",
+      "rules": [
+        "GradientBoostingClassifier(random_state=0).",
+        "Grid contains max_features=None, n_estimators=10, max_depth=10, min_samples_split=2, min_samples_leaf=3, learning_rate=0.1, and subsample=1.0.",
+        "Participates in five-fold accuracy GridSearchCV and downstream class prediction."
+      ],
+      "data_requirements": "The 64-feature, binary-labelled offline dataset used by the rolling pipeline; rights unknown.",
+      "accessible": true,
+      "deployment_status": "offline candidate; no saved trained model or live inference service",
+      "source_urls": [
+        "https://raw.githubusercontent.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/master/Model_Selection/Model_Selection.ipynb"
+      ]
+    },
+    {
+      "id": "svc-classifier",
+      "name": "SVC candidate (RBF and linear alternatives)",
+      "url": "https://github.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/blob/master/Model_Selection/Model_Selection.ipynb",
+      "category": "implemented offline model candidate",
+      "rules": [
+        "SVC(probability=True, random_state=0).",
+        "Grid alternatives are RBF with gamma=0.1,C=1, or linear with C=1 or C=10.",
+        "Participates in five-fold accuracy GridSearchCV and downstream class prediction; for a selected linear kernel the notebook computes coefficient-ranked top-five feature indices but leaves output commented."
+      ],
+      "data_requirements": "The 64-feature, binary-labelled offline dataset used by the rolling pipeline; rights unknown.",
+      "accessible": true,
+      "deployment_status": "offline candidate; no saved trained model or live inference service",
+      "source_urls": [
+        "https://raw.githubusercontent.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/master/Model_Selection/Model_Selection.ipynb"
+      ]
+    },
+    {
+      "id": "best-cv-pnl-evaluator",
+      "name": "Best-CV-model P&L evaluator",
+      "url": "https://github.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/blob/master/Model_Selection/Model_Selection.ipynb",
+      "category": "offline P&L evaluation rule; incomplete/nondeployable",
+      "rules": [
+        "For each prediction window, select the candidate with the largest stored CV accuracy and take its final predicted class and final true class.",
+        "If predicted class equals true class and is 1, append profit=0.2*column 65 at selected 10-second offsets; class 0 appends zero.",
+        "If predicted class is 1 but true class differs, append loss=0.2*(column 67 at current offset minus column 67 600 seconds later); predicted class 0 appends zero.",
+        "Plot individual tick P&L and cumulative sum."
+      ],
+      "data_requirements": "A model output plus CSV columns 65 and 67 at stated offsets. The checked-in feature builder only constructs label plus 64 features (columns 0 through 64), so the required price columns are not generated by the shown builder.",
+      "accessible": false,
+      "deployment_status": "offline and internally incomplete; no self-contained execution, cost, latency, fill, inventory, or order rules",
+      "source_urls": [
+        "https://raw.githubusercontent.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/master/Model_Selection/Model_Selection.ipynb",
+        "https://raw.githubusercontent.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/master/Data_Transformation/Train_Test_Builder/Train_Test_Builder.ipynb"
+      ]
+    },
+    {
+      "id": "logistic-regression-reference-only",
+      "name": "LogisticRegression import (unimplemented reference)",
+      "url": "https://github.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/blob/master/Model_Selection/Model_Selection.ipynb",
+      "category": "context/reference; not an actual configured model candidate",
+      "rules": [
+        "LogisticRegression is imported.",
+        "It is absent from the models dictionary, has no grid parameters, is not fit, is not predicted, and has no P&L use."
+      ],
+      "data_requirements": "Not specified because no LogisticRegression strategy/model configuration is implemented.",
+      "accessible": false,
+      "deployment_status": "reference only",
+      "source_urls": [
+        "https://raw.githubusercontent.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/master/Model_Selection/Model_Selection.ipynb"
+      ]
+    },
+    {
+      "id": "threshold-plots-no-rule-strategy",
+      "name": "Threshold plots with no rule-based strategy",
+      "url": "https://github.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/blob/master/Feature_Selection/SGX_A50_Market_Feature.ipynb",
+      "category": "context/reference; explicitly not a strategy",
+      "rules": [
+        "The market-feature notebook draws rise-ratio and weighted-depth distribution reference lines, but contains no if-condition, trade instruction, position state, entry/exit, holding period, or P&L rule tied to them.",
+        "This entry prevents visual threshold labels from being counted as a separate strategy."
+      ],
+      "data_requirements": "Exploratory feature series only; rights unknown.",
+      "accessible": false,
+      "deployment_status": "no rule semantics beyond plotting references",
+      "source_urls": [
+        "https://raw.githubusercontent.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/master/Feature_Selection/SGX_A50_Market_Feature.ipynb"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "GitHub repository page and README rendering",
+      "url": "https://github.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy"
+    },
+    {
+      "title": "GitHub repository metadata",
+      "url": "https://api.github.com/repos/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy"
+    },
+    {
+      "title": "Complete recursive master tree",
+      "url": "https://api.github.com/repos/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/git/trees/master?recursive=1"
+    },
+    {
+      "title": "Repository README source",
+      "url": "https://raw.githubusercontent.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/master/README.md"
+    },
+    {
+      "title": "Data quality notes",
+      "url": "https://raw.githubusercontent.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy/master/Data_Transformation/Data_Problem.txt"
+    }
+  ]
+}

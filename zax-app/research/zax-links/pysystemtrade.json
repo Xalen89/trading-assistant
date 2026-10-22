@@ -1,0 +1,34 @@
+{
+  "id": "pst-group/pysystemtrade",
+  "name": "pysystemtrade",
+  "url": "https://github.com/pst-group/pysystemtrade",
+  "license": "GNU General Public License v3.0 (GPL-3.0)",
+  "exists": true,
+  "methods": [
+    "Volatility-normalised EWMAC trend: EWMA price difference using fast/slow spans divided by daily price-unit volatility",
+    "EWMAC example parameter pairs 8/32 and 16/64, with documented 16/64, 32/128, and 64/256 rule variations",
+    "Forecast scaling and clipping, with upstream example cap 21 and default cap 20",
+    "Instrument inverse-volatility weighting, correlation-aware diversification, and portfolio volatility targeting"
+  ],
+  "reuseDecision": "Do not reuse or port upstream code. The inspected LICENSE is GPLv3 and the project is a Python automated-futures/Interactive-Brokers engine. Implement the published EWMAC and risk method independently in TypeScript, use only Zax-approved historical data, and keep all outputs paper-only with no broker or order path.",
+  "requirements": [
+    "Licensed daily historical price data with retained source/vintage; a data provider may be paid and data is not bundled with pysystemtrade",
+    "For futures: reproducible adjusted-continuous/roll policy, underlying contract data around roll dates, and multiplier/currency/FX metadata if reporting notionals",
+    "Predeclared no-look-ahead calibration windows, volatility settings, signal cap, risk target, cost assumptions, and deterministic paper-result tests",
+    "No IB account, Gateway/TWS, ib_async, MongoDB, Parquet, GitHub token, or pysystemtrade installation is required for the recommended independent implementation",
+    "If GitHub public metadata is ever read, unauthenticated REST access is 60 requests/hour per originating IP; it is unnecessary for the runtime product"
+  ],
+  "sources": [
+    "https://github.com/pst-group/pysystemtrade",
+    "https://raw.githubusercontent.com/pst-group/pysystemtrade/develop/LICENSE",
+    "https://api.github.com/repos/pst-group/pysystemtrade",
+    "https://raw.githubusercontent.com/pst-group/pysystemtrade/develop/systems/provided/rules/ewmac.py",
+    "https://raw.githubusercontent.com/pst-group/pysystemtrade/develop/systems/provided/example/exampleconfig.yaml",
+    "https://raw.githubusercontent.com/pst-group/pysystemtrade/develop/sysdata/config/defaults.yaml",
+    "https://github.com/pst-group/pysystemtrade/blob/develop/docs/data.md",
+    "https://github.com/pst-group/pysystemtrade/blob/develop/docs/IB.md",
+    "https://www.interactivebrokers.com/docs/tws-api/doc/pacing-limitations/pacing-behavior",
+    "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api"
+  ],
+  "reportPath": "/home/ubuntu/stratdesk/research/zax-links/pysystemtrade.md"
+}

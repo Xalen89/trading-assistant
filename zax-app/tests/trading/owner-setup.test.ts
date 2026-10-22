@@ -1,0 +1,14 @@
+import {describe,expect,it} from 'vitest';
+import {appRouter} from '../../server/routers';
+import {mayUseApp} from '../../server/trading/access';
+import {SETUP_PRESETS,resolveSetupFamily} from '../../lib/trading/setup-presets';
+import {proposeRefinement} from '../../lib/trading/refinement';
+import type {Trade} from '../../lib/trading/model';
+const core=SETUP_PRESETS.find(p=>p.id==='core-sequence')!;
+describe('owner-only setup app',()=>{
+ it('fails closed for guests and a different identity',()=>{expect(mayUseApp(null)).toBe(false);expect(mayUseApp({openId:'UNIT_OTHER_USER',email:'unit-other@example.invalid'})).toBe(false);});
+ it('retains authentication bootstrap without opening application data',async()=>{const caller=appRouter.createCaller({user:null,req:{headers:{}},res:{}} as any);expect(await caller.auth.access()).toMatchObject({ownerOnly:true,allowed:false});await expect(caller.market.catalog()).rejects.toMatchObject({code:'UNAUTHORIZED'});await expect(caller.paper.working()).rejects.toMatchObject({code:'UNAUTHORIZED'});await expect(caller.setup.analyze({market:'BTC-USD',timeframe:'5m',strategyIds:['core-sequence'],combination:'any',timezone:'America/New_York'})).rejects.toMatchObject({code:'UNAUTHORIZED'});await expect(caller.learning.refinement({strategy:core})).rejects.toMatchObject({code:'UNAUTHORIZED'});});
+ it('does not recognize a strategy just because its title sounds familiar',()=>{expect(resolveSetupFamily({...core,id:'unit-custom',name:'Silver Bullet miracle',factors:[...core.factors,{id:'unknown-condition',name:'Only Friday',description:'UNIT extra rule',group:'Personal',enabled:true,weight:10}]})).toBe('custom');expect(resolveSetupFamily({...core,id:'copy',factors:core.factors.map((f,i)=>i===0?{...f,description:'UNIT changed rule'}:f)})).toBe('custom');expect(resolveSetupFamily({...core,id:'copy',name:'Copy',factors:core.factors.map(f=>({...f,weight:20}))})).toBe('core-sequence');});
+ it('withholds refinement until exact-version outcomes support it',()=>{expect(proposeRefinement(core,[]).proposals).toEqual([]);expect(proposeRefinement(core,[]).samples).toBe(0);});
+ it('proposes but does not apply an observational weight change',()=>{const trades:Trade[]=Array.from({length:30},(_,i)=>({id:`unit-${i}`,market:'BTC-USD',side:'long',status:'closed',entry:100,stop:90,target:120,quantity:1,pointValue:1,exit:i<15?120:90,strategyId:core.id,strategyName:core.name,strategyVersion:core.version,factors:i<15?[core.factors[0].id]:[],journal:{},createdAt:1700000000000+i,closedAt:1700000001000+i}));const before=core.factors[0].weight,result=proposeRefinement(core,trades);expect(result.proposals[0]).toMatchObject({factorId:core.factors[0].id,weight:before+5});expect(core.factors[0].weight).toBe(before);expect(result.limitations).toContain('Not causal');expect(proposeRefinement({...core,version:2},trades).samples).toBe(0);});
+});

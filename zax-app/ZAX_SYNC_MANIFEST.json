@@ -1,0 +1,2752 @@
+{
+  "version": 1,
+  "repository": "Xalen89/zax-trading-app",
+  "sync": "on-request",
+  "managed_source_commit": "145da32194fc912f5d3326341ac5461ed7e0e75a",
+  "files": {
+    ".gitignore": {
+      "sha256": "bf630288c8e0e6399c444af8487bd7247a876d637df3b187f1e2030860971dce",
+      "mode": "100644"
+    },
+    ".manus-starter-init.json": {
+      "sha256": "819e30cf9c7f0a64fa9bef1b58daa53b8e03143733db2c80a7e6f09aabae91d8",
+      "mode": "100644"
+    },
+    ".npmrc": {
+      "sha256": "a28c9d86a8981049d203ad164cff1e753ed61dc0460ee8765316cbb3d0007d00",
+      "mode": "100644"
+    },
+    ".watchmanconfig": {
+      "sha256": "f0bf088efd1aeca30c650c5a42d334396ea01f04c22c3125b07c836d2db4d1d7",
+      "mode": "100644"
+    },
+    "AI_FOUNDRY_UPDATE.md": {
+      "sha256": "2d2402bfa1d80996894b435af4f69e8829fc85e117b7bc9d6083867083bf784d",
+      "mode": "100644"
+    },
+    "APP_SCAN_AND_REPAIRS.md": {
+      "sha256": "454adc53182f0dc0d50a1a834c8338112a380ba776bd502519c226e4a534c804",
+      "mode": "100644"
+    },
+    "BUILD_NOTES.md": {
+      "sha256": "89eacf9040e3c6be3940f1689ebbd791000caefdeaa78b9b1b598985675a8846",
+      "mode": "100644"
+    },
+    "Dockerfile": {
+      "sha256": "77569977c612b0a4202418856cc3770eb808936dacbeac14197a1656b926532c",
+      "mode": "100644"
+    },
+    "FEATURE_PURPOSE_GUIDE.md": {
+      "sha256": "82d82d69ed3ada0c91a414ba505e2e39eb76c99182690547253ac3ba7c3a066e",
+      "mode": "100644"
+    },
+    "FORECAST_SCREENSHOT_UPDATE.md": {
+      "sha256": "8fe7f9c1276814448a735115a85fbbbcc03d30e7e12099fc4258e5d6978708ff",
+      "mode": "100644"
+    },
+    "FOUNDRY_STRATEGY_STATUS.md": {
+      "sha256": "8d9d2c400eca1f57799291a38789121c111b3ec632aaf209819352d199e6d538",
+      "mode": "100644"
+    },
+    "INTEGRATION_NOTES.md": {
+      "sha256": "6f0ca6523de754d0c5acfc0420a0f60bd3594a2bb51f830407b0dae0a9653667",
+      "mode": "100644"
+    },
+    "LATEST_FOUNDRY_UPDATE.md": {
+      "sha256": "8c15d53c0ec0a08d9052ef704e3545e380ee541522e8584a45862b4dccf29971",
+      "mode": "100644"
+    },
+    "ORB_STRATEGY_UPDATE.md": {
+      "sha256": "913a467206a6747532b49ae6e318a85c3e76b9ef75d9c36564cf303a70914fe6",
+      "mode": "100644"
+    },
+    "PREVIEW_SIGNIN_ROUTING_FIX.md": {
+      "sha256": "e86f71e07f7386b8bc985478e14b430bc456a1f649dd8d2de87413df9c6a16e4",
+      "mode": "100644"
+    },
+    "PRIVATE_APP_UPDATE.md": {
+      "sha256": "5d97f4a17a2cbcab3b69eaed7ddb7960686af6ef549c05e01c43e6bd41f7fc51",
+      "mode": "100644"
+    },
+    "PRIVATE_GITHUB_SYNC.md": {
+      "sha256": "ac7ce86342e835cf46c6a3d0509f765d7b32855d1e838407393ecd80ec6d7d0e",
+      "mode": "100644"
+    },
+    "SCENARIO_LAYERS_UPDATE.md": {
+      "sha256": "894347d80802c3d36fdda3658833ae11b8f01a6836cb653caa43d71a03c352be",
+      "mode": "100644"
+    },
+    "SCENARIO_NOTIFICATIONS_UPDATE.md": {
+      "sha256": "43da43a7a91b3353b824091223fe5ab035413e72b9c295af6f50ac8f733c15dc",
+      "mode": "100644"
+    },
+    "SESSION_STRATEGIES_UPDATE.md": {
+      "sha256": "751808ed2a893165ee4b84fe8a2937df6e304716eacc4a85c415c7d2c19d9b9e",
+      "mode": "100644"
+    },
+    "STRATEGY_CATALOG_UPDATE.md": {
+      "sha256": "b572460e25f80f4de6003579d14bd1b480ff787df324871ebea694534555abad",
+      "mode": "100644"
+    },
+    "TODO.md": {
+      "sha256": "30484ea189ba301153b883e249ca5b3c2c77b504104b5a8345a7d5c44c6d5f5d",
+      "mode": "100644"
+    },
+    "TRADE_CHART_PRIVATE_RELEASE.md": {
+      "sha256": "cf6b043b44ae38482a589e57947c9f064978fea2a7781f073c3cb455fb2598b4",
+      "mode": "100644"
+    },
+    "ZAX_FIX_TRACKER.md": {
+      "sha256": "4a12c3784bf7e5ee426550098f6ff52c66cc39578b89a58504bf550ff92c7f20",
+      "mode": "100644"
+    },
+    "ZAX_UPDATE.md": {
+      "sha256": "f1889a55773bd1ac3a2be1e2743eb803123781a1b221c330315f0a63d9ed17df",
+      "mode": "100644"
+    },
+    "app.config.ts": {
+      "sha256": "e3df9410768c7dbf298b6dc930ae73850c78021c2fa3b118135876af7434992f",
+      "mode": "100644"
+    },
+    "app/(tabs)/_layout.tsx": {
+      "sha256": "6c586861eb0a79c01aa85e7f6fae09e230e329c895bf84d207046f95655c863a",
+      "mode": "100644"
+    },
+    "app/(tabs)/alerts.tsx": {
+      "sha256": "39994b1e7e655c80139548e34383f95a34859f301434362f762db4c8e0cfda40",
+      "mode": "100644"
+    },
+    "app/(tabs)/index.tsx": {
+      "sha256": "dc79c5a36ace1cae04e2e8a8a8308305efb923d273cc97d2fa2b697162299f77",
+      "mode": "100644"
+    },
+    "app/(tabs)/library.tsx": {
+      "sha256": "b4bff3fc3d4df1aa4c53d819eb1f740b131da59bd55d1d70fbf9de26020563bc",
+      "mode": "100644"
+    },
+    "app/(tabs)/markets.tsx": {
+      "sha256": "ea100f6bf4129841ba69e34301347db4e99f673d45924fab1ce7f2bbaae45188",
+      "mode": "100644"
+    },
+    "app/(tabs)/strategies.tsx": {
+      "sha256": "48c1179eb0ab51301f4c0cc5aca3d72ed90e42ac6c1267dfeacba3fe1a056c07",
+      "mode": "100644"
+    },
+    "app/(tabs)/trades.tsx": {
+      "sha256": "9ea4cfe62e7c6980edc861edad894e167e1ce0f55afd961d173738caa1d23134",
+      "mode": "100644"
+    },
+    "app/_layout.tsx": {
+      "sha256": "16577d8d0ce0ee74968764a4576ecf39205a96c5c21820ad28a90742f2c34c5a",
+      "mode": "100644"
+    },
+    "app/coach.tsx": {
+      "sha256": "15bc9689014db428f6b1a6b06b6206480bde44603c0dafa25e27bd6c6d60b7a5",
+      "mode": "100644"
+    },
+    "app/dev/theme-lab.tsx": {
+      "sha256": "7dceebd4c6e0d10ad78e8c9790ae6d1092072a07b66ecafbb4a6287e0d32b760",
+      "mode": "100644"
+    },
+    "app/features.tsx": {
+      "sha256": "001d1619d3f4eee0fa36596eb35c5394cdc558193490107985e7fded89a861b0",
+      "mode": "100644"
+    },
+    "app/oauth/callback.tsx": {
+      "sha256": "cfe83eb75da6b3fcf53ba81b7047621445f5c38b8709db13fb6630b56669cb52",
+      "mode": "100644"
+    },
+    "assets/images/android-icon-background.png": {
+      "sha256": "6020c92bd2603e396c1082c4d5b6c6fbf083226d58ff135d460d46e53e6d83ce",
+      "mode": "100644"
+    },
+    "assets/images/android-icon-foreground.png": {
+      "sha256": "1df55caef82be57973f4770551b9fb77031f8afc53ad919199020c6c1bbba627",
+      "mode": "100644"
+    },
+    "assets/images/android-icon-monochrome.png": {
+      "sha256": "0fabb6187b5f5a4ae913d34b6b824cd9a7a1ffc69d9b99b1f72b09d8f0d0a36f",
+      "mode": "100644"
+    },
+    "assets/images/favicon.png": {
+      "sha256": "c995690bb0b2c9c1d47b6bc874297353d75ddb3a849048ba922ff9b566b554cf",
+      "mode": "100644"
+    },
+    "assets/images/icon.png": {
+      "sha256": "1df55caef82be57973f4770551b9fb77031f8afc53ad919199020c6c1bbba627",
+      "mode": "100644"
+    },
+    "assets/images/partial-react-logo.png": {
+      "sha256": "015a72aeb24c1166243ebc185355c9488cc892fbf3aa82f9ae66819a10f3451c",
+      "mode": "100644"
+    },
+    "assets/images/react-logo.png": {
+      "sha256": "224b7636b15e672801579b5b418077cbc2ca42f0146389062364356b0ecb5c5c",
+      "mode": "100644"
+    },
+    "assets/images/react-logo@2x.png": {
+      "sha256": "fa600be9ad2f869c7a8dbaffc78bb15af741123e1319c948f0be51753a153cde",
+      "mode": "100644"
+    },
+    "assets/images/react-logo@3x.png": {
+      "sha256": "cd84e02a5d542a3e71b7fa10a685c1b9fb51db4aff92aca6c0da6461ce17be16",
+      "mode": "100644"
+    },
+    "assets/images/splash-icon.png": {
+      "sha256": "c4fc458058eb8d982056fdb652d11f4966ab249468d37da89fbb9dad8f6c8019",
+      "mode": "100644"
+    },
+    "assets/images/stratdesk-original.webp": {
+      "sha256": "80d9b415529198d4da784ee38653163d11994a18c6d2638805aef5efa9652880",
+      "mode": "100644"
+    },
+    "babel.config.js": {
+      "sha256": "eb65280c4b785ba798ff5395b49f82e0a7408b15ab55eaf4cc24e46d3d5ff8e5",
+      "mode": "100644"
+    },
+    "components/external-link.tsx": {
+      "sha256": "2a4b7d4daaaa544ebedc67429235a6d7ee2f25c6402b83974a48bb940bf1d664",
+      "mode": "100644"
+    },
+    "components/haptic-tab.tsx": {
+      "sha256": "e97903c7791d772e746e1eefa6f39e95b39af8aa3a12eebee26414af9cda9e2e",
+      "mode": "100644"
+    },
+    "components/hello-wave.tsx": {
+      "sha256": "e03908c1b822ef27149dcd65c0552d0f30532b072ef47401a8bd24f8e4fd9bee",
+      "mode": "100644"
+    },
+    "components/parallax-scroll-view.tsx": {
+      "sha256": "3741cb292ea5506069a693eaf83a3d8e4eb9e38f05592a1ac102952398be662b",
+      "mode": "100644"
+    },
+    "components/screen-container.tsx": {
+      "sha256": "e98f22672cf7e0b243a87fbff64cfd7db48a70415a516ae80f99b41142b747a5",
+      "mode": "100644"
+    },
+    "components/themed-view.tsx": {
+      "sha256": "cec7921ecee6ee6590ed8cee4c1a3316a9d72d5a9ee695203b15beeec57220b9",
+      "mode": "100644"
+    },
+    "components/trading/account-controls.tsx": {
+      "sha256": "3033caa303d968d6d98954dc879e598d882857ae7d6307fbfbcaef9c51df68cb",
+      "mode": "100644"
+    },
+    "components/trading/ai-coach.tsx": {
+      "sha256": "fb8de9b91ae1850ab22c02fe8effe1e050d94c2e68e313007d64c6bc48fdf516",
+      "mode": "100644"
+    },
+    "components/trading/ai-forecast-panel.tsx": {
+      "sha256": "84a49a93b290eec208c6831ab877281bfb38139413abf1e581109e9b61e65889",
+      "mode": "100644"
+    },
+    "components/trading/ai-quality-selector.tsx": {
+      "sha256": "15f2d33ad0a3573247fd7b99c961548beee03ddb9c08c9124ee289f820dab356",
+      "mode": "100644"
+    },
+    "components/trading/ai-rate-controls.tsx": {
+      "sha256": "a941b3a24b63179b3c34cf5e5928a807178a808d76892016319dfa03db03c95e",
+      "mode": "100644"
+    },
+    "components/trading/candle-chart.tsx": {
+      "sha256": "c4ac5b6426906aff7088c15454f9c896259223f3f6fc7978f2b2dbbb30d03265",
+      "mode": "100644"
+    },
+    "components/trading/confluence-editor.tsx": {
+      "sha256": "aaa5c5f7d9d48595ddf01f09a0f63f3304ff554aaf946be91b758a1c9a33e561",
+      "mode": "100644"
+    },
+    "components/trading/discipline-guard-control.tsx": {
+      "sha256": "340cc8a60fd0dd3adc743b11ac01cb34ee6dd0f6a4a911dbc55a739ddffc891c",
+      "mode": "100644"
+    },
+    "components/trading/discipline-panel.tsx": {
+      "sha256": "40dc057c96033505561591e351020f73d72693443860b7145f707cf9fc9c5319",
+      "mode": "100644"
+    },
+    "components/trading/disclosure.tsx": {
+      "sha256": "42d1d755f1cdcde3b273eca486fa754f64a59c68aa3b0c17b4f514b761a5d74f",
+      "mode": "100644"
+    },
+    "components/trading/feature-guide.tsx": {
+      "sha256": "a38e2b8984e1a48da4fa499ec7016077a6010ac6d5dc4ae7ff7d3a1fb5de1561",
+      "mode": "100644"
+    },
+    "components/trading/foreground-alert-pill.tsx": {
+      "sha256": "48cd4996063802bbc1b4a17d4053e04055fbc7bf433ac038eceb685511d707c8",
+      "mode": "100644"
+    },
+    "components/trading/foreground-alert-sync.tsx": {
+      "sha256": "d5e1dfd2aaa7f82b8c2e3ef2fd376d8451d847235ffcea088488f5a6345034e5",
+      "mode": "100644"
+    },
+    "components/trading/indicator-card.tsx": {
+      "sha256": "98fe5e47fe9df119f703fde99f4476562b11bb2fabe930c4fab17129acf45217",
+      "mode": "100644"
+    },
+    "components/trading/learning-dashboard.tsx": {
+      "sha256": "c50bf01954c44b18bcb12a1942bdd184e1a852780ad9156332d61dc69e35c6c6",
+      "mode": "100644"
+    },
+    "components/trading/library-ai-panel.tsx": {
+      "sha256": "eaaf08956e72d6e6ad05337a43bf3632981926b484f5939397e6edcd52749d18",
+      "mode": "100644"
+    },
+    "components/trading/lightweight-surface-types.ts": {
+      "sha256": "e646a7cba70c182746ba470657ce8ae19343cace8649ef0dceccb12a97b6d9a6",
+      "mode": "100644"
+    },
+    "components/trading/lightweight-surface.native.tsx": {
+      "sha256": "260df89e40616730315512f4347caeff7d852cb023b0d64e159046584590adff",
+      "mode": "100644"
+    },
+    "components/trading/lightweight-surface.tsx": {
+      "sha256": "0f2727449de2a313ca0399dff27b8b3faecbb34057d3133814ea3f2b8d5c1fdb",
+      "mode": "100644"
+    },
+    "components/trading/lightweight-surface.web.tsx": {
+      "sha256": "909b5c53ed2f9ffebfb28daac5c2507dc788a01b9667468a59ba74fdcf567911",
+      "mode": "100644"
+    },
+    "components/trading/local-app-lock.tsx": {
+      "sha256": "481831d2bd8221f135d2f9c03b899e655b90befb95a17cef2a385fc13f23e84c",
+      "mode": "100644"
+    },
+    "components/trading/local-lock-controls.tsx": {
+      "sha256": "344dc326c00f418ba404519ce471d16c14a80911c450168e07ef5ec086d2dec1",
+      "mode": "100644"
+    },
+    "components/trading/market-context-table.tsx": {
+      "sha256": "922e862e006e557d2b784cdb851866e0c51ac1dde53cdcdc039bb3638c129fd4",
+      "mode": "100644"
+    },
+    "components/trading/notification-controls.tsx": {
+      "sha256": "0d502db050e25f128dcdceebf2b62d27b37ac1ff7cc90f97662d83e8b2279fa8",
+      "mode": "100644"
+    },
+    "components/trading/orb-auto-paper.tsx": {
+      "sha256": "a57aceb68cb488f3cf9e9c968f28d7a9b753ffc9c11a7c97abfbe0fa5a591455",
+      "mode": "100644"
+    },
+    "components/trading/orb-strategy-editor.tsx": {
+      "sha256": "e605bc26b656d6bc22c2c46346ff7bf3bc081fc08780b9dd9edb103677e1ac0e",
+      "mode": "100644"
+    },
+    "components/trading/orderbook-research.tsx": {
+      "sha256": "b81e6257238b3b78a2978590a39ff733ee7bad1900f6d626fc7165e7697816f9",
+      "mode": "100644"
+    },
+    "components/trading/owned-source-analysis.tsx": {
+      "sha256": "d3ade4c848d3fe49d3716b1bc680f8ae8440d8a315d4b7b3b028fe62f5ec4c40",
+      "mode": "100644"
+    },
+    "components/trading/owned-source-preview.tsx": {
+      "sha256": "e42f9e9929c0dcc91ad7057cdfa384015dfe6b4e937770eec1b589581d2b0257",
+      "mode": "100644"
+    },
+    "components/trading/owned-workspace-tools.tsx": {
+      "sha256": "3cb36eb753c3ef38f3267833236f3744e11b9fbce6a26afc345a61230e21fbeb",
+      "mode": "100644"
+    },
+    "components/trading/owner-gate.tsx": {
+      "sha256": "863c800c54dfbfb80941d49f90b5badb317ca08fa2f3308fa1c7da05e4481710",
+      "mode": "100644"
+    },
+    "components/trading/owner-privacy-boundary.tsx": {
+      "sha256": "bb0548f1cfd20d4275fc89866f313adaf118fb9d71c551754d288313bc55eabf",
+      "mode": "100644"
+    },
+    "components/trading/paper-plan-sheet.tsx": {
+      "sha256": "131f300c3e516ff76c81817f9ec108d31211048ab4ab719e0e93cd156af8932f",
+      "mode": "100644"
+    },
+    "components/trading/paper-trade-sync.tsx": {
+      "sha256": "2c416db09675ca997d7bc4ae77787cab71dfce9a7523506825e961dc461e620e",
+      "mode": "100644"
+    },
+    "components/trading/pattern-catalog.tsx": {
+      "sha256": "ca7aa72426bacb79dae0df975d40d28afdf22662fbe9b8a95a1bfc53fb9272d2",
+      "mode": "100644"
+    },
+    "components/trading/performance-dashboard.tsx": {
+      "sha256": "0bb451a922b452cebe4010a4660730dc9a19eed626754cf2e3e3c3a42988b3d9",
+      "mode": "100644"
+    },
+    "components/trading/quant-rule-editor.tsx": {
+      "sha256": "979caee1b8687052e81b4ce46d3b19074d29cf7f3606264aa5ddabe254c22e7e",
+      "mode": "100644"
+    },
+    "components/trading/quant-rule-runner.tsx": {
+      "sha256": "6f513f83c19497625ef2d92a36a6c730bda2fb81660e48ea1475ec7ba6a37ba2",
+      "mode": "100644"
+    },
+    "components/trading/quant-workbench.tsx": {
+      "sha256": "bd9847aa4cc384c95bc7aa0a2869f1edce31882eeaf3d14cc67200792e88f0de",
+      "mode": "100644"
+    },
+    "components/trading/research-panel.tsx": {
+      "sha256": "d648cbe33424123089b52d036c3f21c139503ac9f82ef2746b459d5267e95d8e",
+      "mode": "100644"
+    },
+    "components/trading/scenario-layer-manager.tsx": {
+      "sha256": "cd840f916fe175c6a645123bac8a90c593da52af192a285631c192f8cda8c659",
+      "mode": "100644"
+    },
+    "components/trading/scenario-provider-setup.tsx": {
+      "sha256": "607a49f240795e315cc9f3ff2e9a88cfc0dddd71b9f3eb2ac63e0e1862160ec5",
+      "mode": "100644"
+    },
+    "components/trading/session-auto-paper.tsx": {
+      "sha256": "8b64bdc2282300248faa21b4a9c732cabeba393a03626e3b8c28a802490a7703",
+      "mode": "100644"
+    },
+    "components/trading/session-strategy-editor.tsx": {
+      "sha256": "176b0619c5d04406936ef63db5ef7071f73166b8b74f0301d9d00cb88ab91f6e",
+      "mode": "100644"
+    },
+    "components/trading/setup-panel.tsx": {
+      "sha256": "e09864d07b888b189d1b7358e9f096d05c81be17d7aabc0d7a4a47a3f5926ae7",
+      "mode": "100644"
+    },
+    "components/trading/source-analysis-job.tsx": {
+      "sha256": "b3ea445176d30d2ee6bc5bff676ff94224d30e2197b742189976013a2c645f61",
+      "mode": "100644"
+    },
+    "components/trading/source-preview.tsx": {
+      "sha256": "65b2c771ee15a74f46a3519461f79b86a9dda3ad1c897144fa31926d9eb54838",
+      "mode": "100644"
+    },
+    "components/trading/stored-paper-history.tsx": {
+      "sha256": "b860e2a35c84b8fbec71db291f404ded9be4a1f89ffba3db98b750f801247dc9",
+      "mode": "100644"
+    },
+    "components/trading/strategy-collections.tsx": {
+      "sha256": "50879ee709147c582c49f7addad9d5a2c4d90cd9185f60f3d0a5fff6c5c0c772",
+      "mode": "100644"
+    },
+    "components/trading/svg-candle-chart.tsx": {
+      "sha256": "150de8e2df7ea62a69e0cb20defbb87d31375cbed0aa905523b62ba9277e1ec1",
+      "mode": "100644"
+    },
+    "components/trading/theme.ts": {
+      "sha256": "f6a8062eaca80e01656dfb92025ddbbb34d27224eec59bd8b3643a978b57812e",
+      "mode": "100644"
+    },
+    "components/trading/timeframe-bias-table.tsx": {
+      "sha256": "3c7062d96d3f9fce5fee992677db9af84e64ba060178487b4744596e87c8bbf3",
+      "mode": "100644"
+    },
+    "components/trading/trade-screenshot-panel.tsx": {
+      "sha256": "914687e461e4639ecbdd98a892af7c6ea82809b41b0aed9f5a6daee43c0b3785",
+      "mode": "100644"
+    },
+    "components/trading/trading-lessons.tsx": {
+      "sha256": "3909b468a83f4d874fd7cfc7751247ba2d5bd7dbf2bfc82003859414387fe9b7",
+      "mode": "100644"
+    },
+    "components/trading/ui.tsx": {
+      "sha256": "be89b6f88d9a79e738fea85ba068709347aeb00b9fadfc0d8b866ce395fd01d8",
+      "mode": "100644"
+    },
+    "components/trading/weekly-context.tsx": {
+      "sha256": "40ebbf215caee5add0395a9fc3207adb793b6a2c76cd2a2170f4749c84daeb25",
+      "mode": "100644"
+    },
+    "components/trading/workspace-tools.tsx": {
+      "sha256": "d1672cf035fd2071164d209cf4548ce0c3d390d992a39879c6b83202d68b95a8",
+      "mode": "100644"
+    },
+    "components/ui/collapsible.tsx": {
+      "sha256": "c4dd5a6eba6677bdee7b75a3d690f80a2312c6f78cb44cc4f563453d51a859d5",
+      "mode": "100644"
+    },
+    "components/ui/icon-symbol.ios.tsx": {
+      "sha256": "410e970a44835a834ae34981a23db258e63ce5e712ad9aaf73d3bf892696a6a1",
+      "mode": "100644"
+    },
+    "components/ui/icon-symbol.tsx": {
+      "sha256": "fb5dcf6b34306195a4c87b3e2f0e5d760abf9caeb64eec4538d2c0fc1b6dd33f",
+      "mode": "100644"
+    },
+    "constants/const.ts": {
+      "sha256": "60af499b012dd7ba445d60aaaa7a315a1544eae5682955ce1a6fc83e22a9224e",
+      "mode": "100644"
+    },
+    "constants/oauth.ts": {
+      "sha256": "32d576ccc136b1f7b4a5bc86596d3b9b71cc874a86088c428598ccf96dd34068",
+      "mode": "100644"
+    },
+    "constants/theme.ts": {
+      "sha256": "01fbaa9f3e507ec1e63166f009bd61c2ac793060bd143c6d6370d818842e5278",
+      "mode": "100644"
+    },
+    "drizzle.config.ts": {
+      "sha256": "9610673b3fe7b6b950a8e7e54cb1e91f9dd25f87d7ae6a41d2f6ada957065d01",
+      "mode": "100644"
+    },
+    "drizzle/0000_elite_eternals.sql": {
+      "sha256": "814a08e40d7fc2bcfd458759d18319198ca8ae394f2fa15617a78678e9c9c93b",
+      "mode": "100644"
+    },
+    "drizzle/0001_abandoned_king_bedlam.sql": {
+      "sha256": "30fd3e6dcdb1753f9b425d3198f8c8920822a2c762c0d47df117580b6841ff53",
+      "mode": "100644"
+    },
+    "drizzle/0002_remarkable_korvac.sql": {
+      "sha256": "5dedbad5fd1798cc8fea6f8a7a192489e55209806b2d8f759055cfa52ce9e411",
+      "mode": "100644"
+    },
+    "drizzle/0003_skinny_white_tiger.sql": {
+      "sha256": "bd23a633baf86bf4c2fa89904bb59b7c650a579d5094c0ea0e8bf602b70adde0",
+      "mode": "100644"
+    },
+    "drizzle/0004_stormy_slayback.sql": {
+      "sha256": "10d0fc137299c31a20f4b84186d312e47b09433b0dec7445523b95f341d8bc50",
+      "mode": "100644"
+    },
+    "drizzle/0005_handy_avengers.sql": {
+      "sha256": "4420f7cdc52fd0bf0fbf46fc9804cf93eff9f5a1199235c0a9446376fdc7cb13",
+      "mode": "100644"
+    },
+    "drizzle/0006_wise_angel.sql": {
+      "sha256": "a7ee6ddcefd375e76d99f75a31699a3c41d988647a3a39f491e54f4b8b44d1c9",
+      "mode": "100644"
+    },
+    "drizzle/0007_harsh_archangel.sql": {
+      "sha256": "6191be94996c877945f02e47b0fd9b1e1cbe80f4c8802fefc5de7c0cbe5c5b01",
+      "mode": "100644"
+    },
+    "drizzle/meta/0000_snapshot.json": {
+      "sha256": "b7a2022015ccca4b794abe639c7c94a54749472bc4967a0d89fc104cfa589033",
+      "mode": "100644"
+    },
+    "drizzle/meta/0001_snapshot.json": {
+      "sha256": "153baf34ffa5dd0a996f029bdc6e480fc7f7fc45c7444f546298a1149333e10a",
+      "mode": "100644"
+    },
+    "drizzle/meta/0002_snapshot.json": {
+      "sha256": "48ad66431232c6aaf2a3893ab17992c6efcba0f210c5919a1c2fa3e8bda72c67",
+      "mode": "100644"
+    },
+    "drizzle/meta/0003_snapshot.json": {
+      "sha256": "92a0db9f9073e235104becc4a0ba0b08657f8fc180353a7a2cfbedf7a780a231",
+      "mode": "100644"
+    },
+    "drizzle/meta/0004_snapshot.json": {
+      "sha256": "09745b07f5ec7d03c959f2fc80ed3fcf56a0782b37d1afe691dfd8fe1c36ef9e",
+      "mode": "100644"
+    },
+    "drizzle/meta/0005_snapshot.json": {
+      "sha256": "dd8506a8bcdc821dc170fde1f10fa0a7854cc9fdbc4d495f9848c53622afd2c8",
+      "mode": "100644"
+    },
+    "drizzle/meta/0006_snapshot.json": {
+      "sha256": "168eddbe80996a2b2ab6250ad811cbae33e90b9eee019ef248234a29d4ea6af5",
+      "mode": "100644"
+    },
+    "drizzle/meta/0007_snapshot.json": {
+      "sha256": "79b00b7964b965610c8b8961f9782d4ff83531f30fb10aff13b91ec3b07eb56c",
+      "mode": "100644"
+    },
+    "drizzle/meta/_journal.json": {
+      "sha256": "ba29462cc37137d4ff599fe470e4008044f5d2f9cd8f68644d740342e0d65e93",
+      "mode": "100644"
+    },
+    "drizzle/migrations/.gitkeep": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "100644"
+    },
+    "drizzle/relations.ts": {
+      "sha256": "85acb8ece8fbb5031fc56fa8c70338d9b8b06ef3b032391fff8532c6373c7186",
+      "mode": "100644"
+    },
+    "drizzle/schema.ts": {
+      "sha256": "3e117d21b5934aa4d8d5573df8935e23ac785388dee1c6d4793c4281ec3c5c28",
+      "mode": "100644"
+    },
+    "eslint.config.js": {
+      "sha256": "0a16c7a62375d4756b81fbe44f37abf9e9b6969fac84e77c7021972a5a783c63",
+      "mode": "100644"
+    },
+    "global.css": {
+      "sha256": "cc1a7ad0d019ddb1d32d0ecb588ba0ac26ce41d8625dd6c366348b25f83a28ec",
+      "mode": "100644"
+    },
+    "hooks/use-auth.ts": {
+      "sha256": "a278804bd634d9f743af8a07fb69f12a607d05141bd12078bed6a0be2cd6f474",
+      "mode": "100644"
+    },
+    "hooks/use-color-scheme.ts": {
+      "sha256": "33d9d7815f51880b483e72d23e637015ead39c37c78efa098d70d8c0ee866419",
+      "mode": "100644"
+    },
+    "hooks/use-color-scheme.web.ts": {
+      "sha256": "7daabb63b86ba392e4f9a88a068bc5226d41a8dd64eef251eba2d56abdf711b7",
+      "mode": "100644"
+    },
+    "hooks/use-colors.ts": {
+      "sha256": "3a97917e877bb64ab6ba9247993c271aaea3b30fa07f12026f927a5fcb068c9f",
+      "mode": "100644"
+    },
+    "hooks/use-workspace.tsx": {
+      "sha256": "e49f4ea33f92233495544a21401688d0e2b20a503f6ca13a94872613db2f7478",
+      "mode": "100644"
+    },
+    "lib/_core/api-origin.ts": {
+      "sha256": "5cc18829fc31a9b1d75a2cb3a65ff712d7a0ad524bf6f09175be663335b1f169",
+      "mode": "100644"
+    },
+    "lib/_core/api.ts": {
+      "sha256": "05a5cb7a27b24e577d7ce41c4880ed0ecdf3e3de4c8584cc9f413056697332ad",
+      "mode": "100644"
+    },
+    "lib/_core/auth.ts": {
+      "sha256": "403fa175875ce9a3f477c98247979b830b10d6d4c371b3b74050c817f1154f5c",
+      "mode": "100644"
+    },
+    "lib/_core/manus-runtime.ts": {
+      "sha256": "0cbdbc6c4aff179d4e9bd9880b12600e04fd8966e8acd01911c6c99f6540306a",
+      "mode": "100644"
+    },
+    "lib/_core/nativewind-pressable.ts": {
+      "sha256": "a75dac0e8dd47bf99e7af6659e363be969294cb30f6585ff5fc00ce27dd55112",
+      "mode": "100644"
+    },
+    "lib/_core/oauth-completion.ts": {
+      "sha256": "c71516db6d569c34edde4fb354dbcf0cd2ca5fcf36ef2eefa3f5b3f7134d2f35",
+      "mode": "100644"
+    },
+    "lib/_core/theme.ts": {
+      "sha256": "7648ba78ea5fbb9855fc831220ccaa8d93ef6d369673054bfc906092d522e828",
+      "mode": "100644"
+    },
+    "lib/_core/web-login.ts": {
+      "sha256": "253dec45344e47bebe82c6e6302cc6b67cbe0c5e0c8c7f3244a3bd68e47864b5",
+      "mode": "100644"
+    },
+    "lib/theme-provider.tsx": {
+      "sha256": "4a23768f96200676479fa29954c2f853d60355807ade2aa5af222dcfeb007c0a",
+      "mode": "100644"
+    },
+    "lib/trading/ai-forecast.ts": {
+      "sha256": "5105f84120f11b144fb68eee5202b619bcbac218ecc1865d69c9fff48990f452",
+      "mode": "100644"
+    },
+    "lib/trading/ai-quality.ts": {
+      "sha256": "ad5795746030157b06b2fed0df8eebbf19573e3990f1d8399ec136a298ca4d74",
+      "mode": "100644"
+    },
+    "lib/trading/ai-request-lifecycle.ts": {
+      "sha256": "ab711274495a668690248e4304b813ecd55c7572c03109f83f9d68062fe3daf7",
+      "mode": "100644"
+    },
+    "lib/trading/calibration.ts": {
+      "sha256": "a0dfb07dfee096ee7915e5b923b853f5fd9ac7e48fedaf5801be8a3f12aac26c",
+      "mode": "100644"
+    },
+    "lib/trading/chart-bridge.ts": {
+      "sha256": "b8604bc1f2eb96e4f1df2f7bed9b42b259aa7d4d8abe615f6ea11c1f18d29377",
+      "mode": "100644"
+    },
+    "lib/trading/chart-presentation.ts": {
+      "sha256": "4da3234aa5400f2d43f60a62e778d9e2b5f77d34b80f9ad683898e5238552e1c",
+      "mode": "100644"
+    },
+    "lib/trading/chart-sessions.ts": {
+      "sha256": "9ccda9e48df844753ff86f2699a51ff2f4159aeac81209cff24c19e103dd33c9",
+      "mode": "100644"
+    },
+    "lib/trading/chart-types.ts": {
+      "sha256": "ef374a78ea57fd3ccba5b18e832276fe07fe996e40047352a30aff6e8ad22702",
+      "mode": "100644"
+    },
+    "lib/trading/client.ts": {
+      "sha256": "f3ddfff3447abd854697443a9fe42ff73556075f2b14bc18e5c367d172078b57",
+      "mode": "100644"
+    },
+    "lib/trading/coach-types.ts": {
+      "sha256": "61a880925330922056dd71181329174d00b349d7b5eae9437f20ffa36cae5331",
+      "mode": "100644"
+    },
+    "lib/trading/coach-ui-state.ts": {
+      "sha256": "7855115ce26325afad458ff2865936bfe6a977411a3e44b4d9335950c989f861",
+      "mode": "100644"
+    },
+    "lib/trading/cointegration.ts": {
+      "sha256": "2c9b265179189fdc8fa567f1dae961b819bc53dec80a3c33ec9f2618b9f5eae8",
+      "mode": "100644"
+    },
+    "lib/trading/collection-model.ts": {
+      "sha256": "a9968e8d91fe172f1e630d63153481b7ac26191463a7e6d68b2311330d0f917d",
+      "mode": "100644"
+    },
+    "lib/trading/confluence-alerts.ts": {
+      "sha256": "3667d72487e5d0fa12cc5deb8284ea35253aee71c54dff6395928c34b987ac1c",
+      "mode": "100644"
+    },
+    "lib/trading/confluence-analytics.ts": {
+      "sha256": "bfcb60c08594eabd1c8938cbb0d1c56eb054df24bde9a39b9a44b9f156f5616e",
+      "mode": "100644"
+    },
+    "lib/trading/confluence-contract.ts": {
+      "sha256": "8ff298d976602f078744399690ded6da20f4f6246088f86df83ad172481a9f61",
+      "mode": "100644"
+    },
+    "lib/trading/confluence-runtime.ts": {
+      "sha256": "4286a1d15924d11cbc378ffc49befc7e482985fecffacf5a7aa33fe89e7d3a33",
+      "mode": "100644"
+    },
+    "lib/trading/confluence-weights.ts": {
+      "sha256": "b2a3cd4634567a734bebdd53dd99d162905bc362ca38b99915de826d3425970d",
+      "mode": "100644"
+    },
+    "lib/trading/device-local-lock.native.ts": {
+      "sha256": "3e86367062c54eb5f14f22a4320ec4afeb403f516475177c6a20c6c374427a03",
+      "mode": "100644"
+    },
+    "lib/trading/device-local-lock.ts": {
+      "sha256": "979c619e9fe175d9814792b772ed0e42fa18e9d25c234e68c7363c7d5b2fd81f",
+      "mode": "100644"
+    },
+    "lib/trading/discipline-guard-ack.ts": {
+      "sha256": "390eedf252f194a6e4d12e4902e93f7df3b7cda54d6513dc0dedd00f8316b990",
+      "mode": "100644"
+    },
+    "lib/trading/discipline-policy.ts": {
+      "sha256": "1dd864920c194c8c2dbbf08094fbbba91c3d762f9a81aba8cf16f41a07168b1b",
+      "mode": "100644"
+    },
+    "lib/trading/engine.ts": {
+      "sha256": "dff3a0094bc5dc2c2393b8509ca77e6fab51208eb880bf923e0a837e2033d966",
+      "mode": "100644"
+    },
+    "lib/trading/feature-purpose-data.json": {
+      "sha256": "5cb1eb08cbf4fa52aa31d70e94854af76d1a9ca158bac9f18044edd6fe3f36c3",
+      "mode": "100644"
+    },
+    "lib/trading/forecast-display.ts": {
+      "sha256": "1469c9ccff8f4c8d54f5ec46feba3d718fa993503db6fa047ae16be61cad8b92",
+      "mode": "100644"
+    },
+    "lib/trading/foundry-suite.ts": {
+      "sha256": "306cb77394ef9410390bc3dcbad404c22a06ac9d7eef869aab1c063cf349d01e",
+      "mode": "100644"
+    },
+    "lib/trading/freshness.ts": {
+      "sha256": "0869619e3913328afa14940d6fdc1ea4b04e5cf848f9dd42603d11e313bb197d",
+      "mode": "100644"
+    },
+    "lib/trading/generated/lightweight-runtime.ts": {
+      "sha256": "ac78fb7947d1689ff07fd73ab2f956a256d7dfcf2302ab71dead5588b02f2087",
+      "mode": "100644"
+    },
+    "lib/trading/github-presets.ts": {
+      "sha256": "ecb65b9885089a5665eb83ce83ef5adf71c794dfb28a14ca6ff0c998e1207dfe",
+      "mode": "100644"
+    },
+    "lib/trading/github-setups.ts": {
+      "sha256": "82b3fdf4af2269b2fcfbb1654ad3f807dc4c8169fca85a0a4ed111b500216c31",
+      "mode": "100644"
+    },
+    "lib/trading/glossary.ts": {
+      "sha256": "19b48a2c90a5b8f4b1e2bbfd4b424477d4e2a842c97416edfdfb81aea94ae195",
+      "mode": "100644"
+    },
+    "lib/trading/historical-scenario.ts": {
+      "sha256": "2a182e50d1a2bcc781288aef7037e1b09e66404f5ceab08e2710ec21c25b4230",
+      "mode": "100644"
+    },
+    "lib/trading/indicator-presets.ts": {
+      "sha256": "d06afacef910d56362c273bdf328932b0e2b3df35f685dab4e6ac7090112d0a8",
+      "mode": "100644"
+    },
+    "lib/trading/indicator-setups.ts": {
+      "sha256": "5829e9f6eadcab69a95b02591df182e01de93a20b475584d4285dcca6ca1924f",
+      "mode": "100644"
+    },
+    "lib/trading/indicators.ts": {
+      "sha256": "7a76d3ab4d3d792799e4d11ad857a05f7d74bc6c90949230ea07c7edca2ed307",
+      "mode": "100644"
+    },
+    "lib/trading/instrument-setup-types.ts": {
+      "sha256": "34c556cc517a7f69fd22abd03b98e2506d72204ec312e0843bb3cde1c3a2450e",
+      "mode": "100644"
+    },
+    "lib/trading/library-blueprint-types.ts": {
+      "sha256": "5ce13647bd3eb0d69310803cddc9bbe2b10c0d6d648427c46d20ab33ab7adbf9",
+      "mode": "100644"
+    },
+    "lib/trading/lightweight-controller.ts": {
+      "sha256": "7510b85609daff7aa3499c0ddb177e37a12412f33bb57cd5e2f14ef77508629a",
+      "mode": "100644"
+    },
+    "lib/trading/lightweight-payload.ts": {
+      "sha256": "56b6cef5ba85e042a4c22a865681a5ff16a3de27a18d61f7f276cf97ad94e43c",
+      "mode": "100644"
+    },
+    "lib/trading/local-lock.ts": {
+      "sha256": "880269c0963dba77949f960e0f2f39fd0cc4aa31b7819915802176705790127f",
+      "mode": "100644"
+    },
+    "lib/trading/market-making-methods.ts": {
+      "sha256": "599c48edd536d3d02235885eb2f7ebd9ef871345ea67fb36f2c0065fd1787a89",
+      "mode": "100644"
+    },
+    "lib/trading/match-feedback.ts": {
+      "sha256": "b27496d74a9cfd50f1f70b2734765b6e587d0eef307c096f5b1fa4c13b4d804d",
+      "mode": "100644"
+    },
+    "lib/trading/model.ts": {
+      "sha256": "9f35e51509306aaeb68af7cfa3208fb2cd814a5ea2fbfc87f5bc4f562373586b",
+      "mode": "100644"
+    },
+    "lib/trading/native-chart-entry.ts": {
+      "sha256": "82463e9a0af50b58cad810b0b6d3cbe3f60657970d5c7b84be89953434fb1494",
+      "mode": "100644"
+    },
+    "lib/trading/no-code-quant.ts": {
+      "sha256": "ece8e5853cb37b6ec3fe9986a499ac26fa25bfa2a80daa1ca5637fe23d0ca6d2",
+      "mode": "100644"
+    },
+    "lib/trading/notification-scope.ts": {
+      "sha256": "78f36840980b9ba03f95ce4971d4e432662f2eee925d88d1bf917feafdca0657",
+      "mode": "100644"
+    },
+    "lib/trading/orb-auto-types.ts": {
+      "sha256": "e5e3646b220183c660557ac7a3f8ba962165b74301b8981f3d0d45cfe12eac42",
+      "mode": "100644"
+    },
+    "lib/trading/orb-market-profile.ts": {
+      "sha256": "4fad300405393aa03c98910204b7700b3d1ed99fc23174472a18f9c2a1cf69e5",
+      "mode": "100644"
+    },
+    "lib/trading/orb-model.ts": {
+      "sha256": "412a672df8dd3d3ce3f1340cef36b5652ca9090eb1e9237167913976fdde779c",
+      "mode": "100644"
+    },
+    "lib/trading/orb-presets.ts": {
+      "sha256": "5b4166de7ead7b228e4b3550b71a4671bf90f9bdb8dbcac2360a2787c0c6c830",
+      "mode": "100644"
+    },
+    "lib/trading/orb-strategy.ts": {
+      "sha256": "b32a1ad71ee62c424de6f5ae8639253e455fd57cea3cb75fe3f1ea5461b84da4",
+      "mode": "100644"
+    },
+    "lib/trading/orderbook-model.ts": {
+      "sha256": "775857b3b16e359ba97eb45b6bc52ef6f7592f28cde321b00997b6d1aa63f712",
+      "mode": "100644"
+    },
+    "lib/trading/paper-form.ts": {
+      "sha256": "b3b90aef00900c0531e48b3871d5e20aac6bb6382ee8b5d7e8a9b9a666a144c3",
+      "mode": "100644"
+    },
+    "lib/trading/paper-lifecycle.ts": {
+      "sha256": "cdbea57c03e93f78e3a7e037c44b89e3ede47c9e0af09916a14a2049d02960e6",
+      "mode": "100644"
+    },
+    "lib/trading/paper-observations.ts": {
+      "sha256": "712126c7fbb5825d672bb2a490db6bd8a79587a3c87dead112fcf073dea1e4d2",
+      "mode": "100644"
+    },
+    "lib/trading/paper-performance.ts": {
+      "sha256": "7007f3116c0dded2a37201b530b33831cf90918c45c761f643a53f9862986bbd",
+      "mode": "100644"
+    },
+    "lib/trading/paper-risk-template.ts": {
+      "sha256": "994826c6f982fecde90151b897f489a63ed4878feffefebbcf9170ba7612d667",
+      "mode": "100644"
+    },
+    "lib/trading/pattern-catalog.ts": {
+      "sha256": "d2bab68b06f0665f607d9c05cbcbbdaed45fc7e6a466dc555c69415aa9c2a971",
+      "mode": "100644"
+    },
+    "lib/trading/pdc-continuation.ts": {
+      "sha256": "38cfc24974b4577256eb622a35d4c3d32faff106870993509333071d0889116a",
+      "mode": "100644"
+    },
+    "lib/trading/performance-statistics.ts": {
+      "sha256": "920e6617a0c781c9fa4d85063ebdcae2c5e05085ece66d08c853a4a2b71a3101",
+      "mode": "100644"
+    },
+    "lib/trading/previous-provider-day.ts": {
+      "sha256": "f2935c4a82baa67aee0cd14cb1876de6c6ec0894187a859b253a42b49dfd4852",
+      "mode": "100644"
+    },
+    "lib/trading/purged-validation.ts": {
+      "sha256": "cbfbebf50ac94dda39b1330cb25c6ca3631ea94d28713d47309e8f7620b6424d",
+      "mode": "100644"
+    },
+    "lib/trading/quant-lab-types.ts": {
+      "sha256": "1de82baf1206999bdb77091f6bfbfa7d22121401b53c589041dae55209884be6",
+      "mode": "100644"
+    },
+    "lib/trading/quant-macro.ts": {
+      "sha256": "ea04da6dd4d9042d739a3514406d37009a9f6e0abdada42f129cae7a0a28b5f0",
+      "mode": "100644"
+    },
+    "lib/trading/quant-making.ts": {
+      "sha256": "b0a445296d07e1a45398ee6ddca17b6a7b5f37478b1ac3f5472ce1448fce2b8c",
+      "mode": "100644"
+    },
+    "lib/trading/quant-methods.ts": {
+      "sha256": "65635ea8ad35e9161d9f61a19896bebd10fd668c9ad330a997d849b2b4eb2900",
+      "mode": "100644"
+    },
+    "lib/trading/quant-ml.ts": {
+      "sha256": "078da09572b7850ea78a56ac542ac576de888a58eac2edfb0bd775852f08618e",
+      "mode": "100644"
+    },
+    "lib/trading/quant-momentum.ts": {
+      "sha256": "257617fea85c9c0dea3d1dd4b11bbe4b29dca9bc49a60ef3c21f993bef647567",
+      "mode": "100644"
+    },
+    "lib/trading/quant-pairs.ts": {
+      "sha256": "32e5ae8bc46a5251f74818c987a09e79b6eb7541f702976c3be15275c5d4d2c0",
+      "mode": "100644"
+    },
+    "lib/trading/quant-workbench-config.ts": {
+      "sha256": "459101ab7cd01ed8ff7897328400d984ddedf6fbec74626b403f0c897e95a166",
+      "mode": "100644"
+    },
+    "lib/trading/refinement.ts": {
+      "sha256": "93bd7a0edc0157cc23751830ed16fb942cd9c4cac0b47f2f510be826b4989fba",
+      "mode": "100644"
+    },
+    "lib/trading/request-deadline.ts": {
+      "sha256": "8b3fd54941c342fceb9fa7e6f609b8a7b74c701b2cedf05813dad9292a47c8d3",
+      "mode": "100644"
+    },
+    "lib/trading/research.ts": {
+      "sha256": "52494ab9ba7f25ecca9b7bafb3106276ea98abbf6deeba9f026e2de6f23ab180",
+      "mode": "100644"
+    },
+    "lib/trading/scenario-direction.ts": {
+      "sha256": "c6c96296fb22d06550bdee20a471cf614c98c874b4aa1b139dd83c6949bde0b5",
+      "mode": "100644"
+    },
+    "lib/trading/scenario-layer-storage.ts": {
+      "sha256": "23e2410770955bd0953021110c0b79cc01745bcba999f850af20e4990b685360",
+      "mode": "100644"
+    },
+    "lib/trading/scenario-layer-types.ts": {
+      "sha256": "8bf44381e6c7984c2d38f206b75391b0977552a2811603b5900fcd2fe8a41e21",
+      "mode": "100644"
+    },
+    "lib/trading/scenario-layers.ts": {
+      "sha256": "7c5162c46ce30a3fa96d7a909ae8597cbf5d7540718f0b7434b759f702d06590",
+      "mode": "100644"
+    },
+    "lib/trading/session-auto-types.ts": {
+      "sha256": "713a4a5abb87f52d83327a678cebc429f527490cc9f72e7c5e0769152acc2439",
+      "mode": "100644"
+    },
+    "lib/trading/session-background-primitive.ts": {
+      "sha256": "fc611f5cd0e1d2069280f066c63e48cdf0657e8a77c39bd0e01d24edc896324f",
+      "mode": "100644"
+    },
+    "lib/trading/session-paper-geometry.ts": {
+      "sha256": "c4c173a7498d4aaffc052ad8a0f51b71cd9b5c55a53cca51a35ae004204fc333",
+      "mode": "100644"
+    },
+    "lib/trading/session-range-strategies.ts": {
+      "sha256": "9ed72b1ab696767a2a12d1cecc6136ee718a4fbab3e86462b1081b7fae57a105",
+      "mode": "100644"
+    },
+    "lib/trading/session-strategy-model.ts": {
+      "sha256": "aaa31d42cc9d2c4523ace79c08de9a2196d072a8322c0c1560efbdd40c44a64e",
+      "mode": "100644"
+    },
+    "lib/trading/session-strategy-presets.ts": {
+      "sha256": "b2399b27c697d26483e550cb0249614d48080f6e8c2c94e6145606c0faff75a1",
+      "mode": "100644"
+    },
+    "lib/trading/setup-alerts.ts": {
+      "sha256": "6c68ff2b09d1be3dbcf0c19d59b0801c66389bbcf551db840f4fea151e74f9fb",
+      "mode": "100644"
+    },
+    "lib/trading/setup-engine.ts": {
+      "sha256": "ebc361a926f140f52460c393c59a44922800ce12cedc3c15c380272440a97c2c",
+      "mode": "100644"
+    },
+    "lib/trading/setup-model.ts": {
+      "sha256": "c789cccd953b1f3cc8171331b89895ccd0cceb1c7d0b491e44230a79476b6389",
+      "mode": "100644"
+    },
+    "lib/trading/setup-presets.ts": {
+      "sha256": "60fd7c77879b867073db8200e366a1b8de4e5314a33a0a4e3e307f69aef04bc3",
+      "mode": "100644"
+    },
+    "lib/trading/source-analysis-job-types.ts": {
+      "sha256": "9d46ad973df6dbf40904d8e4e4f31ae1a52713067e2f03e0d26090a1b5f52002",
+      "mode": "100644"
+    },
+    "lib/trading/source-cleanup.ts": {
+      "sha256": "03662be92148d50b47195c5801bdb67d2d183adbcff30ab312266b668cdb1067",
+      "mode": "100644"
+    },
+    "lib/trading/source-purpose.ts": {
+      "sha256": "9d5cc16dbcc6d31d994223dc88f5ccc36ee318a8089e6b94309adbd67f5bf9c9",
+      "mode": "100644"
+    },
+    "lib/trading/sources/strategy-excerpt-03-continuation.txt": {
+      "sha256": "d8780231e3a85f11a3d6181354b76fe5727cea186b1f60cf4c31adf94d3166ed",
+      "mode": "100644"
+    },
+    "lib/trading/sources/strategy-excerpt-03.txt": {
+      "sha256": "6540b698ae5b4a77ada9d617a389ce9f8f025909b4c5dbd8149547a94a4fa82c",
+      "mode": "100644"
+    },
+    "lib/trading/strategies05-revision-restore.ts": {
+      "sha256": "7d0582b14ddfa8c1d43f14f55a7056d1b6b933f4d0104d196eba9d08d191aba3",
+      "mode": "100644"
+    },
+    "lib/trading/strategy-indicators.ts": {
+      "sha256": "c6196ab31247ebc95a8158ecd97742700758d7a5fe40831e901bda97bfed4083",
+      "mode": "100644"
+    },
+    "lib/trading/time-zone-clocks.ts": {
+      "sha256": "e369eba81f9d5b6a03708c4b9bf67bb17e740ecf1c3c6ce90c936ccf28ca8ddb",
+      "mode": "100644"
+    },
+    "lib/trading/timeframe-bias.ts": {
+      "sha256": "eb649ae2b77ff9b75663d8c91be25a193398f1c8054ac7adf118cad10843679c",
+      "mode": "100644"
+    },
+    "lib/trading/timeframes.ts": {
+      "sha256": "6597c1d910ca850ef9dfc1af8c5fdeb869a0c1d1f2635af8b39341b901e37fa0",
+      "mode": "100644"
+    },
+    "lib/trading/trade-chart.ts": {
+      "sha256": "15d726d7e7634d10e6fa2ba174b72964cbe6af8057085d50e80a7945aed55dcf",
+      "mode": "100644"
+    },
+    "lib/trading/trade-features.ts": {
+      "sha256": "df9be96818c65679b2401ec72d86db80f13ea964076f888ecc900336f1f74cac",
+      "mode": "100644"
+    },
+    "lib/trading/trade-screenshot-types.ts": {
+      "sha256": "37d7d57b3c10e5abdf3229c8770f8458e0c85e381e54ee3aebefbf5ae5ed94c2",
+      "mode": "100644"
+    },
+    "lib/trading/trading-discipline.ts": {
+      "sha256": "736aa805e5868718964f5f9d3d9c3201eed4b9f52070978eb596d5ad402b7e2f",
+      "mode": "100644"
+    },
+    "lib/trading/upload-byte-limits.ts": {
+      "sha256": "441eca24828fa3911cc4dd90e3a85ccb68127372a1a0ae2353cb90cd04961f9e",
+      "mode": "100644"
+    },
+    "lib/trading/vwap-stdv.ts": {
+      "sha256": "d98a1fd8f1d51f4256e55d4ad3f84450c1b7abfccd3d09337cf97e4be4a35196",
+      "mode": "100644"
+    },
+    "lib/trading/web-chart-document.ts": {
+      "sha256": "e282824bc00009ede5c0a3d2a13031fc673785e121bdbafff42bdc2e85e8ad15",
+      "mode": "100644"
+    },
+    "lib/trading/weekly-context-copy.ts": {
+      "sha256": "a25aa744b2d767f07373c40fa97b29a19ca9856143be5351475fc25cfb904045",
+      "mode": "100644"
+    },
+    "lib/trading/workspace-capacity.ts": {
+      "sha256": "f531aeaf23f976b7654913d71122b26650d9e0580dfe5547d1840de077f1a422",
+      "mode": "100644"
+    },
+    "lib/trading/workspace-portability.ts": {
+      "sha256": "ab4f3c2ec0c3bd488f94a0bae1ee92169d2440ba69acafe3efff0b6a571fc75c",
+      "mode": "100644"
+    },
+    "lib/trading/workspace-removal.ts": {
+      "sha256": "21fc4d122a333f01e2febe75ab107ab215009db97bb39ee54d0aed3f3f490edc",
+      "mode": "100644"
+    },
+    "lib/trading/workspace-sync.ts": {
+      "sha256": "0ba3443cd3176481ed3ff613d6c4bf5ba9abe872e68514906892625be3322326",
+      "mode": "100644"
+    },
+    "lib/trading/wr1-disclaimer.json": {
+      "sha256": "250dfbbd00d8e156a0336c8acebe9d07ab213d32495f23c44c983043cead8a3a",
+      "mode": "100644"
+    },
+    "lib/trpc.ts": {
+      "sha256": "1c364143dbf22c2d56d5768f10ba133c752ebbd2b613bc08ca6e79c3a6425608",
+      "mode": "100644"
+    },
+    "lib/utils.ts": {
+      "sha256": "dabdb4094e3b6f8b17fdc43435b1d5317b232079076922d0a258e78e0abe4ccd",
+      "mode": "100644"
+    },
+    "metro.config.js": {
+      "sha256": "29ccc1a82127decead7d1fe694ab4d2cead3e06f23fc43d17dceab88bbfe7183",
+      "mode": "100644"
+    },
+    "nativewind-env.d.ts": {
+      "sha256": "cc9bcf6c27b600bd682a6e47dece7b6f53ded4d8f0f707b44831f9f1b1530d6e",
+      "mode": "100644"
+    },
+    "package.json": {
+      "sha256": "0b851cc6373bbdb60d62ffa7cfc2dc0347c52b6e67b2e1855a9df388f3cd4133",
+      "mode": "100644"
+    },
+    "plan.md": {
+      "sha256": "1b2778cf0822b3a841eb9c06e14f9c43fab292884c26a8d8b8ed898c00590b10",
+      "mode": "100644"
+    },
+    "pnpm-lock.yaml": {
+      "sha256": "0d583ba9b8aa00993f9aa299da4eca03d178d40c3c0eb117d56614ec88cc47d8",
+      "mode": "100644"
+    },
+    "pyrightconfig.json": {
+      "sha256": "cdc6f7917056bb434204743ca9c73ef85ccd3cbccd9c3fec30c6160bbffebb52",
+      "mode": "100644"
+    },
+    "python/ORDERBOOK_README.md": {
+      "sha256": "a6bf95320f3f4755bd2b1a2273e4ced0b026af9b97f0ae8ced6c6b560b470d13",
+      "mode": "100644"
+    },
+    "python/README.md": {
+      "sha256": "830eb7645a7585d655a991122f8bf94b5ef9bad3259eb2ec792430913117bbbc",
+      "mode": "100644"
+    },
+    "python/orderbook_research.py": {
+      "sha256": "66631eeec3ce6fb70add88ef3786ef1993ab3f5c6e9ec6fb1fc5a8617606dfe5",
+      "mode": "100644"
+    },
+    "python/pattern_indexer.py": {
+      "sha256": "1296ce5480e92cc53039a0a416d8a7a2f8574530b5fa226f23ad3cca67118cf9",
+      "mode": "100644"
+    },
+    "python/requirements.txt": {
+      "sha256": "e9c99b6d8d7b52d409ef6a5c2c2ffd232ea1f527de0b8ebeed515b332f9bce92",
+      "mode": "100644"
+    },
+    "python/research_engine.py": {
+      "sha256": "3f735748a39b5e40e6b530f3fe21b1e8bb0e4ae45739757077b57f81b6ece147",
+      "mode": "100644"
+    },
+    "python/test_orderbook_research.py": {
+      "sha256": "f3bf9470b05af099a5826aed36b0db6b9d1cfc77a4a6a5541beec314bdae5e98",
+      "mode": "100644"
+    },
+    "python/test_pattern_indexer.py": {
+      "sha256": "eebe4df422aa5b4e8be29e380041332ad02fba43ed37de0b45601370b020c5fd",
+      "mode": "100644"
+    },
+    "python/test_research_engine.py": {
+      "sha256": "bf8d0ba1f61981db8e7f35fc8f47f338c8ed721c86e55af42f63052f812b906b",
+      "mode": "100644"
+    },
+    "python/vectorbt_adapter.py": {
+      "sha256": "c84c0935c09b0de15ed699bf179811480a8972aa8ebf8750b5c1615f82f7f702",
+      "mode": "100644"
+    },
+    "requirements/confluence-scope-05.txt": {
+      "sha256": "3ebb0f23899823e321db5be3160e21f0dfbc21e20462fd791ba0ed02f7fe23b8",
+      "mode": "100644"
+    },
+    "requirements/foundry-scope-04.txt": {
+      "sha256": "97e8cc47ebb4e5781f60b4fe166f2104be10a5ccddabc59a0f96d120ffbf3b42",
+      "mode": "100644"
+    },
+    "requirements/zax-fixes-scope-07.txt": {
+      "sha256": "9e50f8d0107b5165edddaa1ccbb820f1ae8c6df523d272bd621dadac715072f3",
+      "mode": "100644"
+    },
+    "requirements/zax-quant-scope-06.txt": {
+      "sha256": "28ba932055c5523910c790c94339d0e40d601d74123955af57b6e19d0a98901c",
+      "mode": "100644"
+    },
+    "research/ai4trade-assessment.md": {
+      "sha256": "b06b75d971a85fb8fa27c7ab84592209f9848365eb3c9f7b07937524eb649966",
+      "mode": "100644"
+    },
+    "research/ai4trade/2026-10-19-provider-check.md": {
+      "sha256": "f14cbcb1ecb1a115d54705692b57a52e3bee15a3f5f428cdb12a39199fd005e5",
+      "mode": "100644"
+    },
+    "research/ai4trade/DIRECT_OPENAI_CONTRACT.md": {
+      "sha256": "7e6554eb16f997fceafcb1e2d7f6b5b147de62c418ff6be18ecf2ab152c518b6",
+      "mode": "100644"
+    },
+    "research/app-audit/01-ai.md": {
+      "sha256": "9c87546bf95e242a3aab64a060f182edce6656698856b3b1ec759655bd26667c",
+      "mode": "100644"
+    },
+    "research/app-audit/02-chart.md": {
+      "sha256": "9f9c7cb9b75ebf5833a56cb99e0c65b419190e092c3439007d0baf9f176abde9",
+      "mode": "100644"
+    },
+    "research/app-audit/03-feeds.md": {
+      "sha256": "493d44c7e701a1cdd406d649968a71e22a7492cf702efcb6b760471704d2a210",
+      "mode": "100644"
+    },
+    "research/app-audit/04-paper.md": {
+      "sha256": "8322acd1b870dd01bf97099a0547ba88790a305c9df719c63939a95e9009abdc",
+      "mode": "100644"
+    },
+    "research/app-audit/05-strategies.md": {
+      "sha256": "0bd1e9afcd9b62ca99d143457bcbb2b0fab60f51e6e3888a22253697e354cf4a",
+      "mode": "100644"
+    },
+    "research/app-audit/06-alerts.md": {
+      "sha256": "cde0ccff53fc26843e0c40ce584ae6b2099c7aaa422c049013dd77a6e33b26c3",
+      "mode": "100644"
+    },
+    "research/app-audit/07-library.md": {
+      "sha256": "18cfed6a72ce59b11dccd0d5f286f50ce3926b575fd2128af8a093ce6be4f5dc",
+      "mode": "100644"
+    },
+    "research/app-audit/08-quant.md": {
+      "sha256": "8ad17b79bd44e65144ea108680a41cd41c2cb2278e0322d71304b7457eaad0d8",
+      "mode": "100644"
+    },
+    "research/app-audit/09-auth.md": {
+      "sha256": "fcaa9bcd70bdb587c201870c8520bc02173ce61654da00eac50d45eb692174be",
+      "mode": "100644"
+    },
+    "research/app-audit/10-journal.md": {
+      "sha256": "6ed0e06677364052b867fc6fc5cf25167d9bbf51643c90d91b157c56bb8191b5",
+      "mode": "100644"
+    },
+    "research/app-audit/FINAL_STATUS.md": {
+      "sha256": "aa24ed9d696d04e86033a224b80f2e9e79efc707b0794a223e2c9f5b619d3109",
+      "mode": "100644"
+    },
+    "research/app-audit/final-integration-review.md": {
+      "sha256": "cf5c40b0454e98764e0166187b9aa94ff0df483c0a7789197299ed13c3ae3feb",
+      "mode": "100644"
+    },
+    "research/app-audit/repair-01-ai.md": {
+      "sha256": "08af762e610966400ae1f7923df8aeb82f0000fe55b39a56b9445ee9d2df135d",
+      "mode": "100644"
+    },
+    "research/app-audit/repair-02-chart.md": {
+      "sha256": "636cda5b7a4483e85f7cf0b1cd375fed0847f52015978c1b92efde8a2d6ebdbb",
+      "mode": "100644"
+    },
+    "research/app-audit/repair-03-feeds.md": {
+      "sha256": "a159bced9ab5d33e9bb917027f6e6a603d2a447a082c295672a1da23b92e4c88",
+      "mode": "100644"
+    },
+    "research/app-audit/repair-04-paper.md": {
+      "sha256": "6667af5e1b3b7bfb0762818bf46285876711b5a65a7e5d84669f803cd0b341ac",
+      "mode": "100644"
+    },
+    "research/app-audit/repair-05-strategies.md": {
+      "sha256": "83d8ef8b1b3bcd56799237cbc2b421f91d36b2ecc5206ce85d34db966a825fef",
+      "mode": "100644"
+    },
+    "research/app-audit/repair-06-alerts.md": {
+      "sha256": "01dc0794643087a76142e60251e930edf9988edb8c42bc3ab380f640183493a0",
+      "mode": "100644"
+    },
+    "research/app-audit/repair-07-library.md": {
+      "sha256": "33d4f9ca35977a314acbced7ebd8af8a880f182675fded2f96b1806dee6d6771",
+      "mode": "100644"
+    },
+    "research/app-audit/repair-08-quant.md": {
+      "sha256": "9d18ccdc610f214045388f2162e83f1efb17d14df9c6d9f12803954dc190a176",
+      "mode": "100644"
+    },
+    "research/app-audit/repair-09-auth.md": {
+      "sha256": "321760bba3f86831b4fbd8181d562240f2aa56402dec20b766ce4e21c7502946",
+      "mode": "100644"
+    },
+    "research/app-audit/repair-10-journal.md": {
+      "sha256": "e2466d7ca78087416d39cdfb35aad0e96416aaa73190eb17e93a6f48a3c57748",
+      "mode": "100644"
+    },
+    "research/app-audit/repair-cleanup.md": {
+      "sha256": "88875a2cd5e291d767857affec594e8a6565ff84fa92ec168dedb55873a1cbe5",
+      "mode": "100644"
+    },
+    "research/cointegration-method.md": {
+      "sha256": "bed737a822bbe2f945fac12f606500cce560a710b06c3ca8435808955898ddbc",
+      "mode": "100644"
+    },
+    "research/feature-purpose/alerts.md": {
+      "sha256": "eaaf21e4bf6eb1ae19c5271f26c48d17868f2e790b65afb462066002d231840b",
+      "mode": "100644"
+    },
+    "research/feature-purpose/chart.md": {
+      "sha256": "2e1e7df5e87632720be7029748e4ae3d7873379c2c6909ed2ca387ae1567f5cb",
+      "mode": "100644"
+    },
+    "research/feature-purpose/coach.md": {
+      "sha256": "f5e14430d61b6b1aa7532457317233c78dc71c1c5f2d3f5572f73374e3cbeaa0",
+      "mode": "100644"
+    },
+    "research/feature-purpose/discipline.md": {
+      "sha256": "7e1b14069aecc4f083c0a70f4349ff0a1f9895f86caf6451e04fed9ab55799d7",
+      "mode": "100644"
+    },
+    "research/feature-purpose/forecast.md": {
+      "sha256": "f3543e3889cd51c87bdcf51fefdc1ee513ecb6087805f669af05c5ccb412d4e7",
+      "mode": "100644"
+    },
+    "research/feature-purpose/historical.md": {
+      "sha256": "a175beb351bc97b4fbbd5d751f4f0a6a417bc8ecaa06f6e59a7353a51406df4c",
+      "mode": "100644"
+    },
+    "research/feature-purpose/journal.md": {
+      "sha256": "50b2d3181cbdd8fa67a53e60024afd8bbc0e301641fa1d20120cb625f9190502",
+      "mode": "100644"
+    },
+    "research/feature-purpose/library.md": {
+      "sha256": "85efa3cdae38af93fa94fbdbb2dca3b1372751848bc83b9eda677018bc4bd372",
+      "mode": "100644"
+    },
+    "research/feature-purpose/macro.md": {
+      "sha256": "190ab94850491fd079d19b559a30c11cd2d14eee174c0d6485dbabeb4ba9a6b7",
+      "mode": "100644"
+    },
+    "research/feature-purpose/making.md": {
+      "sha256": "1606943fd740c2c29c8044abe10a4acca173cf278c49361de151212da9e97c6a",
+      "mode": "100644"
+    },
+    "research/feature-purpose/markets.md": {
+      "sha256": "a2969e46bda5858c3c3cb594337f55d6b3431eb9302d06934ce3fa98ebcb1855",
+      "mode": "100644"
+    },
+    "research/feature-purpose/ml.md": {
+      "sha256": "b600c032da36531c5b84d03fa53d5c31d4ca7d7e73628ee3d80c48d6311b504f",
+      "mode": "100644"
+    },
+    "research/feature-purpose/momentum.md": {
+      "sha256": "9142b7dce41e5f14a8f2026c6bf568f38387455fab5691cc8aa522a3bf3f2104",
+      "mode": "100644"
+    },
+    "research/feature-purpose/pairs.md": {
+      "sha256": "a43331e190af2cead1f73b78b1e9876bc01984e94c7dfb79165cf11f1a521664",
+      "mode": "100644"
+    },
+    "research/feature-purpose/paper.md": {
+      "sha256": "79b2d374beb7d6618d2e7396f16085156a57d4a5ef9068ab89130f97bdf90bd3",
+      "mode": "100644"
+    },
+    "research/feature-purpose/screenshots.md": {
+      "sha256": "606e429fdbebad715aaa08de720cac76b188a1d2041e999669613e1fc0ae3f22",
+      "mode": "100644"
+    },
+    "research/feature-purpose/strategies.md": {
+      "sha256": "8f16e3402fbabe7ad0327f860a145aa575b8ac2ee22415e033370a9e1e092d8b",
+      "mode": "100644"
+    },
+    "research/foundry-audit/bb.md": {
+      "sha256": "a284d2deb47add2a69a686f0ddae30a419be7aa9c528218ece81be8269458fbc",
+      "mode": "100644"
+    },
+    "research/foundry-audit/breakout.md": {
+      "sha256": "489eeaa944a548b93c358b7c13c6e7d1afc39ca046203d4bb961fdc7eb63a39e",
+      "mode": "100644"
+    },
+    "research/foundry-audit/core.md": {
+      "sha256": "c8671decb996f8a01a2702b3ef32e3267c3fe2c00a5c7e3e11604b5008b7468c",
+      "mode": "100644"
+    },
+    "research/foundry-audit/ema.md": {
+      "sha256": "3df6368d945c9186a719d0de48f96c7beab429c72680cfd58ed496c6fe7a8441",
+      "mode": "100644"
+    },
+    "research/foundry-audit/macd.md": {
+      "sha256": "f3f705128fe7500b97e28d2e04c33c0cc4c7e98c862f9a2ce0b8f1d00bee1e28",
+      "mode": "100644"
+    },
+    "research/foundry-audit/macro.md": {
+      "sha256": "e9b749b19a65ef0f344864204065243c4e2779ddfc70d747e390a55a2adf11a4",
+      "mode": "100644"
+    },
+    "research/foundry-audit/making.md": {
+      "sha256": "b8cd0509ecbd85542f648b69fa4c1b8ca09a280803129e94b5ee6f8e5221f070",
+      "mode": "100644"
+    },
+    "research/foundry-audit/ml.md": {
+      "sha256": "f5814213942e9811e8448bfd46a998eb541b3ca1482fb1c592b3747fbd8cd04d",
+      "mode": "100644"
+    },
+    "research/foundry-audit/momentum.md": {
+      "sha256": "b9ea7b1a6104265dfcc669d8fe637f18a8956f909fc12da6f51630f90d530c71",
+      "mode": "100644"
+    },
+    "research/foundry-audit/ob.md": {
+      "sha256": "c05fc549d384364c8be41f7182c9c282ee5959f67f3c640ef4fe7a0d21b993ea",
+      "mode": "100644"
+    },
+    "research/foundry-audit/pairs.md": {
+      "sha256": "730fb68369905cacf974c930f63bea481a82545512560432bb0f917a6cba87aa",
+      "mode": "100644"
+    },
+    "research/foundry-audit/sma.md": {
+      "sha256": "0e04ee033c56505a27221838d2abb4347e6c66d1bda73cfeeb8215864885b0a9",
+      "mode": "100644"
+    },
+    "research/foundry-audit/stdv.md": {
+      "sha256": "b47db082bf7eba4baf1ad2ebae2f7f50fc52fb41f876039a8e48a6718d6d963b",
+      "mode": "100644"
+    },
+    "research/github/backtesting.md": {
+      "sha256": "3fdbe53f8569c38751291b73a1d433a9fd220e60c6419321ab9f60423ac1bea6",
+      "mode": "100644"
+    },
+    "research/github/catalog-decision.md": {
+      "sha256": "26a7cdfb1c1c92f2d4f734e6c27b71ab6d32dfe52b7166b7c5772fff6554a984",
+      "mode": "100644"
+    },
+    "research/github/lean.md": {
+      "sha256": "1abc0c69d3151d4d8fd31dc5b0ad0f07b56c15fbc93c5eb25eb4fac38dcadc38",
+      "mode": "100644"
+    },
+    "research/github/stockindicators.md": {
+      "sha256": "69a694076b46ac9a699772a3d0d392cc05d79913981daaf2ef1899c72571da36",
+      "mode": "100644"
+    },
+    "research/github/ta.md": {
+      "sha256": "40d1cc53ece2c587d673d137b1ce2d261c498e051cb7d2a1a5f0febe77bc9c1a",
+      "mode": "100644"
+    },
+    "research/github/talib.md": {
+      "sha256": "b9dfa53ea6d8b283c8fb7f028866740ff7338d87188b1ec47e7d19aba3bec988",
+      "mode": "100644"
+    },
+    "research/github/technicalindicators.md": {
+      "sha256": "dd1f38087d48965400a761ae59f2906493be68b3c1b3881e34085110b0462fb2",
+      "mode": "100644"
+    },
+    "research/integrations/decision.md": {
+      "sha256": "ce83a4bf97c62a5fb642fe8f7c3ef5958ca572fbd375f74f603395905cd6e436",
+      "mode": "100644"
+    },
+    "research/integrations/tradingagents.md": {
+      "sha256": "6a595e16af7d2199fd9174326b4294a390db19dab864907c96d3fca9c682b1d3",
+      "mode": "100644"
+    },
+    "research/lightweight-charts.md": {
+      "sha256": "3062e94caf5c6f0adad701c65723db0e931408e1be161d80ffd107567f73eed1",
+      "mode": "100644"
+    },
+    "research/notification-activation.md": {
+      "sha256": "ce4248160c03ae4f6522d0f3aef0d1ee460ad8f8f839c212369363c14265a3e9",
+      "mode": "100644"
+    },
+    "research/orb-video/VIDEO_ANALYSIS.md": {
+      "sha256": "00e3a7ec11c6c81d014d47bc5cad0da70db9ef14614baa79714bdf79d8eebba7",
+      "mode": "100644"
+    },
+    "research/orb-video/VIDEO_PROVENANCE.json": {
+      "sha256": "8ec4e5befdd31b75f7ed7cdca699511fa612ebd9ecb0d85c907853f07162751d",
+      "mode": "100644"
+    },
+    "research/orb-video/transcript.json": {
+      "sha256": "9de05d9aabf6790f694565de2aff47ea43f6c045d36e5ebf5698e01feeb75c50",
+      "mode": "100644"
+    },
+    "research/public-context-sources.md": {
+      "sha256": "bf5c888313f3b81e071a73912ddb048196f827cb5f0355ab4a72e675b640c7d6",
+      "mode": "100644"
+    },
+    "research/quant-provider-contracts.md": {
+      "sha256": "9ada36aa6e2f03480da5a2ef246dbf10a6d32779249f7eaa891408fe421e0f8d",
+      "mode": "100644"
+    },
+    "research/session-strategies/INSTRUMENT_METADATA_SOURCES.md": {
+      "sha256": "133f7856bb1671e1c96ad1ff0809ff2c6b6b73d03eb8baaceef1020e5602c645",
+      "mode": "100644"
+    },
+    "research/session-strategies/Pasted_content_08.txt": {
+      "sha256": "a8bd06f37b6de089e74708a90547c43fe2440cd19569c9c848dce78bd5a68e7a",
+      "mode": "100644"
+    },
+    "research/strategy-inventory/coverage-manifest.json": {
+      "sha256": "c07c136a0a7830a838a32aeebcdd0dfd9788bb4b19f07621c0a92bb4002858f6",
+      "mode": "100644"
+    },
+    "research/strategy-inventory/coverage.md": {
+      "sha256": "4e1aa39627e948c0c075d3c495c871ede4ed4117fd16c18bb2f31dbb8b291f68",
+      "mode": "100644"
+    },
+    "research/strategy-inventory/paperswithbacktest.md": {
+      "sha256": "e32911ef1b4012f6b140b1f8c1603b9df6902256125927917c30e1d475898e27",
+      "mode": "100644"
+    },
+    "research/strategy-inventory/quant-vault.md": {
+      "sha256": "c49e53dee70a3035863ea26962f770d0c691f376bda6bc2dc1b83484b6f037af",
+      "mode": "100644"
+    },
+    "research/strategy-inventory/sgx-orderbook.json": {
+      "sha256": "3bb54ed6574a9d3098a08ad53bd04e5c28729baf73b03eae318d90dce90f3780",
+      "mode": "100644"
+    },
+    "research/strategy-inventory/sgx-orderbook.md": {
+      "sha256": "4907a23c2e29345997b6f9b819c0037c906d0c8775d6d693fd2e05678e0a80c0",
+      "mode": "100644"
+    },
+    "research/zax-links/alphalens.json": {
+      "sha256": "a094ed53265ad0567c7dcf644a4f6c970d3826494fbf57aeb196a4bf4b845b3e",
+      "mode": "100644"
+    },
+    "research/zax-links/alphalens.md": {
+      "sha256": "83905ccd5e366d3d036ecc30fb465dccf880dbd01e98711ecce8c5f86722a2f3",
+      "mode": "100644"
+    },
+    "research/zax-links/composer.json": {
+      "sha256": "79beff9cc4f34b21cd2b8f8cb247df0d5e36dd63b8cf11fdaf084f330841fedd",
+      "mode": "100644"
+    },
+    "research/zax-links/composer.md": {
+      "sha256": "e099950977f0e611e1178de94f4422bb6634a206614549eee2c16f3ca6d10591",
+      "mode": "100644"
+    },
+    "research/zax-links/hummingbot.json": {
+      "sha256": "2e5ba0d68a077620ccd41fc03303200d22fc33d058fe184fea9c2ea74133abbe",
+      "mode": "100644"
+    },
+    "research/zax-links/hummingbot.md": {
+      "sha256": "9dda108d7f896017dfafba7cd00785e45c4402caa04e995b397fd87d1231e69d",
+      "mode": "100644"
+    },
+    "research/zax-links/mavarun.json": {
+      "sha256": "38034120ff33bbf78cb20e3b46a6f8c0e538aaa4a60fdd32819f5fd6001e1350",
+      "mode": "100644"
+    },
+    "research/zax-links/mavarun.md": {
+      "sha256": "a8b32c29f51e8710b9954101c693d38c2ace0b95dbc45cfdb2360c8c8afc3d98",
+      "mode": "100644"
+    },
+    "research/zax-links/mlfinlab-examples.json": {
+      "sha256": "dded05858b352577d680834f66ffab48768135a7db6a4f42d88743991f8bab6d",
+      "mode": "100644"
+    },
+    "research/zax-links/mlfinlab-examples.md": {
+      "sha256": "3d284b0231deb9b5074eae7fa91610c8d1ac35807638ea08259f599800ef4a1f",
+      "mode": "100644"
+    },
+    "research/zax-links/mlfinlab.json": {
+      "sha256": "f3b1e8e7e9695321afde35af3ecfc40db6ae70d737e394a5da68bf53333b6259",
+      "mode": "100644"
+    },
+    "research/zax-links/mlfinlab.md": {
+      "sha256": "485870d637f8a6bc363b028afea4ec05f1527c54cf3d8d01fc3f0b80da4863bd",
+      "mode": "100644"
+    },
+    "research/zax-links/nautilus.json": {
+      "sha256": "bfeb8374e9ad25abe6f5bcc9cc7cf48cc32ba28b4220b5911b77458a63812a7a",
+      "mode": "100644"
+    },
+    "research/zax-links/nautilus.md": {
+      "sha256": "c9c3518e08751c6ceb9add3ca1748fa66dc46061bf38d34a54c7c299f73f812f",
+      "mode": "100644"
+    },
+    "research/zax-links/niraj-pairs.json": {
+      "sha256": "d4e76d525ea05d17f1d7fbabead0f58350f2338782c5bd6a3bacd2cef91e88f2",
+      "mode": "100644"
+    },
+    "research/zax-links/niraj-pairs.md": {
+      "sha256": "086246125aaaa74c9eca2259e5230e280c7b5e6ee0138f60c380c0733b0b20c4",
+      "mode": "100644"
+    },
+    "research/zax-links/purged-cv.json": {
+      "sha256": "0e3794b30a33f20cca509441ce83337a7764a7757efc0ffdbd5ed788ed02e9ff",
+      "mode": "100644"
+    },
+    "research/zax-links/purged-cv.md": {
+      "sha256": "5e20269cfdadbcd53f667b3fe8ab5d681836a1f4353f6b37be5a544dd578ea52",
+      "mode": "100644"
+    },
+    "research/zax-links/pysystemtrade.json": {
+      "sha256": "2d8f5d91c53bda35ea772872a04c7743ccab25c40d304beb6f87438f3bce2c1e",
+      "mode": "100644"
+    },
+    "research/zax-links/pysystemtrade.md": {
+      "sha256": "a7976001ed9f4b9e1b0c780b97841486e04cb190039c9b6e10373b1980acea06",
+      "mode": "100644"
+    },
+    "research/zax-links/quantconnect.json": {
+      "sha256": "91f0745ad3dcd9f1f852c703fa4e74db671c8a96d42016a79620d11121b568a5",
+      "mode": "100644"
+    },
+    "research/zax-links/quantconnect.md": {
+      "sha256": "a148c395cb81aa39dc9876fd8b3d5f5c2970c034f5241602837da3c7ed588b20",
+      "mode": "100644"
+    },
+    "research/zax-links/sklearn.json": {
+      "sha256": "7af758f2656599dd8b54b8f976dbb31b93096a465ae50f8c9ee6c58588cb9de0",
+      "mode": "100644"
+    },
+    "research/zax-links/sklearn.md": {
+      "sha256": "944838ee49ebca0edd1badcb38fd489c2efc7d4df0a98122f33384bcde001cc7",
+      "mode": "100644"
+    },
+    "scripts/align-feature-guide.py": {
+      "sha256": "d42ea1687d4cf6e369f5863eb33061f0cc54761322f9767bdc2069c354332d5f",
+      "mode": "100644"
+    },
+    "scripts/apply-runtime-state.ts": {
+      "sha256": "1eb3fb58438038c7f5245704d1f7cb24847cb4efed75a46085a446e6c56ebe00",
+      "mode": "100644"
+    },
+    "scripts/build-app-scan-report.py": {
+      "sha256": "4eeb1affd6fadf5b508dd2efcd42f0b6ce1af2e3e2886447ce8b24d36da9944e",
+      "mode": "100644"
+    },
+    "scripts/build-feature-guide.mjs": {
+      "sha256": "497d0405ee6bb1bf8ecc46b6cd9fbd1d4f3e55d6a7337123658f2e72ac5ae407",
+      "mode": "100644"
+    },
+    "scripts/build-native-chart.mjs": {
+      "sha256": "2346eda5a97c8b8f084d5783b0005156bed560742c1869a1365151ec4dd6ba37",
+      "mode": "100644"
+    },
+    "scripts/build-strategy-collections.ts": {
+      "sha256": "8fac75e2503a6b70795063a2e5f7ffbd3270d78a904c86ad6ea21475e41500d1",
+      "mode": "100644"
+    },
+    "scripts/build-zax-fix-tracker.py": {
+      "sha256": "291d9a047f03e7ef7c075e146eb3e4512b69543980635cf389b5f4bfa72ebc93",
+      "mode": "100644"
+    },
+    "scripts/check-ai-forecast.ts": {
+      "sha256": "17964fd30f061273152900ae9286a79a83e90569b65a59c406b294e8d2025b77",
+      "mode": "100644"
+    },
+    "scripts/check-ai-scenario-recovery.ts": {
+      "sha256": "feeaee23854266f9937511d3e80c61ae8424d243155948f53cace7a02104dc1b",
+      "mode": "100644"
+    },
+    "scripts/check-chart-browser.mjs": {
+      "sha256": "d96848e201b05f38ff9e0bf063f3661d7b212f05c12205d2df6fe594e0833392",
+      "mode": "100644"
+    },
+    "scripts/check-foundry-live.ts": {
+      "sha256": "3130e1324439f1e1a47c51eddc95c3c7c37ccbd979908e6604df16672a5d8220",
+      "mode": "100644"
+    },
+    "scripts/check-instrument-preparation.ts": {
+      "sha256": "c7cdbf4d3a3129adc2c6de48f2d49d5a23455bd015431ed948869bde3e38add8",
+      "mode": "100644"
+    },
+    "scripts/check-nas100-orb.ts": {
+      "sha256": "c4bf5578ec70e45b95520887965611cfd2e740843f458ad171009394e4a26c16",
+      "mode": "100644"
+    },
+    "scripts/check-quant-workbench-browser.mjs": {
+      "sha256": "fa7216e23843bacf1a9912240c758036a37b0da2d5429305244ed98bc328bb99",
+      "mode": "100644"
+    },
+    "scripts/check-quant-workbench.ts": {
+      "sha256": "307b9078d987881fbc32e9e79c3cf39e367438ad3f0be6e1a58802140a16068b",
+      "mode": "100644"
+    },
+    "scripts/check-scenario-layer-ui.mjs": {
+      "sha256": "c80df450101e48cb0f75c58a6d42862725fd1861f1c13f2fbeaa4a80585fa4bc",
+      "mode": "100644"
+    },
+    "scripts/check-selected-forecast-source.ts": {
+      "sha256": "a139f46106c393be7ef0eaa6318a9ca5662f87781a2b208711b5a7db28787fa8",
+      "mode": "100644"
+    },
+    "scripts/check-session-chart-ui.mjs": {
+      "sha256": "defd2999f9605f68465fff68c7c897ffbd51f2c1b9f77ce272a4b103378091cf",
+      "mode": "100644"
+    },
+    "scripts/check-web-chart-frame.mjs": {
+      "sha256": "7a5b07cfdbd5af66d04ae874ecd20af4df94893a5a18bfe9d27539ad03efcec1",
+      "mode": "100644"
+    },
+    "scripts/generate_qr.mjs": {
+      "sha256": "ec99d3f6d71a322306a7769114e88c32dc3b61ccb582853e9b013907363448a6",
+      "mode": "100644"
+    },
+    "scripts/load-env.js": {
+      "sha256": "c5b246d30053b373bb3102654ab33257c5f54a9845431dae02197f70b780c2d0",
+      "mode": "100644"
+    },
+    "scripts/package-source.py": {
+      "sha256": "7479f181a78b5bbb5abcf9b996db82202d8763d81027703aed7084d08e8b87f2",
+      "mode": "100644"
+    },
+    "scripts/private-repo-sync.py": {
+      "sha256": "b0b3a879423b477a1778dff882ecac6e51ad8b8e06a7babecf92dcccc2a00525",
+      "mode": "100644"
+    },
+    "scripts/quant-workbench-fixture-server.ts": {
+      "sha256": "e33b3fbb7105a8ee2b4a2a068f32b7cea9cb96ea13b73a8ffe599b1cb83ce85b",
+      "mode": "100644"
+    },
+    "scripts/refresh-feature-guide.py": {
+      "sha256": "582db76446954c1e7212a808e4f161bd843553efb5d23303d82d1d5204417f84",
+      "mode": "100644"
+    },
+    "scripts/smoke-owner-setup.ts": {
+      "sha256": "4aa7f61463bbd8647662194d79fcaba05137a3579f0396a8e8161c183da2aa08",
+      "mode": "100644"
+    },
+    "scripts/smoke-research.ts": {
+      "sha256": "e033eb16bfd17d79b34eb17d2f51e542960cd3a85d4f54c92b7d975655fda843",
+      "mode": "100644"
+    },
+    "scripts/smoke-trading.ts": {
+      "sha256": "ec842cf71918b55de90f6b84a7f5da6c6d5028f467e68f1a0f2177160ec2d6a6",
+      "mode": "100644"
+    },
+    "scripts/update-session-feature-guide.py": {
+      "sha256": "814864c15670cd23793d4cd55d40d8a7979814ec87b281e49e702f9cc1fd3e53",
+      "mode": "100644"
+    },
+    "scripts/verify-orderbook-bridge.ts": {
+      "sha256": "766861a1ba2445bda703489a838a1faf6cd4dea92878a9d31c09d6bd975e63ef",
+      "mode": "100644"
+    },
+    "scripts/verify-paper-proposal.ts": {
+      "sha256": "e5448ccb19581e17eee00b50d4d8c5d6878c87b16bae57027065bf9b0d5a2ab8",
+      "mode": "100644"
+    },
+    "scripts/verify-quant-workbench-browser.mjs": {
+      "sha256": "2f18f66de31bbe1ad833dac76677272a7fbcd907702bcf50c22eba0d83d1266e",
+      "mode": "100644"
+    },
+    "scripts/verify-quantstats.ts": {
+      "sha256": "45e5da34b91d530f2cac4a05e3fd2d8f28e7aa3f3f75db9b8842f0895d3c4abc",
+      "mode": "100644"
+    },
+    "scripts/verify-scenario-layer-ui.mjs": {
+      "sha256": "fbf50eea9fcb8ae3dfbed29e6fae853751b151caf450ffc21365b9c775ba7cb7",
+      "mode": "100644"
+    },
+    "scripts/verify-session-chart-ui.mjs": {
+      "sha256": "a4626a0920da0963ab7725142d1aba10a22fa3ac57b6522914c04453f79000c8",
+      "mode": "100644"
+    },
+    "scripts/verify-strategy-replay.ts": {
+      "sha256": "d7083ffb4409a014ecadb5cbaa4cc9762c294f14337831aa176500d638c0ef03",
+      "mode": "100644"
+    },
+    "scripts/verify-tradelocker-auth.ts": {
+      "sha256": "3129f00c06b79693d3cb0f87f58084a0a383fe0d0cc1e69141ec0886164fa4be",
+      "mode": "100644"
+    },
+    "scripts/verify-tradelocker-data.ts": {
+      "sha256": "08db8c6853301f24876f88c889fd6337e850101c9f2d1f1d96945d990ac6db89",
+      "mode": "100644"
+    },
+    "scripts/verify-web-chart-frame.mjs": {
+      "sha256": "29c115ef90a136bcbeee90b5eb636b9c4e1b359cac329271edd98ced577ae902",
+      "mode": "100644"
+    },
+    "scripts/write-web-release.mjs": {
+      "sha256": "dec24c25215afbcacdc02b847ea09551482e6e67c4efd78ad8228c9e6b7fd9e5",
+      "mode": "100644"
+    },
+    "server/_core/auth-security.ts": {
+      "sha256": "c559ec383944a3e44a5bcf44fdf9b8da99ad02b5ae0cae2d96823202c15801cf",
+      "mode": "100644"
+    },
+    "server/_core/context.ts": {
+      "sha256": "23f93675d55c330e159dfafede905a39286eafe0d17a6d5014ab66f1aee0dd5b",
+      "mode": "100644"
+    },
+    "server/_core/cookies.ts": {
+      "sha256": "16e1390715ee88dc5d7377bdd532a3ba34ff2eba8e9e093d76fdb35d5f768c66",
+      "mode": "100644"
+    },
+    "server/_core/cors.ts": {
+      "sha256": "11744bf090a2adf2ccdaf2a325669ebad2a83d7f03570b4371f387208524b900",
+      "mode": "100644"
+    },
+    "server/_core/dataApi.ts": {
+      "sha256": "789a35c8bd1651560d08bfaae03e41bb55d99d00cca30c460bb1c3ea4d002ca9",
+      "mode": "100644"
+    },
+    "server/_core/env.ts": {
+      "sha256": "f80a13ad81236a7516550676f69d0384fd951aa6275c876ebe1a8d4aa2b7c35c",
+      "mode": "100644"
+    },
+    "server/_core/heartbeat.ts": {
+      "sha256": "ceacceb39d5b9b9b0d5d2b24da9d84ac398c9eb7d64932dcb8a0b4ea603386e3",
+      "mode": "100644"
+    },
+    "server/_core/imageGeneration.ts": {
+      "sha256": "52d7016bcd730084e5cf8660141a0071c6160bdf3f5fbc6f3a5367d893c75908",
+      "mode": "100644"
+    },
+    "server/_core/index.ts": {
+      "sha256": "c4734556be767711812473da29f62040f6df1d1951e6401c5e3e2c0a7421e1c9",
+      "mode": "100644"
+    },
+    "server/_core/llm-errors.ts": {
+      "sha256": "e9d2f8749707c3b33768da739ecf5cea6b2efcd6d8b4b0ec0c6f8a9a8a9f8f96",
+      "mode": "100644"
+    },
+    "server/_core/llm.ts": {
+      "sha256": "c06f1f201292445d333bef192d7ced25ab0957b492218bdbdc37bc6c3e165c40",
+      "mode": "100644"
+    },
+    "server/_core/notification.ts": {
+      "sha256": "2a8ca16560631528771f2b07ea2b7d1db8ba84622338587882a44f66bb4c98db",
+      "mode": "100644"
+    },
+    "server/_core/oauth.ts": {
+      "sha256": "02eb144900f85a62565a364c61038a64e515a5eaf90e0bee74b2002a1d322720",
+      "mode": "100644"
+    },
+    "server/_core/published-origins.ts": {
+      "sha256": "256aebd3c7a6f8d20572687846003edbe0930c89f042aa6e5ffe86c38aaef1e5",
+      "mode": "100644"
+    },
+    "server/_core/sdk.ts": {
+      "sha256": "4a1a16ba9fed1d89db713ca2d65555aaa3d636d346b0c48e43c3c4cd7f143f20",
+      "mode": "100644"
+    },
+    "server/_core/storageProxy.ts": {
+      "sha256": "497d11bab6627e8ab082078894c50f79310cd62f9501e00321e4948386db3038",
+      "mode": "100644"
+    },
+    "server/_core/systemRouter.ts": {
+      "sha256": "bbd50d95f79659159ddbc85f8960ad1ebb81b83047523fcedd5dde5b50e8357c",
+      "mode": "100644"
+    },
+    "server/_core/trpc.ts": {
+      "sha256": "3a7c1f973e1e44590e9219421e4860102f9aaa359420d73e9144e0e2886fbf27",
+      "mode": "100644"
+    },
+    "server/_core/types/cookie.d.ts": {
+      "sha256": "6688b6c17ecf926f651885037ea17b032c100b7e27f5e33180867f9e7879dbdd",
+      "mode": "100644"
+    },
+    "server/_core/types/manusTypes.ts": {
+      "sha256": "d073995b792a4376177bf7270cbcf3a670d4e72efb8eb6a83ecb55043cc729c3",
+      "mode": "100644"
+    },
+    "server/_core/voiceTranscription.ts": {
+      "sha256": "b54d7894f85dfd7d8a3eef57a9a0cfa76d4c9c49bc25d7ae384c4a6c76485d25",
+      "mode": "100644"
+    },
+    "server/_core/web-app.ts": {
+      "sha256": "03b50a0d54abd5279e57458476df55b07eb21b8dcc7e670aac8412b579929ef3",
+      "mode": "100644"
+    },
+    "server/db.ts": {
+      "sha256": "8ece7055b12e6e30e80a8a616ca2c3656a04aaeea798f0c3668dd723a546333e",
+      "mode": "100644"
+    },
+    "server/routers.ts": {
+      "sha256": "12bb8dac2289c3b698d52e36bf05681eb2a7bd96a669b10276fa4576be891da8",
+      "mode": "100644"
+    },
+    "server/storage.ts": {
+      "sha256": "55eab39960d991bfbd50e86fb586fd6842fff88bcc7ab6d3538982a3fd9dd860",
+      "mode": "100644"
+    },
+    "server/trading/access.ts": {
+      "sha256": "758df9aadc34071e8259f955615a1c1f92b115c9b2cad7b2d0fb8b58420d4ef0",
+      "mode": "100644"
+    },
+    "server/trading/ai-model-policy.ts": {
+      "sha256": "56f30b76d0cd11c7b093f4f704f99053dbdb78a741378dfb48b644df57506415",
+      "mode": "100644"
+    },
+    "server/trading/alert-delivery-state.ts": {
+      "sha256": "fd81c1608ce8f1dbb42eb0c41e949148c0d565a309bc295735bae6b7f3e323eb",
+      "mode": "100644"
+    },
+    "server/trading/app-quota.ts": {
+      "sha256": "69e978be15b2748f8d7377f97b14c30a661fe82d5713a2336448afe2904feed0",
+      "mode": "100644"
+    },
+    "server/trading/background-strategy-status.ts": {
+      "sha256": "ffe1126034d8bb4efe62131b6c01a13aaf99f2c9a7e0e905cdd6838fe57aad2c",
+      "mode": "100644"
+    },
+    "server/trading/bias-router.ts": {
+      "sha256": "5bf4ca786510d4510517fbc1d22847afc1f0a47a576dcb386d04441cfd332d69",
+      "mode": "100644"
+    },
+    "server/trading/coach-analytics.ts": {
+      "sha256": "84eb80465414e18dc3af4e344e8e370552b9319209d54d9eb1149643ff914f2a",
+      "mode": "100644"
+    },
+    "server/trading/coach-router.ts": {
+      "sha256": "791f7d650d3c6aa47169f55c5dd8952f085ee7c555731a7b5b2b5509c65e41f2",
+      "mode": "100644"
+    },
+    "server/trading/coach-service.ts": {
+      "sha256": "bbd56eccb5bb1be4af395b9ecf1a93e6e5f06796231340cc8eeebadf9b2fcec7",
+      "mode": "100644"
+    },
+    "server/trading/coinbase-window.ts": {
+      "sha256": "5c88a2bc9bc4929d54a7e028a5771646947f6749cb091a1978c74af1ecabdc9f",
+      "mode": "100644"
+    },
+    "server/trading/collections.ts": {
+      "sha256": "f0d332b4823b8c45b13c5e90440cd28ada088ead148fac4e5e1f18461ee881fe",
+      "mode": "100644"
+    },
+    "server/trading/data/strategy-collections.json": {
+      "sha256": "31d0dd9b72211e4f8e7c31a3fcb60a4e68b4f90f42515d4a09cdcabc5fd3655e",
+      "mode": "100644"
+    },
+    "server/trading/discussion.ts": {
+      "sha256": "6864f61f84c950861883115f159e4efe0e13dc6eed62762075f7e0a58a9669ff",
+      "mode": "100644"
+    },
+    "server/trading/forecast-router.ts": {
+      "sha256": "e49aab52943e33f001db4e790cbd17b9109385dbfbb89b0d4470d143fe9656ef",
+      "mode": "100644"
+    },
+    "server/trading/forecast-service.ts": {
+      "sha256": "56a5b4b51fae26f3b90891c7d35b6072b4bb09ddfab02efc6f3e9255ad578ba7",
+      "mode": "100644"
+    },
+    "server/trading/forecast-source.ts": {
+      "sha256": "94453076047adb5c4584feadc0a09e171a6f73cd33ed910efe3b86cc7803cec8",
+      "mode": "100644"
+    },
+    "server/trading/instrument-facts-service.ts": {
+      "sha256": "f1897436828d3ff03b0a10025cfec1ab3bb18bf600fc3accc5e6aabdde181189",
+      "mode": "100644"
+    },
+    "server/trading/instrument-preparation.ts": {
+      "sha256": "a368568a9e8bb687fbf01e5a76c5d067db75715e5015c1dbba75f5ea21564d56",
+      "mode": "100644"
+    },
+    "server/trading/learning.ts": {
+      "sha256": "c617837feac2f8e0c274b8d4e66ed02e4028b5dd689f61538ef69f3101055060",
+      "mode": "100644"
+    },
+    "server/trading/library-blueprint.ts": {
+      "sha256": "9ed82126f029f62739182312d3c53a7eaf45f43ca2c497b2a68887d2de1cd041",
+      "mode": "100644"
+    },
+    "server/trading/market.ts": {
+      "sha256": "bd7fb6dbadbaf02b1688d04d462934c72db62e15c001fa1f6492a5e59bb45d18",
+      "mode": "100644"
+    },
+    "server/trading/notifications.ts": {
+      "sha256": "91d1e8f4d83d403cc12c3290207a3739741ad270b3fe46eef0b60d6436d4bd62",
+      "mode": "100644"
+    },
+    "server/trading/openai-scenario-client.ts": {
+      "sha256": "9127eab512b6912af8c1e20c0b20be1305710caa9a72ea5d360df8a17705d222",
+      "mode": "100644"
+    },
+    "server/trading/orb-auto-paper.ts": {
+      "sha256": "74f5176007732f2b4769972515222e7de06505c7cfddb5b0080e1ae32e2a3776",
+      "mode": "100644"
+    },
+    "server/trading/orb-instrument-preparation.ts": {
+      "sha256": "8af061ab0b6d2f8d66ec42ab3f28685e4b3d02893e9281185232b5e5b2d7c697",
+      "mode": "100644"
+    },
+    "server/trading/orderbook-validation.ts": {
+      "sha256": "e3e426e03cd9a199aae2cb9c7e189daf3f23b5599cd6506ab646546f586be578",
+      "mode": "100644"
+    },
+    "server/trading/paper-balance.ts": {
+      "sha256": "bc04f8f4eb29c785f665b5b13bc42bae8562e8f725eb9dc3cce3eb070a68e966",
+      "mode": "100644"
+    },
+    "server/trading/paper-gate.ts": {
+      "sha256": "8f006524d5ee7e20ca234fb9c518f9e2bfb1e846a134d6ed5a3febde9538db31",
+      "mode": "100644"
+    },
+    "server/trading/paper-processing.ts": {
+      "sha256": "e33b62bbb4c62a8ebabe96d753d583007317959cddf22210de809b087f487d27",
+      "mode": "100644"
+    },
+    "server/trading/paper-service.ts": {
+      "sha256": "5faee7f542bf7b464aaa09b195735fc407e283e654660a9a21479f3652da5aa8",
+      "mode": "100644"
+    },
+    "server/trading/pdf-parse.d.ts": {
+      "sha256": "9e4e86583bdfd6e1b9ba215a6dd6de2a88abddc7e5731313ed93cfed362dc0b6",
+      "mode": "100644"
+    },
+    "server/trading/public-context.ts": {
+      "sha256": "12e2b042776335b6b03d556e97d50a9fffe232d380e3b71f713f519aa58560b5",
+      "mode": "100644"
+    },
+    "server/trading/python.ts": {
+      "sha256": "f25469304ecf223475735a32554931214b6679ef4c8d6fff7a23b11aba3b24f5",
+      "mode": "100644"
+    },
+    "server/trading/quant-data.ts": {
+      "sha256": "147e4f1ff7eac75677dc755031c7e68733f31bc7116619025febfd0bd902377a",
+      "mode": "100644"
+    },
+    "server/trading/quant-request.ts": {
+      "sha256": "4d7a0a41fc2ad8bf50cc4bc98b0bb785bd41c76d25e3a20801e43b8a76763e55",
+      "mode": "100644"
+    },
+    "server/trading/quant-router.ts": {
+      "sha256": "d97d8fc80781f4305438458344eb19f5b7111ceda2301951d855357a3045b84f",
+      "mode": "100644"
+    },
+    "server/trading/quant-rules-router.ts": {
+      "sha256": "b88c8ad92f03b29f267e76ad7ec9873f02251a1238aac976049665029801848d",
+      "mode": "100644"
+    },
+    "server/trading/quant-service.ts": {
+      "sha256": "35780713ec297f17d32ac7cab75710385958779576a06a4c0376f77e7ef4810c",
+      "mode": "100644"
+    },
+    "server/trading/quant-state.ts": {
+      "sha256": "28dc90991f5d83e30af813237cc5a75bf0c0f253279a9ac250dc940aa9aeae94",
+      "mode": "100644"
+    },
+    "server/trading/repository.ts": {
+      "sha256": "2c1100128905d2613324b0c6c56e4d0ceb17bee1208f6bfa6bff375f03c52cb5",
+      "mode": "100644"
+    },
+    "server/trading/research-jobs.ts": {
+      "sha256": "bc8ba8f689785d6beeeb04334bfdc68e24ea2a01c2a6d826201e9001fb22e045",
+      "mode": "100644"
+    },
+    "server/trading/router.ts": {
+      "sha256": "f5eb95f0fc15e3082fd6165864a257517e9683ab67ec52e3689853b28634e2b3",
+      "mode": "100644"
+    },
+    "server/trading/scan-budget.ts": {
+      "sha256": "9c594fa793012cb5af8ab7810b1e55c49118e40a7df93ba30e0c2edcb891f2fc",
+      "mode": "100644"
+    },
+    "server/trading/scenario-directions.ts": {
+      "sha256": "b37ff67ef4d333de87cfe8192834896ae2725d739fba5573043322254a18529e",
+      "mode": "100644"
+    },
+    "server/trading/scenario-layer-schema.ts": {
+      "sha256": "a2ad9fc02cb9fa1ee1fec79029d95a6bf7372ce1ce5b26988b365c50e29b2b1b",
+      "mode": "100644"
+    },
+    "server/trading/scenario-provider-security.ts": {
+      "sha256": "6395c33aef4baa1e922ec7ead2a11fa826c432c81d72f7ab5e59bb7e5fda1a8b",
+      "mode": "100644"
+    },
+    "server/trading/scenario-provider-vault.ts": {
+      "sha256": "8158791bd03a6efac9f7037e1b28264edc2148c9322a9338b43e5d03cd45b359",
+      "mode": "100644"
+    },
+    "server/trading/scenario-router.ts": {
+      "sha256": "d31a55d47606f493598954c3fea4b8e82f476a40cd5c1221e67cada1f1d55bed",
+      "mode": "100644"
+    },
+    "server/trading/scheduled-scan-budget.ts": {
+      "sha256": "f1c401e88402b086735f1f83cdab52861280bbd4e966796d714b16ea16139d42",
+      "mode": "100644"
+    },
+    "server/trading/session-auto-paper.ts": {
+      "sha256": "19b69a691e0b3c3ccfa5e85ee6a4511cfaeb19c1f2a6645cef358c54513b246f",
+      "mode": "100644"
+    },
+    "server/trading/setup-history.ts": {
+      "sha256": "61b13bef6c375a9912c2aa0cf652a119276efd14e9cd53729b21708656acff3e",
+      "mode": "100644"
+    },
+    "server/trading/setup-router.ts": {
+      "sha256": "8416c650d969c299c1cd960359a166180c6126845d28f488190a2b82b97ea91e",
+      "mode": "100644"
+    },
+    "server/trading/setup-service.ts": {
+      "sha256": "b24c77f7de29a32586169cda6cda6e57e7b9275c7b4730cab73a35e72efbb3f4",
+      "mode": "100644"
+    },
+    "server/trading/source-analysis-jobs.ts": {
+      "sha256": "8882958049a7526553b909a2d5109d87b41b29368c69427b35d697344a81a557",
+      "mode": "100644"
+    },
+    "server/trading/source-analysis-router.ts": {
+      "sha256": "27bc02ca1cd1eed7ac8449b4b47956544589cc70e8a8b98ed51f16f337cf364c",
+      "mode": "100644"
+    },
+    "server/trading/source-identity.ts": {
+      "sha256": "454b0443f486dd87162afab50d9cbcdab0828e832eef8c9545ed0e4c6bf42d3b",
+      "mode": "100644"
+    },
+    "server/trading/source-intake-validation.ts": {
+      "sha256": "e876ab1fd333f1d8aa28084225269a846130bac5a2bd35bcc79775219c446c70",
+      "mode": "100644"
+    },
+    "server/trading/source-preview-router.ts": {
+      "sha256": "cb2d9887da94f76a3987ff4bbcb79a0c026ae813ecc3fe6a9f29f045dd3af591",
+      "mode": "100644"
+    },
+    "server/trading/source-preview.ts": {
+      "sha256": "70a9502d37bf8a98d4d95bd3d38e09de67ebd65783086af8c438e2de6071573b",
+      "mode": "100644"
+    },
+    "server/trading/strategy-quote-observations.ts": {
+      "sha256": "49478dcc23643cb122543d938ee47706e95e9b9b0b7b1f2fb01a3c302290e90e",
+      "mode": "100644"
+    },
+    "server/trading/trade-screenshot-router.ts": {
+      "sha256": "8fb37027b70eb4f2b2602bf900c0def269e132eafe1d50494406055ff44a182f",
+      "mode": "100644"
+    },
+    "server/trading/trade-screenshot-service.ts": {
+      "sha256": "f0d36c37f3a3ce1284f8f2fdbfd81acafddba09d3ef5c70a4a6e35c5c28d17da",
+      "mode": "100644"
+    },
+    "server/trading/tradelocker-config.ts": {
+      "sha256": "5a2ce3c608c47c6c771fa02b3427c0c6760c89e03caf4022edcb7157526c3331",
+      "mode": "100644"
+    },
+    "server/trading/tradelocker.ts": {
+      "sha256": "1285e8d374523df5757138468e6206bca83d09ede9932a14e7df4f8ddbc9b73b",
+      "mode": "100644"
+    },
+    "server/trading/validation.ts": {
+      "sha256": "0130a1bbb21b63a113659e22106140551cf2d87ceb5b37695476a68755868cb2",
+      "mode": "100644"
+    },
+    "server/trading/vectors.ts": {
+      "sha256": "347f67b22584b25bb6bce3f90f893b88265ae50a4b17b1a6be314e3240102a0d",
+      "mode": "100644"
+    },
+    "server/trading/venue-depth.ts": {
+      "sha256": "246b7a467b7c24c73c477d6040cd12042251ae4198a2b9151882f7032145ef9b",
+      "mode": "100644"
+    },
+    "server/trading/workspace-tools-router.ts": {
+      "sha256": "77246210519099c44b5573cae0e3c26c27d30fe1c5f820e8593ef880fa06656c",
+      "mode": "100644"
+    },
+    "server/trading/workspace-tools.ts": {
+      "sha256": "7d1ed5b5e2274a27e96a8fed06d0693c6dec71e2063fbe15dd0cb6673ee9b9bd",
+      "mode": "100644"
+    },
+    "shared/_core/errors.ts": {
+      "sha256": "f49c86179b38c7ea610bdb51ecf90c14a34953cab56b75ce57f1ada5479a55c1",
+      "mode": "100644"
+    },
+    "shared/const.ts": {
+      "sha256": "60af499b012dd7ba445d60aaaa7a315a1544eae5682955ce1a6fc83e22a9224e",
+      "mode": "100644"
+    },
+    "shared/types.ts": {
+      "sha256": "959aeb30b032e203677e278922e97988b7cbcb56485694458298859af5589974",
+      "mode": "100644"
+    },
+    "tailwind.config.js": {
+      "sha256": "257c0949766a0699e536eb7d18379a3c0bda37766e878271b06222f222544489",
+      "mode": "100644"
+    },
+    "tests/auth-audit-09.test.ts": {
+      "sha256": "60a8f02bd9bbd7de1a682f56b3fe7f024d8b36f3292f77bd35a1d944cb2c6c22",
+      "mode": "100644"
+    },
+    "tests/auth.logout.test.ts": {
+      "sha256": "80048b7fca23ebbecf022569b9ec848c40e0311f612d1bbb674bddfff2b86e82",
+      "mode": "100644"
+    },
+    "tests/cors.test.ts": {
+      "sha256": "a5c67211b7f44ce49489bca83426b3cfcfa873af179e07fac20669c3c3fc7d67",
+      "mode": "100644"
+    },
+    "tests/tools/test_private_repo_sync.py": {
+      "sha256": "61edbc8df06c418de148e5b9ca6a1d12cae236e40f97736185fb6b0f4c7e17ad",
+      "mode": "100644"
+    },
+    "tests/trading/ai-forecast.test.ts": {
+      "sha256": "f7ca87b36c4a184be169323986ff901e3a181bb29bbae4d102a1abee1742fc5b",
+      "mode": "100644"
+    },
+    "tests/trading/ai-model-policy.test.ts": {
+      "sha256": "4efe76a3f1502b0d3a9536b5f3e23b20010cd1b7f14e820f52d1c62ead301ea3",
+      "mode": "100644"
+    },
+    "tests/trading/ai-quality-storage.test.ts": {
+      "sha256": "9ccfe2653b8bf478109af6c1ec32ea11a5ceafeb6852678c272f2de24333a5a6",
+      "mode": "100644"
+    },
+    "tests/trading/ai-request-lifecycle.test.ts": {
+      "sha256": "cae0500258bd625129ae6c1225925af0f9de8f1f07fcd8caeeb6338b9b1e8c74",
+      "mode": "100644"
+    },
+    "tests/trading/alerts-audit-06.test.ts": {
+      "sha256": "ad799d1e34e727a6e439851e6baf6a534e02db9c342511af0ebe3850703dec5a",
+      "mode": "100644"
+    },
+    "tests/trading/app-quota-reservation.test.ts": {
+      "sha256": "6b42d52644c43556f005aecee3abd82c2192713500724f4bb99066021081e5e0",
+      "mode": "100644"
+    },
+    "tests/trading/app-quota.test.ts": {
+      "sha256": "a5d5a40191c04989a4c2eb60cee58adb99633d0935b25fe10d80e1f9fa746881",
+      "mode": "100644"
+    },
+    "tests/trading/broker-instrument-facts.test.ts": {
+      "sha256": "19215229bdb444d7bd2ee5b3f8d144daf5ab69767ed603785c857385b478272e",
+      "mode": "100644"
+    },
+    "tests/trading/broker-read-refresh.test.ts": {
+      "sha256": "0c1236915fe0d293bbb95a9cd1df566c7a94d4c0df420a5f17873539b337ecbc",
+      "mode": "100644"
+    },
+    "tests/trading/calibration.test.ts": {
+      "sha256": "2090bde26c70528e40878cf5a3e9c6adf481a4b7c0ba3f02a95c1ede75088295",
+      "mode": "100644"
+    },
+    "tests/trading/catalog-deadline.test.ts": {
+      "sha256": "ca041dd2ecaf4e77ed9e89092f807b99173892600f437fe3ef24f8d01bab5b72",
+      "mode": "100644"
+    },
+    "tests/trading/chart-presentation.test.ts": {
+      "sha256": "320cbd8e050a171071ff044546ea72d58c4ba1fd1d0b8c9967054f3a366ca757",
+      "mode": "100644"
+    },
+    "tests/trading/chart-session-settings.test.ts": {
+      "sha256": "773c09a1a614d99c17d8edf9e3ddb77724bc9a03977e904b5e08273c810d9031",
+      "mode": "100644"
+    },
+    "tests/trading/chart-sessions.test.ts": {
+      "sha256": "7066d9235295999f624c2b97d3a054ffc57311043eb8aac2e1c05a6512d49cc0",
+      "mode": "100644"
+    },
+    "tests/trading/coach-ui-state.test.ts": {
+      "sha256": "4130bd3d7649a904f24c2b081f21912dfb798cfb2563cb2a984a1b6e972972d3",
+      "mode": "100644"
+    },
+    "tests/trading/coach.test.ts": {
+      "sha256": "1af98376738ba27b8e0414b21d00cc2b8b111e0b95619f95dedbd3f147715cb0",
+      "mode": "100644"
+    },
+    "tests/trading/coinbase-window.test.ts": {
+      "sha256": "47f5dd58dd895a001d38754e4fbfb8c3bd1799efabb03fed76f7fe39d7b7c35c",
+      "mode": "100644"
+    },
+    "tests/trading/cointegration.test.ts": {
+      "sha256": "19efe7e8c5767ede2a8b8620a704a8e32fd959f75e310a0ba43a69db2afdc049",
+      "mode": "100644"
+    },
+    "tests/trading/collections.test.ts": {
+      "sha256": "98b701a2f72b81072cf6782cc6b7e60f9236cad6cc5306e778eb40658bdd0ece",
+      "mode": "100644"
+    },
+    "tests/trading/confluence-alerts.test.ts": {
+      "sha256": "ae897cfc9521531792f1f3c2bf19cb5597e09a641601a8f13c679e10dc1b1437",
+      "mode": "100644"
+    },
+    "tests/trading/confluence-analytics.test.ts": {
+      "sha256": "543023f34c6c3a470cc55dc06c5db46d7eec444e9657848ee84c8744ee465ac5",
+      "mode": "100644"
+    },
+    "tests/trading/confluence-contract.test.ts": {
+      "sha256": "d0937be8ee321103c82ef538906feb741a84085f627d78a2573ace10ef51496f",
+      "mode": "100644"
+    },
+    "tests/trading/confluence-runtime.test.ts": {
+      "sha256": "ba844f7432ddcc82b24e68486bdd5c5fb85d467826a99a07fb9641798efc0d6d",
+      "mode": "100644"
+    },
+    "tests/trading/direct-scenario-service.test.ts": {
+      "sha256": "d0616dcbf619c3cf2ba84dd3b9059ecce4b88524160d99be659ab5528320e6ec",
+      "mode": "100644"
+    },
+    "tests/trading/discipline-guard-ack.test.ts": {
+      "sha256": "89319e6b77b724ef44c85ee7021f81a3d21ccc23de2fade69b761f4c85de2e70",
+      "mode": "100644"
+    },
+    "tests/trading/discipline-policy.test.ts": {
+      "sha256": "1b68e1b8fe2277907fe6ceca2bf7f0597a7d187e73c3b899a59e4833fbfee3d0",
+      "mode": "100644"
+    },
+    "tests/trading/engine.test.ts": {
+      "sha256": "e15f71c0b151a42f1f55db7f3463f1998c058500d58f3a167256150830d83130",
+      "mode": "100644"
+    },
+    "tests/trading/feature-purpose-guide.test.ts": {
+      "sha256": "7a6cb53f23ea3adef7e00ef035af3a15221856c1b7652daebc0f459758c4bc4a",
+      "mode": "100644"
+    },
+    "tests/trading/forecast-auto.test.ts": {
+      "sha256": "5952ebdc1bdcecf899629e0438212084ea0a92a61f6962ff2d0c22507f536d3a",
+      "mode": "100644"
+    },
+    "tests/trading/forecast-freshness.test.ts": {
+      "sha256": "c732bf3917e3c3a98bd81064aab4ce8d5f42febf687d37d932c9dcac2e093594",
+      "mode": "100644"
+    },
+    "tests/trading/forecast-output-recovery.test.ts": {
+      "sha256": "b9c8acdba5a23ef464556cfb193e72526ed2e024137a00686f3756f55c524d70",
+      "mode": "100644"
+    },
+    "tests/trading/forecast-service-context.test.ts": {
+      "sha256": "2cda8ba208d450be3ad8edd31eab6d7a87fcf273abd4ab3849d2c2e09c4c01f2",
+      "mode": "100644"
+    },
+    "tests/trading/forecast-source.test.ts": {
+      "sha256": "75ac8867082b267bc28f0f2b36c51f77eda8af844f6b4bf3874be206d74263a4",
+      "mode": "100644"
+    },
+    "tests/trading/foundry-suite.test.ts": {
+      "sha256": "f0ebfbd4dc6a2bc749e6d1a8d3dc2be03dcfd6dedf38a544e607cf0cc774bb7c",
+      "mode": "100644"
+    },
+    "tests/trading/freshness.test.ts": {
+      "sha256": "5a622f9c6df3c398b0a72b9cdcaaa4c7fafabeff22265eb577aa3d512988f088",
+      "mode": "100644"
+    },
+    "tests/trading/historical-scenario.test.ts": {
+      "sha256": "da8c60df44f12489a9593cf59d438b523c5b7be4ff841a0a3abd233b926a6616",
+      "mode": "100644"
+    },
+    "tests/trading/indicator-contract.test.ts": {
+      "sha256": "d797ae12ae1d08fd6fc110b03d39586459497e6170f9e95d26b1076eb26be10e",
+      "mode": "100644"
+    },
+    "tests/trading/indicators.test.ts": {
+      "sha256": "3a330ce7a8218b666ef4cc5d4fe6eb949dd99078c95f00353fdbcb3206f492d0",
+      "mode": "100644"
+    },
+    "tests/trading/instrument-preparation.test.ts": {
+      "sha256": "e0e0744aba1933a61c42b03c0e9e32fa18acdcaff8d7ed76f96a002e4d59d8b7",
+      "mode": "100644"
+    },
+    "tests/trading/learning-upload.test.ts": {
+      "sha256": "61d0ebe5c2b5721d7b3b0b25b5452ac7f5335fc4f8c02fd8490e8828f30b1681",
+      "mode": "100644"
+    },
+    "tests/trading/library-blueprint.test.ts": {
+      "sha256": "bfa2243bbba06e9e56b219a22b349f7cc179b7346d6ca85c14c256b70955918f",
+      "mode": "100644"
+    },
+    "tests/trading/lightweight-chart.test.ts": {
+      "sha256": "8a0203363c17fbd3cbec16f9cc33177095657b6c279cb568a2eb6417e4b6de89",
+      "mode": "100644"
+    },
+    "tests/trading/lightweight-controller.test.ts": {
+      "sha256": "ed60300133d0ebd30e3d1ca4ca53f39973b4af6cf66e24c8e3c61bb4e5c961d9",
+      "mode": "100644"
+    },
+    "tests/trading/llm-errors.test.ts": {
+      "sha256": "0bba7c02f94966d70e9ebd42b2f1281e09f38bbc0661ce6daf74e416b55b388b",
+      "mode": "100644"
+    },
+    "tests/trading/local-lock.test.ts": {
+      "sha256": "76c3c3fd17411edb96aa518f2342c2be209a521d7ab310ce837bf90653907b83",
+      "mode": "100644"
+    },
+    "tests/trading/market-making-methods.test.ts": {
+      "sha256": "3aac4b580ce6c24b8a10c0ca6c5c2d403273527a7b418646a73cdc65dffe51cb",
+      "mode": "100644"
+    },
+    "tests/trading/market-retry.test.ts": {
+      "sha256": "29a5b4d9ebb24da74a82df7d7f49834e4632eff616058ace7bc13d6d0b5449de",
+      "mode": "100644"
+    },
+    "tests/trading/match-feedback.test.ts": {
+      "sha256": "aac7f27a2e934503decc35cb11b9a9606fe54f3fb7f462e4e3e7f7665ada11b9",
+      "mode": "100644"
+    },
+    "tests/trading/no-code-quant.test.ts": {
+      "sha256": "4f370145392670f4d560c60f5ef9e363634d7e82fdb41c12e48a2ce1960bb08f",
+      "mode": "100644"
+    },
+    "tests/trading/notification-delivery.test.ts": {
+      "sha256": "2a6ac9c7f505d95f6b5abc0b466cc4d373f0e47652fe0e635a3e7688ab0f8ae8",
+      "mode": "100644"
+    },
+    "tests/trading/oauth-completion.test.ts": {
+      "sha256": "9a14e03d8f53cec5656394e0fcac386927b05f667d9bca54e8c4993d70f47ca7",
+      "mode": "100644"
+    },
+    "tests/trading/openai-scenario-client.test.ts": {
+      "sha256": "eaeb80e12f961675bb75f3b028906ef818feede251a854ca90caced74fae0b86",
+      "mode": "100644"
+    },
+    "tests/trading/orb-auto-flow.test.ts": {
+      "sha256": "e71d3c302ab3764562fadc01721a83db2618abc751831b7c985f36e125c39951",
+      "mode": "100644"
+    },
+    "tests/trading/orb-auto-paper.test.ts": {
+      "sha256": "b58ff06315ac1cb09777b4aebc9abf75128635ad90c270162e5f50ac51d09b82",
+      "mode": "100644"
+    },
+    "tests/trading/orb-instrument-preparation.test.ts": {
+      "sha256": "56986c34f5039610c2c59845274a1434395ed54f8213b8a6edddfef1f35e8c63",
+      "mode": "100644"
+    },
+    "tests/trading/orb-integration.test.ts": {
+      "sha256": "782e6dfb49aa73345706505816b7bedeaf754f5cc071090cced9f3406c805f10",
+      "mode": "100644"
+    },
+    "tests/trading/orb-nas100-integration.test.ts": {
+      "sha256": "6a9b72203f8d5a3b40826b50a0defe0108d45c12b4dca21adcc631bc0da4f645",
+      "mode": "100644"
+    },
+    "tests/trading/orb-nas100-paper-fill.test.ts": {
+      "sha256": "8d3d90bbd9424925ede9260fe2f4e6bbc708af2c31920472c5659907f7096c7d",
+      "mode": "100644"
+    },
+    "tests/trading/orb-strategy.test.ts": {
+      "sha256": "414c865eb18c0d72b637678fb75e3b0e14017a39a31b25464834d90f16b8b3b6",
+      "mode": "100644"
+    },
+    "tests/trading/orderbook-security.test.ts": {
+      "sha256": "328cd1c5174246239aa612c791eb3bff1892071d4061860ef9ad87e782239ac9",
+      "mode": "100644"
+    },
+    "tests/trading/owner-setup.test.ts": {
+      "sha256": "538993e8578ff7fffab1e06287f0e81f69c9ddc4eceb5a9fb71a4fb84084ca84",
+      "mode": "100644"
+    },
+    "tests/trading/paper-balance.test.ts": {
+      "sha256": "994e61727934cfd34cbd0f67e86bae435c31d664b6aad4a452b97e020e313e1f",
+      "mode": "100644"
+    },
+    "tests/trading/paper-form.test.ts": {
+      "sha256": "adb4dbbbd8ae7fcc06e6ebecfdb82e9fa7cb98631de59821dd2813a301faef20",
+      "mode": "100644"
+    },
+    "tests/trading/paper-gate.test.ts": {
+      "sha256": "e23e49571f0f834ed2ff8d0521ca235ec9b5f1f2cb331f437b3e8d8424964bc5",
+      "mode": "100644"
+    },
+    "tests/trading/paper-lifecycle.test.ts": {
+      "sha256": "a422e8b05d18e638553c8ac222e9aba5e521b4878920d1ca70c07fc428a3b750",
+      "mode": "100644"
+    },
+    "tests/trading/paper-observations.test.ts": {
+      "sha256": "3f0af818a57a6a76e0cc57e3c9731c105252aab71b55f5533976a3364a831250",
+      "mode": "100644"
+    },
+    "tests/trading/paper-performance.test.ts": {
+      "sha256": "2bbc0bf50aa6882988f8d01854dd10d4adcfb079364268a7fe9ab29e8584ef3a",
+      "mode": "100644"
+    },
+    "tests/trading/paper-plan-sheet.test.ts": {
+      "sha256": "8147ca6d1c259157c6abb21842a3300b1f30bb66a3a2dcaa5df5dc281cfe9f24",
+      "mode": "100644"
+    },
+    "tests/trading/paper-processing.test.ts": {
+      "sha256": "b985f6ba03daab19046de53ed3e049d3e52d204929afd6928a124485c1c47973",
+      "mode": "100644"
+    },
+    "tests/trading/paper-proposal-canonical-balance.test.ts": {
+      "sha256": "9d214547915bfde0b8cf05f0f54f24bfbb6e4641b8b3506dc7ac63be550b0c34",
+      "mode": "100644"
+    },
+    "tests/trading/paper-service.test.ts": {
+      "sha256": "0e97dfc7e8ec4efcc47cb603d2088fd3f3a96e56afa3d6660b2c3bf4b2a06ae1",
+      "mode": "100644"
+    },
+    "tests/trading/pdc-continuation.test.ts": {
+      "sha256": "9afe95ffaf2f594cca59bdc667fedfdc94b8f665bfcab48a538965da33f0560d",
+      "mode": "100644"
+    },
+    "tests/trading/pending-paper-gate.test.ts": {
+      "sha256": "e846835b69214cfe3766da1c1a7c4422475831d0ce8c650038b0025a1ca4e0f4",
+      "mode": "100644"
+    },
+    "tests/trading/performance-statistics.test.ts": {
+      "sha256": "97f0bb920bf0056373cfcde02816b99c920ff04d6bf7497335290e62cb5778ba",
+      "mode": "100644"
+    },
+    "tests/trading/proposal-retry.test.ts": {
+      "sha256": "21567343d1e1f133655cded451d50f356b04078b1290240baa675cb4081f2b59",
+      "mode": "100644"
+    },
+    "tests/trading/provider-day-autofill.test.ts": {
+      "sha256": "cbc31bd401ef8d0a430488a1d96825a6f62162e32307233aa9b3edcd872c16c9",
+      "mode": "100644"
+    },
+    "tests/trading/public-context.test.ts": {
+      "sha256": "ee0ba3a741e413514ecf63b7375e77feeda84f67e05ab48a11d9741443e1443c",
+      "mode": "100644"
+    },
+    "tests/trading/publication-origin.test.ts": {
+      "sha256": "a52ad46582550a5f4b1dad96c9e5cbd8c850a36192cc7ac85a05b40ee5076f71",
+      "mode": "100644"
+    },
+    "tests/trading/purged-validation.test.ts": {
+      "sha256": "76116ef2557c078bc2676ce03bff81d25bdbedd4ea23289d5cb42a1fb56630f3",
+      "mode": "100644"
+    },
+    "tests/trading/quant-data.test.ts": {
+      "sha256": "ade91d03bb7dd820c6da51eafa8982717c853e8b221e5956dd6ee561cf81fba1",
+      "mode": "100644"
+    },
+    "tests/trading/quant-macro.test.ts": {
+      "sha256": "cfac1bc7be257ee423fe40fa18ac10bccb66c1c71ca71e53f764f10131d32abf",
+      "mode": "100644"
+    },
+    "tests/trading/quant-making.test.ts": {
+      "sha256": "8fafd8cbfe8787f1f6aa588c20adf82a7d494c1a5d64a072e36b60d4167fe8d3",
+      "mode": "100644"
+    },
+    "tests/trading/quant-methods.test.ts": {
+      "sha256": "1d153774556cb7f893a6486d52f9f5e0788d5aa1b228429a18b9ffb1b7e50ecd",
+      "mode": "100644"
+    },
+    "tests/trading/quant-ml.test.ts": {
+      "sha256": "12cd9301a908757496adb36c63b043649536cada7598255dd0580edc81fcdd25",
+      "mode": "100644"
+    },
+    "tests/trading/quant-momentum.test.ts": {
+      "sha256": "3408b7051ade901d4e9b6c30961b13632299edc8bda7e40a4ffabcba8f7401d3",
+      "mode": "100644"
+    },
+    "tests/trading/quant-pairs.test.ts": {
+      "sha256": "40b05c46e3327de81f17239d8e46f9e3cf083b51dae9c4663dcccac010dc7093",
+      "mode": "100644"
+    },
+    "tests/trading/quant-router-timing.test.ts": {
+      "sha256": "1088d314ea1ac7fea3233eefbde8f8e716061dd41e03c1169b34316dc81790f2",
+      "mode": "100644"
+    },
+    "tests/trading/quant-workbench-config.test.ts": {
+      "sha256": "67193ef5346ae96e08accb1a9177d220fcb903a11bd729d896d4ff31a3d9ef65",
+      "mode": "100644"
+    },
+    "tests/trading/quote-age.test.ts": {
+      "sha256": "ed24a53497e5d404179075915378320c41dd8b4bf25a7cb621cbbc7e42cad26f",
+      "mode": "100644"
+    },
+    "tests/trading/research-security.test.ts": {
+      "sha256": "f47114b0b34297dc86a15415b05a6bcfa78ec1c10edf238f5b4ec3e56dd9e35f",
+      "mode": "100644"
+    },
+    "tests/trading/scan-budget.test.ts": {
+      "sha256": "1368a59f9c8b89a014ec4d3d1b90a8650b48317e6f7e45f89a481b5bbd24b08d",
+      "mode": "100644"
+    },
+    "tests/trading/scenario-direction-store.test.ts": {
+      "sha256": "3cc02b9d8ae0a41e6f5d28c9e98f29c86fe554685f00a5f009a5dd7251044674",
+      "mode": "100644"
+    },
+    "tests/trading/scenario-layer-controller.test.ts": {
+      "sha256": "e3c52891cf5cc9e1ad994ca511b571b7f8135d0efca10a3937eb52ef621450a4",
+      "mode": "100644"
+    },
+    "tests/trading/scenario-layers.test.ts": {
+      "sha256": "7167092eb808c3c81d16854829354199f12cedf7b2c1305cc00900752f0f7c6e",
+      "mode": "100644"
+    },
+    "tests/trading/scenario-provider-router.test.ts": {
+      "sha256": "01a17f6f84383e75669a85e99a5d469207566ad886d76a756cb449acc3e0ec13",
+      "mode": "100644"
+    },
+    "tests/trading/scenario-provider-security.test.ts": {
+      "sha256": "5ed61a783845c08164588c904b22e9b5bcfe7729a535af8bb4342713c4f80f8e",
+      "mode": "100644"
+    },
+    "tests/trading/scenario-provider-vault.test.ts": {
+      "sha256": "761535f0a505320c6beff511b1b73904617f53b8da3540e4f1b5f68d00e66419",
+      "mode": "100644"
+    },
+    "tests/trading/scenario-router.test.ts": {
+      "sha256": "0d18ecb41a182891587d938301f176e3ae7d14cdef5a246cf6ef09ab8facca71",
+      "mode": "100644"
+    },
+    "tests/trading/scheduled-scan-budget.test.ts": {
+      "sha256": "3b4b3fcb4ecc1ef135161ff93eb504a61e76242f7e25e67fcd1adadfc80e8411",
+      "mode": "100644"
+    },
+    "tests/trading/scheduler-cookie.test.ts": {
+      "sha256": "6030ae1b7ed44bf53c22cdb7dca395ec5f70e42fae7d504b7a61350cfaef09c0",
+      "mode": "100644"
+    },
+    "tests/trading/security.test.ts": {
+      "sha256": "76c74f9e50ddf71ba78ab0d748c5029810e3049473237976ab402401aab5f9f6",
+      "mode": "100644"
+    },
+    "tests/trading/session-auto-flow.test.ts": {
+      "sha256": "5a0fcff421cc2d0883bec8ddea1c587615392b68a90e2a55a88d1b98d475212d",
+      "mode": "100644"
+    },
+    "tests/trading/session-auto-paper.test.ts": {
+      "sha256": "8d90886ebbc34043c215dcee50dae5c5c8aa6d8a2df1b80d58e32032bb2f90a4",
+      "mode": "100644"
+    },
+    "tests/trading/session-background.test.ts": {
+      "sha256": "d84376df9be976e5d968064b674aa0db8d4b20b7b6b0ae5b8f5c1704ae505b59",
+      "mode": "100644"
+    },
+    "tests/trading/session-paper-fill.test.ts": {
+      "sha256": "58fa85cf2b457009850ab439a182e66f592b0a9165fa973fbec309670228255e",
+      "mode": "100644"
+    },
+    "tests/trading/session-range-strategies.test.ts": {
+      "sha256": "5c0830a28ff61e9d2f9c2feb0935dff5d0ebfc4568fea6d44147df4647637235",
+      "mode": "100644"
+    },
+    "tests/trading/session-source-acquisition.test.ts": {
+      "sha256": "293923c5c6ad4caf574ba908d8103c4468427ea78cbbec8372ffc4b310cc3701",
+      "mode": "100644"
+    },
+    "tests/trading/session-strategy-integration.test.ts": {
+      "sha256": "2767a5a5d425710694e50d724dc08e3ddf69baf820de4a6b319e23b65430b5c6",
+      "mode": "100644"
+    },
+    "tests/trading/setup-engine.test.ts": {
+      "sha256": "d13366b65bb5a156ae779e7d2880d71be7afbe75152c6147ee33f1dd43e4bb4a",
+      "mode": "100644"
+    },
+    "tests/trading/setup-history-source-identity.test.ts": {
+      "sha256": "52c6451a61a1bcec6bb0299fb2c6af14fc1109bb935386f8395c29fe667c45db",
+      "mode": "100644"
+    },
+    "tests/trading/source-analysis-jobs.test.ts": {
+      "sha256": "39483f8676f908dc06d98b95946e1038ab68333c479de424a9d91bc12cd0283d",
+      "mode": "100644"
+    },
+    "tests/trading/source-cleanup.test.ts": {
+      "sha256": "320bc0d1c3dbe2d3d6f308083f9337366d9c1ff870136bf3d59700039f843485",
+      "mode": "100644"
+    },
+    "tests/trading/source-index-recovery.test.ts": {
+      "sha256": "1358d394f9fae06211030f860588e8fe5ddeaade3762cf9f69f1167bd1f3f5dd",
+      "mode": "100644"
+    },
+    "tests/trading/source-intake-validation.test.ts": {
+      "sha256": "4b75fc7f849109e434e048882deebea0ae562227152c4075c21a22830ededfb4",
+      "mode": "100644"
+    },
+    "tests/trading/source-preview.test.ts": {
+      "sha256": "2efdcdb755beb3ad8cf81eedab7d77fb07d4f33604ae86e22f5568ef7f651403",
+      "mode": "100644"
+    },
+    "tests/trading/source-public-dto.test.ts": {
+      "sha256": "547210261d3c243107f736a2ed1e14f1f69c071b0a720b96214f469a6ee7677f",
+      "mode": "100644"
+    },
+    "tests/trading/source-purpose.test.ts": {
+      "sha256": "bfff6e81195a25ae9a99b4872ab74c223b50708065a7f27a10fe8ac49bbe072a",
+      "mode": "100644"
+    },
+    "tests/trading/storage-owner.test.ts": {
+      "sha256": "8d7c1eedf24eb750897d6b38fb493e8311635075837f87fb377092876adeff19",
+      "mode": "100644"
+    },
+    "tests/trading/strategies05-revision-restore.test.ts": {
+      "sha256": "aa7497827ad71c7a7c70db608244ba13b6805b8c070051ca7363c6af8a05f31c",
+      "mode": "100644"
+    },
+    "tests/trading/strategies05-session-paper-geometry.test.ts": {
+      "sha256": "228243030b979fa98ac757982d7bb011d33dbe11129789466ff7c77375c6e8eb",
+      "mode": "100644"
+    },
+    "tests/trading/strategy-direction.test.ts": {
+      "sha256": "a87019d24e5c3fb4ca1b48ad6350724a092532e0b8b14e9d2e698760fab558fe",
+      "mode": "100644"
+    },
+    "tests/trading/strategy-quote-observations.test.ts": {
+      "sha256": "479ea2afaeb461e9fff6730ac1508991738f8e29f09162f8e8ac8c0aa5b59c3e",
+      "mode": "100644"
+    },
+    "tests/trading/time-zone-clocks.test.ts": {
+      "sha256": "c18c83f7432100758e9a478ce9c9d194e01e66f1365f5a8fc276c0a34c96e951",
+      "mode": "100644"
+    },
+    "tests/trading/timeframe-bias.test.ts": {
+      "sha256": "8356d7daf60f9cbd6ee677a48c3509bd89e42ef0cfe5aba910cea913abb62fd6",
+      "mode": "100644"
+    },
+    "tests/trading/timeframes.test.ts": {
+      "sha256": "f2896fc02a151df87977663eac06e4c17642bf9c3b7352787b2f6c080abfa980",
+      "mode": "100644"
+    },
+    "tests/trading/trade-chart.test.ts": {
+      "sha256": "ff7367385148727f3685452fe2361f8f7135f2e5aad75765c93e1552b7d845e6",
+      "mode": "100644"
+    },
+    "tests/trading/trade-features.test.ts": {
+      "sha256": "206b1fbc9a68fd8770c82c09b8ddb34174d36e1028519ce260b5225dde49fef2",
+      "mode": "100644"
+    },
+    "tests/trading/trade-screenshot-router.test.ts": {
+      "sha256": "36198a06c3c32190bfddd73456a960904cae442d9bb17481c8de86c05c7a60b1",
+      "mode": "100644"
+    },
+    "tests/trading/trade-screenshot-service.test.ts": {
+      "sha256": "5a90ec3a87de40b37c1d2aff370ec9434f410d24fbd4eb5adc488fa072d670ca",
+      "mode": "100644"
+    },
+    "tests/trading/trade-screenshot-types.test.ts": {
+      "sha256": "800a4e782955d3e43176a2496b77d7118c499d40eebb1978061831b0b06a1970",
+      "mode": "100644"
+    },
+    "tests/trading/tradelocker.test.ts": {
+      "sha256": "65b7bcc517c2a13a14e10ffedf74f8ea18982857357537279f4f51a99b93e8e5",
+      "mode": "100644"
+    },
+    "tests/trading/trading-discipline.test.ts": {
+      "sha256": "13548317052a0cbd0820d3bb7c3f0f54dbe469765edaeee24cae4331ffaf6da9",
+      "mode": "100644"
+    },
+    "tests/trading/upload-byte-limits.test.ts": {
+      "sha256": "3f9fb9e9c2a6ed29f1822a78715859b2a6cb5ceeb7101626bcd9ac761047d60d",
+      "mode": "100644"
+    },
+    "tests/trading/venue-depth.test.ts": {
+      "sha256": "14e06943c06c5adbcb92a2b18e7ef2158e4b2b1d99f6c6ca704031cfd744e2c0",
+      "mode": "100644"
+    },
+    "tests/trading/vwap-stdv.test.ts": {
+      "sha256": "7145c817feb8a998ef15be5ae042e54575a4a3bb1e29bfc934f20a769e0337d2",
+      "mode": "100644"
+    },
+    "tests/trading/web-app-serving.test.ts": {
+      "sha256": "508bfcf338ec54e66689f36608a26b13ffc6f8469155718aa3656d04c7d13734",
+      "mode": "100644"
+    },
+    "tests/trading/web-chart-document.test.ts": {
+      "sha256": "f190e71fb7be1e3e08b3aeca92424ed5efa90586bd507179ebfea2263a9d28f6",
+      "mode": "100644"
+    },
+    "tests/trading/web-login.test.ts": {
+      "sha256": "a637534816d7cf347a0f567996b36befc4f72ca058ad47066c10c7cddbc43951",
+      "mode": "100644"
+    },
+    "tests/trading/weekly-context-copy.test.ts": {
+      "sha256": "9388b9cdff50bc20a77e2844bfeafab81f4aa0ef450818040ce5b9f4b52104ba",
+      "mode": "100644"
+    },
+    "tests/trading/workspace-capacity.test.ts": {
+      "sha256": "f85cd1c734c750f5a037f2c405ac81eb2cbd0ebc944b5b28b89a983bc7dde988",
+      "mode": "100644"
+    },
+    "tests/trading/workspace-portability.test.ts": {
+      "sha256": "2b930a92a4e55824039e57f1975eb1724bce47f0c50ef8ec073a279ed196dafd",
+      "mode": "100644"
+    },
+    "tests/trading/workspace-removal.test.ts": {
+      "sha256": "7cdbef89fdccf68e577c56faf5287a954b13bf4c071663395f028fd38c964e4c",
+      "mode": "100644"
+    },
+    "tests/trading/workspace-sync.test.ts": {
+      "sha256": "6778f4097d0457119359b1f0c107e47483e38dd318fcc6f782a60036ad5e0c85",
+      "mode": "100644"
+    },
+    "tests/trading/workspace-tools-router.test.ts": {
+      "sha256": "06595c0c61549279001766a1049fb757c72f3e36788c86d28df7e3b6e14bb5f0",
+      "mode": "100644"
+    },
+    "tests/trading/workspace-tools-transaction.test.ts": {
+      "sha256": "0bda6af5f4e7506c92c504f84ce5b4e771c2d126c8d11d1b17a045098792f32a",
+      "mode": "100644"
+    },
+    "theme.config.d.ts": {
+      "sha256": "dc7c4d2cc9c3cb1cad011aa3a6f5f9c9ab1a62e1abad35aaf3efea7f7105f24d",
+      "mode": "100644"
+    },
+    "theme.config.js": {
+      "sha256": "136d70bd04cfa08fd2b74c0f3dd9a42f614c66b9a5d1ac399573d56bb299bba5",
+      "mode": "100644"
+    },
+    "third-party/cointegration-statsmodels/LICENSE": {
+      "sha256": "04a0e75f35e447d0821142495fa7730434ff001f245197cb497ed8cebb912198",
+      "mode": "100644"
+    },
+    "third-party/lightweight-charts/LICENSE": {
+      "sha256": "70c9d5382506dd184465425c08a99ad9bd6d9ac1313c252968ba0b585e5ef823",
+      "mode": "100644"
+    },
+    "third-party/lightweight-charts/NOTICE": {
+      "sha256": "f76c6afab94884448f0426e30d6e9d555ca7247894cd3484e477d2f87513036e",
+      "mode": "100644"
+    },
+    "tsconfig.json": {
+      "sha256": "0be41ed94625c4824ee98ad589da4687fd4afc965a8aedb30111697b9296877a",
+      "mode": "100644"
+    }
+  }
+}

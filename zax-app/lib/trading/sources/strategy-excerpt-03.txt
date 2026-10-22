@@ -1,0 +1,35 @@
+them.
+1. Trend-Following (Swing / Position Trading)
+Core Mechanics
+Trend-following strategies operate on the premise that assets in motion tend to stay in motion. Rather than trying to predict a reversal at the bottom or top, trend traders wait for a directional trend to be confirmed and ride it until technical indicators signal market exhaustion.
+ Timeframe: Daily (\bm{D}), 4-Hour (\bm{4H}), or Weekly (\bm{W}) charts.
+ Holding Period: Days to several months.
+How It Looks On Your Screen
+ Indicators: Exponential Moving Averages (EMAs)—typically the 20-period and 50-period EMAs.
+ Chart Setup: The price bar candles will sit persistently above moving averages during an uptrend. The moving averages themselves will fan out diagonally upward.
+ Execution Trigger: A "Moving Average Pullback." You look for the asset price to temporarily pull back to touch the 20 EMA while the broader trend remains upward.
+
+Key Execution Rules
+1. Entry: Buy on the first green candle close that bounces off the 20 EMA following a minor pullback.
+2. Stop Loss: Placed just below the lowest swing point or below the 50 EMA.
+3. Exit/Take Profit: Use a trailing stop (e.g., trail 2 times the Average True Range, \bm{ATR}).
+
+2. Breakout & Momentum Trading
+Core Mechanics
+Breakout strategies aim to capture fast, high-volatility price expansions that occur when price breaks through a key structural level (such as horizontal resistance, multi-month highs, or specific chart patterns like a Bull Flag).  
+ Timeframe: 1-Minute, 5-Minute, or 15-Minute intraday charts.
+ Holding Period: Minutes to hours (Day Trading).  
+How It Looks On Your Screen
+ Indicators/Tools: Level 2 Order Book, Time & Sales tape, Volume Profile, and Volume Relative (RVOL) scanners.
+ Chart Setup: Price consolidates in a tight range or flag-like wedge (low volume), followed by a massive high-volume green candle breaking above resistance. Key Execution Rules
+1. Filter/Scanner: Stock/Asset must have high relative volume (\bm{\text{RVOL} \ge 2.0\times} average) and a key fundamental or news catalyst.  
+2. Entry: Place a buy-stop limit order 1 to 2 cents/ticks above the key resistance line or flag pattern high.
+3. Stop Loss: Placed directly under the low of the consolidation pattern or the breakout candle.
+4. Take Profit: Profit targets set using a fixed Risk-to-Reward ratio (e.g., \bm{1:2} or \bm{1:3}). 3. Mean Reversion (RSI Divergence / Bollinger Bands)
+Core Mechanics
+Mean reversion strategies operate on the mathematical concept that asset prices, when stretched excessively far from their statistical average, eventually revert back toward that mean.
+ Timeframe: 15-Minute, 1-Hour, or Daily charts.  
+ Holding Period: Hours to days.
+How It Looks On Your Screen
+ Indicators: Bollinger Bands (20 period, 2 Standard Deviations) and Relative Strength Index (RSI - 14 period).  
+ Chart Setup: The asset price pierces or stretches outside the outer upper or lower Bollinger Band while RSI moves into extreme territories (\bm{RSI > 70} for overbought, \bm{RSI < 30} for oversold).

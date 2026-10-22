@@ -1,0 +1,34 @@
+{
+  "id": "nautechsystems/nautilus_trader",
+  "name": "Nautilus Trader",
+  "url": "https://github.com/nautechsystems/nautilus_trader",
+  "license": "LGPL-3.0; verified from the repository's actual GNU Lesser General Public License Version 3 text",
+  "exists": true,
+  "methods": [
+    "Independent TypeScript replay of the published top-of-book imbalance ratio: min(bestBidSize, bestAskSize) / max(bestBidSize, bestAskSize)",
+    "Paper-only BBO-cross scenario: buy at contemporaneous ask when bid depth dominates, sell at contemporaneous bid when ask depth dominates",
+    "Coinbase level2 snapshot-plus-update book reconstruction with absolute new_quantity updates, zero-size deletion, and sequence-gap invalidation",
+    "Feed signed imbalance, spread, BBO depth, and event-rate features into Zax's existing purged chronological classifier/stump evaluation"
+  ],
+  "reuseDecision": "Do not reuse, port, or embed Nautilus Trader code. Independently implement the published method with original TypeScript, names, tests, and documentation; this avoids a Rust/Python execution-engine mismatch and LGPL-derived-code distribution analysis. Do not represent paper scenarios as FOK or queue fills.",
+  "requirements": [
+    "Public Coinbase Advanced Trade level2 WebSocket market data; no JWT, account, portfolio, or private user channel is required for the public feed",
+    "Honor Coinbase's documented limit of 8 WebSocket connections/s/IP and 8 unauthenticated messages/s/IP; use a single durable subscription, heartbeat, reconnect backoff, and sequence checks",
+    "Historical L2 replay requires Zax's own forward capture or a separately licensed depth archive; no free Coinbase historical-L2 download was verified",
+    "Per-instrument calibration data, frozen chronological train/test windows, explicit paper risk cap, fee schedule, and adverse-fill buffer",
+    "No vendor installation, broker API, order submission, queue-fill claim, provider registration, or user-data transmission"
+  ],
+  "sources": [
+    "https://github.com/nautechsystems/nautilus_trader",
+    "https://raw.githubusercontent.com/nautechsystems/nautilus_trader/develop/LICENSE",
+    "https://api.github.com/repos/nautechsystems/nautilus_trader",
+    "https://nautilustrader.io/docs/latest/tutorials/orderbook_imbalance/",
+    "https://raw.githubusercontent.com/nautechsystems/nautilus_trader/master/docs/tutorials/backtest_orderbook_binance.py",
+    "https://nautilustrader.io/docs/latest/concepts/backtesting/fill-models/",
+    "https://nautilustrader.io/docs/latest/concepts/backtesting/trade-execution/",
+    "https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/websocket/level2",
+    "https://docs.cdp.coinbase.com/coinbase-app/advanced-trade-apis/websocket/websocket-endpoints",
+    "https://docs.cdp.coinbase.com/coinbase-app/advanced-trade-apis/websocket/websocket-rate-limits"
+  ],
+  "reportPath": "/home/ubuntu/stratdesk/research/zax-links/nautilus.md"
+}

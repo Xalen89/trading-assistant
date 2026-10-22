@@ -1,0 +1,62 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1763372440610,
+      "tag": "0000_elite_eternals",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1792034832520,
+      "tag": "0001_abandoned_king_bedlam",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1792035899725,
+      "tag": "0002_remarkable_korvac",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1792096045755,
+      "tag": "0003_skinny_white_tiger",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1792099641635,
+      "tag": "0004_stormy_slayback",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1792100625867,
+      "tag": "0005_handy_avengers",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1792118009142,
+      "tag": "0006_wise_angel",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1792332164756,
+      "tag": "0007_harsh_archangel",
+      "breakpoints": true
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "id": "hudson-and-thames-example-notebooks",
+  "name": "hudson-and-thames/example-notebooks",
+  "url": "https://github.com/hudson-and-thames/example-notebooks",
+  "license": "No LICENSE file found in the current main tree; repository metadata reports no license. Treat as default copyright / no code reuse permission.",
+  "exists": true,
+  "methods": [
+    "Event-interval PurgedKFold with sample end times, sample weights, and embargo",
+    "Triple-barrier labeling with symmetric CUSUM events, volatility-scaled profit/stop barriers, and vertical horizon",
+    "Purged out-of-sample negative log-loss model selection for probability outputs",
+    "Drawdown, time-under-water, concentration, probabilistic Sharpe ratio, and deflated Sharpe ratio reporting",
+    "PAPER-only precision/frequency/stop-loss/take-profit scenario analysis"
+  ],
+  "reuseDecision": "Do not copy, port, translate, execute, or derive code from the unlicensed notebooks. Independently implement the published methods in TypeScript, retain method/run provenance, and seek legal advice before any other reuse.",
+  "requirements": [
+    "No Hudson & Thames account, mlfinlab package, vendor code, broker, exchange, or external provider is required for an independent implementation.",
+    "For purging: each label must retain event start, event end, feature-lookback boundary, optional uniqueness weight, and immutable feature/label version metadata.",
+    "For triple barriers: locally licensed historical OHLC or finer data is required; close-only bars cannot resolve the first barrier hit. Make the bar-path convention explicit.",
+    "For PAPER backtest metrics: retain net-of-modeled-cost return paths, timestamps, all tried variants, observed return count, skewness, kurtosis, and a stated annualization convention.",
+    "For real L2 inventory-quote research: timestamped depth updates and an explicit PAPER fill/cost model remain necessary; quality historical depth may be paid or license-restricted.",
+    "Keep all owner data local and do not expose Composer credentials in Expo. Composer access requires credentials and a Pro account; official sources conflict on endpoint rate limits."
+  ],
+  "sources": [
+    "https://github.com/hudson-and-thames/example-notebooks",
+    "https://api.github.com/repos/hudson-and-thames/example-notebooks/git/trees/main?recursive=1",
+    "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository",
+    "https://hudsonthames.org/mlfinlab/",
+    "https://github.com/hudson-and-thames/example-notebooks/blob/main/Cross_validation/Chapter7_Cross_Validation.ipynb",
+    "https://github.com/hudson-and-thames/example-notebooks/blob/main/Labeling/Chapter3_Labeling.ipynb",
+    "https://github.com/hudson-and-thames/example-notebooks/blob/main/Cross_validation/Chapter9_Hyperparameter_Tuning_with_CV.ipynb",
+    "https://github.com/hudson-and-thames/example-notebooks/blob/main/Backtesting/Chapter14_Backtest_Statistics.ipynb",
+    "https://github.com/hudson-and-thames/example-notebooks/blob/main/Backtesting/Chapter15_Understanding_Strategy_Risk.ipynb",
+    "https://api.composer.trade/docs/index.html",
+    "https://help.composer.trade/article/236-getting-started-with-your-composer-api"
+  ],
+  "reportPath": "/home/ubuntu/stratdesk/research/zax-links/mlfinlab-examples.md"
+}

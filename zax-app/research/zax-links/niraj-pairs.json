@@ -1,0 +1,36 @@
+{
+  "id": "github:nirajneupane17/Statistical-Arbitrage-Pairs-Trading",
+  "name": "Statistical-Arbitrage-Pairs-Trading",
+  "url": "https://github.com/nirajneupane17/Statistical-Arbitrage-Pairs-Trading",
+  "license": "MIT License; actual LICENSE says Copyright (c) 2026 Niraj Neupane and requires the copyright and permission notice in copies or substantial portions.",
+  "exists": true,
+  "methods": [
+    "OLS hedge ratio with intercept on supplied log-price series; residual ADF with AIC autolag and a 0.05 threshold",
+    "Pair screen: log-price correlation filter (source default 0.80; pair-selection notebook 0.85), residual-stationarity result, and AR(1) half-life between zero and 60 days",
+    "60-bar rolling spread Z-score with entry at ±2, exit at ±0.5, and stop at absolute 4",
+    "Static hedge ratio, 60-bar rolling OLS hedge ratio, and experimental scalar Kalman beta with delta=1e-5 and Ve=0.001",
+    "Daily-close paper backtest using prior-bar signal, static beta, and a 5 bp per signal-change cost default",
+    "Kelly fraction and standard return/drawdown performance summaries"
+  ],
+  "reuseDecision": "Implement independently in TypeScript as a paper-only, out-of-sample Pairs Research layer. Do not port the Python modules or reuse bundled data/results. MIT permits code reuse with retained notice, but independent implementation avoids expression/dependency mismatch and is preferred. Add formation/trading blocks, Benjamini-Hochberg correction for universe scans, optional Johansen confirmation, explicit cost/borrow scenarios, and diagnostic provenance; do not add broker orders or fills.",
+  "requirements": [
+    "Two legally usable, timestamp-aligned, corporate-action-adjusted price histories; asset metadata and owner-set paper cost/borrow assumptions",
+    "No repository market-data API, credential, provider registration, or paid plan exists: its complete current tree has bundled CSVs and no acquisition code",
+    "No additional paid data is technically required if Zax uses existing entitled data or owner-imported files; a broader recurring equity universe may require a separately licensed adjusted-history feed, and point-in-time constituents/delistings may require paid access",
+    "Use next-bar paper execution, non-overlapping 252-bar formation and 63-bar trading blocks, and persist tested-pair family size, raw p-values and q-values",
+    "If GitHub REST metadata is ever queried for this public repository, unauthenticated traffic is limited by GitHub to 60 requests per hour per originating IP; it should not be a Zax runtime dependency"
+  ],
+  "sources": [
+    "https://github.com/nirajneupane17/Statistical-Arbitrage-Pairs-Trading",
+    "https://api.github.com/repos/nirajneupane17/Statistical-Arbitrage-Pairs-Trading",
+    "https://api.github.com/repos/nirajneupane17/Statistical-Arbitrage-Pairs-Trading/git/trees/main?recursive=1",
+    "https://raw.githubusercontent.com/nirajneupane17/Statistical-Arbitrage-Pairs-Trading/main/LICENSE",
+    "https://raw.githubusercontent.com/nirajneupane17/Statistical-Arbitrage-Pairs-Trading/main/src/cointegration.py",
+    "https://raw.githubusercontent.com/nirajneupane17/Statistical-Arbitrage-Pairs-Trading/main/src/signals.py",
+    "https://raw.githubusercontent.com/nirajneupane17/Statistical-Arbitrage-Pairs-Trading/main/src/backtest.py",
+    "https://www.statsmodels.org/stable/generated/statsmodels.tsa.stattools.coint.html",
+    "https://www.statsmodels.org/stable/generated/statsmodels.tsa.vector_ar.vecm.coint_johansen.html",
+    "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api"
+  ],
+  "reportPath": "/home/ubuntu/stratdesk/research/zax-links/niraj-pairs.md"
+}

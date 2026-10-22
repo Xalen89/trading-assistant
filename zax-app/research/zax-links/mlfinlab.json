@@ -1,0 +1,40 @@
+{
+  "id": "mlfinlab",
+  "name": "MlFinLab",
+  "url": "https://github.com/hudson-and-thames/mlfinlab",
+  "license": "Proprietary, All Rights Reserved. The actual LICENSE.txt grants limited internal-use rights to licensees and restricts distribution and non-internal API/data/forecast services; it also contains stale ArbitrageLab naming.",
+  "exists": true,
+  "methods": [
+    "PurgedKFold with interval-based purging and pct_embargo",
+    "CombinatorialPurgedKFold for CPCV robustness evaluation",
+    "Triple-barrier labeling and optional meta-labeling",
+    "CUSUM event filtering",
+    "Label concurrency, average uniqueness, and sequential bootstrap",
+    "Fixed-width fractional differentiation",
+    "Mutual information and variation-of-information dependence screening",
+    "Probabilistic and deflated Sharpe ratio robustness statistics"
+  ],
+  "reuseDecision": "Do not reuse code from the current GitHub repository or add MlFinLab as a Zax dependency. Use a clean-room, independently tested TypeScript-friendly implementation of published methods for private PAPER research. A paid Python vendor deployment is only a conditional alternative after Hudson & Thames confirms in writing that the current MlFinLab license, owner-only backend/API, user/device count, and telemetry are permitted.",
+  "requirements": [
+    "For independent implementation: retained point-in-time OHLCV or mid-price bars, L2 snapshots/events where book features are evaluated, exchange timestamps/gap handling, and an auditable fee/slippage profile; no MlFinLab account, API key, provider registration, or subscription is required.",
+    "For leakage-safe labels: persist featureStartTs, decisionTs, information end time, barrier/horizon settings, feature version, and label version; select parameters in training data and retain a final chronological holdout.",
+    "For direct vendor use: a paid Business or Enterprise license, written resolution of the LICENSE.txt ArbitrageLab naming mismatch and API/internal-use restrictions, and a separately licensed Python worker because the public package metadata is Python >=3.6,<3.9 rather than Expo/TypeScript.",
+    "Do not claim a hosted MlFinLab API, authentication protocol, rate limit, brokerage connector, order execution, queue-fill simulator, or market-data entitlement: none was documented in the authoritative materials reviewed.",
+    "The license describes webhooks for authentication/usage/function-call checks; do not install or allow outbound telemetry under Zax's no-user-data constraint without an approved review."
+  ],
+  "sources": [
+    "https://api.github.com/repos/hudson-and-thames/mlfinlab",
+    "https://raw.githubusercontent.com/hudson-and-thames/mlfinlab/master/README.md",
+    "https://raw.githubusercontent.com/hudson-and-thames/mlfinlab/master/LICENSE.txt",
+    "https://hudsonthames.org/mlfinlab/",
+    "https://raw.githubusercontent.com/hudson-and-thames/mlfinlab/master/mlfinlab/cross_validation/cross_validation.py",
+    "https://raw.githubusercontent.com/hudson-and-thames/mlfinlab/master/mlfinlab/cross_validation/combinatorial.py",
+    "https://raw.githubusercontent.com/hudson-and-thames/mlfinlab/master/mlfinlab/labeling/labeling.py",
+    "https://raw.githubusercontent.com/hudson-and-thames/mlfinlab/master/mlfinlab/sampling/bootstrapping.py",
+    "https://raw.githubusercontent.com/hudson-and-thames/mlfinlab/master/mlfinlab/features/fracdiff.py",
+    "https://raw.githubusercontent.com/hudson-and-thames/mlfinlab/master/mlfinlab/codependence/information.py",
+    "https://raw.githubusercontent.com/hudson-and-thames/mlfinlab/master/mlfinlab/backtest_statistics/statistics.py",
+    "https://raw.githubusercontent.com/hudson-and-thames/mlfinlab/master/setup.cfg"
+  ],
+  "reportPath": "/home/ubuntu/stratdesk/research/zax-links/mlfinlab.md"
+}

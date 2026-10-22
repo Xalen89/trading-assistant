@@ -1,0 +1,49 @@
+Strategy B: London Breakout
+The London Breakout strategy captures momentum when European financial markets open (typically at 3:00 AM EST / 8:00 AM GMT), bringing a large surge in trading volume.
+Step-by-Step Logic
+ * Define the Range Window:
+   * Track price action during the late Asian session (e.g., 12:00 AM EST to 3:00 AM EST).
+   * Record the highest price point (Asian High) and lowest price point (Asian Low) formed during this period.
+ * Identify the Trigger:
+   * Monitor the 5-minute or 15-minute chart starting at the London open (3:00 AM EST).
+   * Wait for a full candle to close beyond either boundary:
+     * Long Signal: A candle closes above the Asian High.
+     * Short Signal: A candle closes below the Asian Low.
+ * Execution & Risk Management:
+   * Entry: Open a trade in the direction of the breakout immediately upon candle close.
+   * Stop-Loss: Place the stop-loss on the opposite side of the range or at the range midpoint to manage risk.
+   * Take-Profit: Set a target based on a 1:1.5 or 1:2 Risk-to-Reward ratio, or measured by adding the range height to the entry point.
+Strategy C: Initial Balance (IB) Breakout
+Used frequently in futures markets (such as S&P 500 or Nasdaq futures), the Initial Balance represents the market's price discovery phase during the first hour of regular trading hours.
+Step-by-Step Logic
+ * Define the Initial Balance Window:
+   * Track price action during the first hour of the US market open: 9:30 AM EST to 10:30 AM EST.
+   * Identify the highest price (IB High) and lowest price (IB Low) hit during this 60-minute window.
+ * Identify the Trigger:
+   * Watch the price action after 10:30 AM EST on a 15-minute timeframe.
+   * Look for high trading volume accompanying a move past the IB boundary.
+     * Long Entry: Enter when a 15-minute candle closes clearly above the IB High.
+     * Short Entry: Enter when a 15-minute candle closes clearly below the IB Low.
+ * Execution & Risk Management:
+   * Entry: Execute the trade at the market price upon the candle closing outside the IB range.
+   * Stop-Loss: Place the stop-loss just inside the IB boundary or at the IB midpoint.
+   * Take-Profit: Project the IB range height outward. For example, if the IB range is 20 points wide, set a profit target 20 points beyond the IB High or Low (1\times \text{IB} expansion).
+Strategy D: Red-to-Green / Green-to-Red Continuation
+This momentum strategy relies on the previous day's closing price as a key psychological pivot level.
+Step-by-Step Logic
+ * Identify the Key Level:
+   * Note the exact Previous Day's Close (PDC) price for the asset before the market opens.
+ * Identify the Trigger Setup:
+   * Red-to-Green (Bullish):
+     * The asset opens lower than the PDC (trading "red" on the day).
+     * Early buying pressure pushes the price upward toward the PDC.
+     * Trigger: Price crosses above the PDC line into positive territory ("green").
+   * Green-to-Red (Bearish):
+     * The asset opens higher than the PDC (trading "green" on the day).
+     * Early selling pressure pushes the price downward toward the PDC.
+     * Trigger: Price crosses below the PDC line into negative territory ("red").
+ * Execution & Risk Management:
+   * Entry: Enter long when price moves above PDC with increasing volume; enter short when price breaks below PDC.
+   * Stop-Loss: Place the stop-loss just past the low of the morning move (for Red-to-Green) or the high of the morning move (for Green-to-Red).
+   * Take-Profit: Target pre-market highs/lows or predefined key technical resistance/support levels.
+Is there a specific asset class or timeframe you plan to test these strategies on?

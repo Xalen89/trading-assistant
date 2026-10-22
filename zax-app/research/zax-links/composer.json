@@ -1,0 +1,37 @@
+{
+  "exists": true,
+  "id": "composer-trade",
+  "license": "Composer core/API: no reusable official source license found; treat as proprietary. The unaffiliated SolarWolf-Code/composer-trade-py repository has an actual MIT LICENSE, but its README calls it unofficial; composer-trade-common has no LICENSE in its visible top-level tree.",
+  "methods": [
+    "Conditional absolute momentum: cumulativeReturn(SPY, 20 trading days) > 0.02 selects SPY; otherwise BND, independently implemented and PAPER-only.",
+    "Cross-sectional momentum: rank a declared universe by 90-day cumulative return and select topN=3; Composer's public illustration names SQ, SPOT, NFLX, AAPL, SHOP, and TWLO.",
+    "Inverse-volatility weighting: independently implement w_i=(1/sigma_i)/sum(1/sigma_j), with Zax-selected trailing daily-return windows such as 20, 60, or 126 bars; Composer does not document its estimator/window.",
+    "Cost-sensitive backtest controls: capital, start/end dates, benchmarks, fee switches, slippage and spread inputs; Composer documents slippage_percent as decimal and spread_markup 0.001 as 10 bp.",
+    "Optional read-only research discovery: authenticated POST /api/v0.1/search/symphonies can return public-symphony metadata and OOS performance statistics; do not copy logic or deploy/trade."
+  ],
+  "name": "Composer and Composer API",
+  "reuseDecision": "No vendor-code reuse and no default API integration. Implement the published rule concepts independently in Zax. Only consider an off-by-default server-side reference mode for public-symphony metadata after explicit terms review; never expose a Composer key in Expo and never permit account, deployment, backtest, dry-run, or trading routes.",
+  "requirements": [
+    "Composer API access requires a Composer account, Pro plan, Key ID, and bearer Secret; Pro is listed at $384/year, billed as $32/month yearly.",
+    "Keep any Composer Secret in a user-controlled server-side secret store; Composer documents one active key tied to the creator's account access and does not document read-only scopes.",
+    "For independent Zax implementations, use a permitted adjusted daily-bar data source with corporate-action and symbol handling. Composer's documented market data does not establish historical equity OHLCV or L2 availability.",
+    "For exact Composer backtests, paid Pro access is necessary but insufficient: public docs do not disclose the price-history method, universe treatment, signal timing, or inverse-volatility lookback/estimator.",
+    "Use 25 requests/minute per API key and endpoint as the conservative cap because the API docs and onboarding article conflict; the claimed public 500-request/second backtest endpoint is not verified.",
+    "Review the current rendered API terms directly and obtain vendor confirmation before production use; substantive terms text was dynamically inaccessible to text fetch."
+  ],
+  "sources": [
+    "https://www.composer.trade/",
+    "https://api.composer.trade/docs/index.html",
+    "https://help.composer.trade/article/236-getting-started-with-your-composer-api",
+    "https://www.composer.trade/pricing",
+    "https://github.com/invest-composer",
+    "https://raw.githubusercontent.com/SolarWolf-Code/composer-trade-py/main/LICENSE",
+    "https://raw.githubusercontent.com/SolarWolf-Code/composer-trade-py/main/README.md",
+    "https://github.com/SolarWolf-Code/composer-trade-common",
+    "https://trading-api.composer.trade/api/v1/api-docs/index.html",
+    "https://backtest-api.composer.trade/api/v1/api-docs/index.html",
+    "https://www.composer.trade/terms-of-service"
+  ],
+  "url": "https://www.composer.trade/",
+  "reportPath": "/home/ubuntu/stratdesk/research/zax-links/composer.md"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "hummingbot-hummingbot",
+  "name": "Hummingbot",
+  "url": "https://github.com/hummingbot/hummingbot",
+  "license": "Apache License 2.0 — verified from the repository’s actual master LICENSE, copyright 2023 Hummingbot Foundation",
+  "exists": true,
+  "methods": [
+    "Paper-only simple PMM quote proposal: mid/last-price bid and ask with asymmetric spreads and periodic refresh",
+    "Inventory-aware PMM: target base allocation, inventory range, multi-level quote spreads and amounts",
+    "Independent Avellaneda–Stoikov reservation-price and optimal-spread paper-quote research model"
+  ],
+  "reuseDecision": "Implement the published methods independently in TypeScript; do not run, embed, or copy Hummingbot/Hummingbot API code. This preserves Zax’s Expo, owner-only, paper-only boundary and avoids live credentials, orders, containers, and derivative-code obligations.",
+  "requirements": [
+    "No Hummingbot account, paid access, exchange key, or Hummingbot API is required for local/replayed paper research.",
+    "For optional live Coinbase input, use only the public Advanced Trade level2 and market_trades WebSocket; it requires no JWT. Public REST product-book data requires no JWT but is cached for one second.",
+    "Observe Coinbase’s published public WebSocket limit: connections and unauthenticated messages are each limited to 8 per second per IP; do not rely on Hummingbot’s stale connector constants as a current venue allowance.",
+    "Retain explicit paper-fill assumptions. Existing L2 snapshots/replay without queue modelling cannot support queue-priority or executable-fill claims.",
+    "Store locally: parameter set/version, feed/replay provenance, quote age/staleness, synthetic inventory, fees/tick size, and modeled-fill rule."
+  ],
+  "sources": [
+    "https://api.github.com/repos/hummingbot/hummingbot",
+    "https://raw.githubusercontent.com/hummingbot/hummingbot/master/LICENSE",
+    "https://raw.githubusercontent.com/hummingbot/hummingbot/master/README.md",
+    "https://hummingbot.org/strategies/v1-strategies/pure-market-making/",
+    "https://hummingbot.org/strategies/v1-strategies/avellaneda-market-making/",
+    "https://people.orie.cornell.edu/sfs33/LimitOrderBook.pdf",
+    "https://hummingbot.org/hummingbot-api/",
+    "https://docs.cdp.coinbase.com/coinbase-app/advanced-trade-apis/rest-api",
+    "https://docs.cdp.coinbase.com/coinbase-app/advanced-trade-apis/websocket/websocket-endpoints",
+    "https://docs.cdp.coinbase.com/coinbase-app/advanced-trade-apis/websocket/websocket-rate-limits"
+  ],
+  "reportPath": "/home/ubuntu/stratdesk/research/zax-links/hummingbot.md"
+}

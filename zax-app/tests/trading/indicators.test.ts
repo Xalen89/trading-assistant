@@ -1,0 +1,27 @@
+import {describe,it,expect} from 'vitest';
+import {indicatorSnapshot,ema} from '../../lib/trading/indicators';
+import {indicatorCandidate} from '../../lib/trading/indicator-setups';
+import {INDICATOR_PRESETS} from '../../lib/trading/indicator-presets';
+import {resolveSetupFamily} from '../../lib/trading/setup-presets';
+import {analyzeSetups} from '../../lib/trading/setup-engine';
+import type {Candle} from '../../lib/trading/model';
+const start=1_700_000_000;
+const bars=(n:number,kind:'flat'|'up'|'down'='flat'):Candle[]=>Array.from({length:n},(_,i)=>{const close=kind==='flat'?100:kind==='up'?100+i:200-i;return {time:start+i*60,open:close,high:close+1,low:close-1,close,volume:i===n-1?300:100};});
+const now=(n:number)=>start+n*60;
+const source='Coinbase Exchange · synthetic unit fixture';
+const preset=(id:string)=>INDICATOR_PRESETS.find(p=>p.id===id)!;
+describe('causal indicator definitions',()=>{
+ it('uses SMA seeding and absent warm-up rather than zero',()=>{const x=ema([1,2,3,4],3);expect(x.slice(0,2)).toEqual([undefined,undefined]);expect(x[2]).toBe(2);expect(x[3]).toBe(3);const s=indicatorSnapshot(bars(60),'1m',source,now(60));expect(s.points[18].ema20).toBeUndefined();expect(s.points[19].ema20).toBe(100);expect(s.points[48].ema50).toBeUndefined();expect(s.points[49].ema50).toBe(100);});
+ it('uses Wilder ATR/RSI with flat/up/down defined cases',()=>{expect(indicatorSnapshot(bars(60),'1m',source,now(60)).points.at(-1)).toMatchObject({atr14:2,rsi14:50});expect(indicatorSnapshot(bars(60,'up'),'1m',source,now(60)).points.at(-1)?.rsi14).toBe(100);expect(indicatorSnapshot(bars(60,'down'),'1m',source,now(60)).points.at(-1)?.rsi14).toBe(0);});
+ it('uses population deviation, prior-only volume and Donchian range',()=>{const b=bars(60,'up'),s=indicatorSnapshot(b,'1m',source,now(60)),p=s.points.at(-1)!;const vals=b.slice(-20).map(c=>c.close),mid=vals.reduce((a,v)=>a+v,0)/20,sd=Math.sqrt(vals.reduce((a,v)=>a+(v-mid)**2,0)/20);expect(p.bbUpper).toBeCloseTo(mid+2*sd,10);expect(p.rvol20).toBe(3);expect(p.donchianUpper).toBe(Math.max(...b.slice(-21,-1).map(c=>c.high)));});
+ it('rejects unfinished/future bars and remains prefix causal',()=>{const b=bars(60,'up'),first=indicatorSnapshot(b,'1m',source,now(40)),prefix=indicatorSnapshot(b.slice(0,40),'1m',source,now(40));expect(first).toEqual(prefix);expect(first.points).toHaveLength(40);});
+ it('warms MACD signal from nine populated MACD values',()=>{const p=indicatorSnapshot(bars(60,'up'),'1m',source,now(60)).points;expect(p[24].macd).toBeUndefined();expect(p[32].macdSignal).toBeUndefined();expect(Number.isFinite(p[33].macdSignal)).toBe(true);expect(Number.isFinite(p[34].macdSignal)).toBe(true);});
+ it('missing/zero prior volumes do not manufacture RVOL',()=>{const b=bars(60);b[58].volume=0;expect(indicatorSnapshot(b,'1m','TradeLocker',now(60)).points.at(-1)?.rvol20).toBeUndefined();expect(indicatorSnapshot(bars(60),'1m','TradeLocker',now(60)).volumeBasis).toContain('not established');});
+});
+describe('exact source-family evidence',()=>{
+ it('recognizes exact presets but not edited/renamed definitions',()=>{expect(resolveSetupFamily(preset('trend-following'))).toBe('trend-following');expect(resolveSetupFamily({...preset('trend-following'),factors:preset('trend-following').factors.map((f,i)=>i?f:{...f,description:'Different rule'})})).toBe('custom');});
+ it('does not claim a catalyst/stop-limit breakout from broker OHLC',()=>{const b=bars(60,'up'),c=indicatorCandidate(preset('breakout-momentum'),'breakout-momentum',b,'1m','TradeLocker',now(60));expect(c.ready).toBe(false);expect(c.steps.find(s=>s.id==='breakout-catalyst')?.status).toBe('unknown');expect(c.steps.find(s=>s.id==='breakout-rvol')?.status).toBe('unknown');});
+ it('requires both mean re-entry and RSI crossing; fixed stop is unknown',()=>{const b=bars(25);b[23]={...b[23],low:85,open:95,close:90};b[24]={...b[24],open:90,low:89,close:96};const snap=indicatorSnapshot(b,'1m',source,now(25));snap.points[23]={time:b[23].time,bbLower:91,bbUpper:110,rsi14:25,bbMid:100};snap.points[24]={time:b[24].time,bbLower:92,bbUpper:110,rsi14:35,bbMid:101};const c=indicatorCandidate(preset('mean-reversion'),'mean-reversion',b,'15m',source,start+25*900,snap);expect(c.steps.find(s=>s.id==='rsi-cross')?.status).toBe('met');expect(c.steps.find(s=>s.id==='bb-reentry')?.status).toBe('met');expect(c.target).toBe(101);expect(c.stop).toBeUndefined();expect(c.ready).toBe(false);});
+ it('keeps scalp as unknown instead of substituting REST polling',()=>{const c=indicatorCandidate(preset('scalping'),'scalping',bars(60),'1m','TradeLocker',now(60));expect(c.ready).toBe(false);expect(c.steps.every(s=>s.status==='unknown')).toBe(true);});
+ it('keeps recipe outcomes separate from a labeled historical context replay',()=>{const b=bars(60,'up');const a=analyzeSetups({market:{id:'UNIT',name:'Synthetic fixture',category:'Crypto',provider:'coinbase',providerSymbol:'UNIT',precision:2,pointValue:1},timeframe:'1m',candles:b,daily:[],hourly:[],strategies:[preset('sma-crossover')],patterns:[],combination:'all',timezone:'America/New_York',now:now(60),source,dailySource:'none',hourlySource:'none'});expect(a.candidates).toHaveLength(1);expect(a.candidates[0].family).toBe('sma-crossover');expect(a.scenario?.basis).toBe('context-replay');expect(a.scenario?.strategyIds).toEqual(['sma-crossover']);expect(a.estimate.samples).toBe(0);expect(a.estimate.probability).toBeNull();expect(a.indicators?.points).toHaveLength(60);});
+});

@@ -1,0 +1,772 @@
+# Zax repair tracker — complete original acceptance clauses
+
+Version: 18 October 2026. Source: requirements/zax-fixes-scope-07.txt.
+
+This is the full scope tracker, not a claim that every physical-device or statistical acceptance test passed. Core source work is being validated; unresolved deployment/data/device outcomes remain explicit.
+
+## C1 — Pending paper orders have no cancel
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+C1 · Pending paper orders have no cancel
+CRITICAL
+effort S
+PAPER LIFECYCLE
+Problem — "Pending cannot be manually exited by closePaperTrade." A limit that has not opened is unreachable — you place it, the setup invalidates, and you watch it.
+Fix — Add cancelPaperTrade(id) mirroring close: require matching version plus a fresh quote, set terminal state "cancelled", emit a lifecycle event into the trade trail. Surface as a swipe on the pending row and a Cancel button in detail. → test: place a limit, cancel it, drive price through the level, confirm no fill can occur.
+
+## C2 — No delete, and archives consume the cap
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+C2 · No delete, and archives consume the cap
+CRITICAL
+effort M
+STRATEGIES
+Problem — "Archive is not delete and archived records count toward the 100-record workspace limit." Fill it with retired strategies and you are permanently locked out.
+Fix — Two changes: (1) hard-delete for archived records, with a confirm sheet listing dependent alerts, paper trades and screenshots and how each will be detached; (2) move archives to a separate allowance so archiving actually frees capacity. → test: archive 100, delete 10, create 10 new.
+
+## C3 — You cannot see the source you are reviewing
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+C3 · You cannot see the source you are reviewing
+CRITICAL
+effort L
+SCREENSHOT / LIBRARY
+Problem — Retained screenshots are never rendered to the client, and text/PDF preview is "unavailable in this preview". The Trainer tells you to reconcile against the authoritative original — which you cannot open.
+Fix — Serve a short-lived signed URL for the original and render it beside the extracted rules, with zoom and pan. For PDFs use page rasterisation rather than text-only. Add "jump to quote" that scrolls the source to the evidence span. → test: open a retained screenshot from the Trainer and see the image.
+
+## C4 — Closed-app brackets rest on unverified scheduling
+
+**Status:** Pending deployment and physical force-quit test; authenticated worker and dated per-position evidence exist, but not verified deployed.
+
+### Original requirement
+
+C4 · Closed-app brackets rest on unverified scheduling
+CRITICAL
+effort L
+PAPER LIFECYCLE
+Problem — "Do not assume processing while the app is closed unless deployed scheduling is established." A paper stop may silently never fire.
+Fix — Ship a real scheduled worker that polls open positions and evaluates brackets server-side, then verify it and replace the caveat with a dated confirmation. Add a per-position badge: "Server-managed" or "Foreground only". → test: place a bracket, force-quit, move price through the stop, confirm the fill exists on reopen.
+
+## C5 — Notifications ship silent and badge-less
+
+**Status:** Native channel/sound/badge preferences implemented; physical iOS/Android delivery still required.
+
+### Original requirement
+
+C5 · Notifications ship silent and badge-less
+CRITICAL
+effort S
+ALERTS
+Problem — "Android channel is configured; notification sound and badge are disabled." In an alerting app, the alert is easy to miss.
+Fix — Enable sound and badge on both platforms, set the channel to high importance so it heads-up, and add per-alert-type toggles for sound. → test: trigger a rule on a physical device; expect a heads-up banner, audible tone and an app badge.
+
+## C6 — Unsaved paper history is loseable, and there is no export
+
+**Status:** Autosave and private exports implemented; kill/reopen device test pending.
+
+### Original requirement
+
+C6 · Unsaved paper history is loseable, and there is no export
+CRITICAL
+effort M
+TRADES / DATA SAFETY
+Problem — Cloud sync is explicit-only; manual local logs are not durable. No autosave and no CSV/JSON export anywhere.
+Fix — Autosave locally on every state transition (debounce ~2s) and push to cloud on a longer debounce rather than only on explicit save. Add export: CSV for trades and events, JSON for strategies, rules and journal. Add a "last synced" indicator. → test: kill the app mid-trade, reopen, trade intact.
+
+## H1 — Below-gate warning ignores its own settings
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+H1 · Below-gate warning ignores its own settings
+HIGH
+effort S
+CHART / ENTRY GATE
+Problem — Its visible minimum-points and count controls "do not affect this branch". Dead UI.
+Fix — Wire the settings into the branch rather than hiding them — they exist because the threshold matters. If wiring is impractical, hide the controls while the branch is active. → test: change min-points, observe the warning threshold move.
+
+## H2 — Risk template UI contradicts the server cap
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+H2 · Risk template UI contradicts the server cap
+HIGH
+effort S
+PAPER ORDER
+Problem — "The UI says fixed units may be below 0.5%, but server cap is 2%." Two different truths on one screen.
+Fix — Have the server return the effective cap and render it inline: "Fixed units — any size; server caps at 2% of equity." Reword the 0.5% copy so it describes a recommendation, not a limit.
+
+## H3 — Post-loss pause cannot be configured
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+H3 · Post-loss pause cannot be configured
+HIGH
+effort S
+DISCIPLINE
+Problem — Enforcement can be toggled on, but "this control has no duration editor" — it silently keeps a stale value or defaults to 20 minutes.
+Fix — Add a duration stepper (5/10/20/30/60/custom) beside the toggle, persisted per workspace, and show remaining cooldown on the discipline panel.
+
+## H4 — The panel enforces one of the four things it flags
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+H4 · The panel enforces one of the four things it flags
+HIGH
+effort M
+DISCIPLINE
+Problem — Server rejection keys only on cooldownUntil — not daily count, loss streak, or elevated risk. Three of four flags are decoration, presented identically to the enforced one.
+Fix — Split the panel into "Enforced — blocks orders" and "Advisory — display only", move each flag to the right group, and add a one-line note on how to promote an advisory flag. Best fix: add per-flag enforcement toggles.
+
+## H5 — Silent fallback to the first strategy
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+H5 · Silent fallback to the first strategy
+HIGH
+effort S
+SCREENSHOT EVIDENCE
+Problem — When the workspace strategy is missing, upload "falls back to the first strategy". Evidence can attach to the wrong rulebook with no signal.
+Fix — Return strategyResolution: "explicit" | "fallback", render a banner "Attached to (fallback — no active strategy)", and offer a one-tap reassign.
+
+## H6 — Two incompatible definitions of "stale"
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+H6 · Two incompatible definitions of "stale"
+HIGH
+effort M
+FRESHNESS
+Problem — Quotes go stale after 120 seconds; forecast bars tolerate "2 timeframe periods" — two weeks on a 1w chart. Same app, wildly different freshness.
+Fix — Centralise one staleness config keyed by timeframe: quotes 120s; bars = max(2 x period, 15 min), capped at 24h daily and 7d weekly. Surface the rule in the UI as "stale after X" on each panel.
+
+## H7 — Per-section "not run" contradicts "407 tests passed"
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+H7 · Per-section "not run" contradicts "407 tests passed"
+HIGH
+effort M
+EVIDENCE / DOC
+Problem — Dozens of features say fixtures "were read, not run"; the closing section says the full suite passed. One of the two is stale.
+Fix — Run the suite, capture a dated result, delete every per-section "not run" line, and reference a single evidence table. Where a feature genuinely has no coverage, write "no dedicated fixture" instead.
+
+## H8 — Client waits 30 seconds longer than the service
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+H8 · Client waits 30 seconds longer than the service
+HIGH
+effort S
+AI COACH
+Problem — Client timeout is 75s; the service bound is 45s. After 45s the wait is guaranteed dead.
+Fix — Set the client timeout to service bound plus network margin (50s), or raise the service bound to 75s. Add a visible progress state so the wait is legible either way.
+
+## H9 — Alert rules allow one strategy, other surfaces allow three
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+H9 · Alert rules allow one strategy, other surfaces allow three
+HIGH
+effort M
+ALERTS
+Problem — Scenario and setup surfaces accept up to three models; alert rules select one. Unexplained asymmetry.
+Fix — Bring alerts to parity with 1–3 strategies. If the restriction is deliberate for scan cost, say so in one line next to the control.
+
+## H10 — Scan rotation can silently starve a rule
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+H10 · Scan rotation can silently starve a rule
+HIGH
+effort M
+ALERTS
+Problem — A 12-request broker budget forces market rotation. With many rules, some go unevaluated for an unbounded time, with no visible signal.
+Fix — Show "last evaluated" and a deferred count per rule in the alerts list, and let users pin priority rules so rotation cannot skip them. Consider raising the budget or batching.
+
+## H11 — No UTC, and "Fixed EST" is mislabelled
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+H11 · No UTC, and "Fixed EST" is mislabelled
+HIGH
+effort S
+CLOCKS
+Problem — Only "New York (DST)" or "Fixed EST". No UTC or fixed-offset option, and the fixed label ignores EDT.
+Fix — Add "UTC" and "Fixed offset (UTC−12 to UTC+14)". Relabel to "Fixed UTC−5" and add a "Fixed UTC−4" option. Display the resolved offset beside each clock so it is never ambiguous.
+
+## H12 — No export or backup
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+H12 · No export or backup
+HIGH
+effort M
+DATA PORTABILITY
+Problem — Journal, paper history and library have no CSV or JSON escape hatch. Competitors ship this as a selling point.
+Fix — See C6. Add a "Export everything" action producing a zip of CSV plus JSON, and a documented import path.
+
+## M1 — "Historical" scenario is really "recent"
+
+**Status:** Separate deeper source surface implemented; provider-specific history availability governs actual retrieved depth.
+
+### Original requirement
+
+M1 · "Historical" scenario is really "recent"
+MEDIUM
+effort M
+HISTORICAL SCENARIO
+Problem — Analogue search is capped at 3,000 bars. On a 1m chart that is roughly two days of history.
+Fix — Do both: give the scenario surface its own deeper fetch (target 20k bars) and, until that lands, rename to "Recent analogue scenario". → test: on 1m, confirm the nearest analogue can be weeks old.
+
+## M2 — "Photo-based search" is term matching wearing vector language
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+M2 · "Photo-based search" is term matching wearing vector language
+MEDIUM
+effort M
+LIBRARY SEARCH
+Problem — Retrieval requires two shared terms and sorts by term count — but the same feature says "visual index", "re-index" and "cosine similarity". Two mental models, one name.
+Fix — Split into two named modes: "Find by keyword" (term overlap) and "Find by visual similarity" (embedding cosine), and label which mode produced each result. If no embedding index exists yet, drop the vector language until it does.
+
+## M3 — "Ask AI about this source" excludes the source bytes
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+M3 · "Ask AI about this source" excludes the source bytes
+MEDIUM
+effort M
+LIBRARY / AI
+Problem — The coach packet excludes the image and file bytes. You ask about a picture the model cannot see.
+Fix — Attach a downscaled JPEG (768px, under 200KB) to the coach packet and mark it as attached in the UI. Keep the exclusion of fileKey and internal URIs.
+
+## M4 — "Probability is always null" beside a displayed percentage
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+M4 · "Probability is always null" beside a displayed percentage
+MEDIUM
+effort S
+SEMANTICS
+Problem — The outcome profile renders a rate with a Wilson interval while the gate insists probability is always null. Both are defensible; together they read as a bug.
+Fix — Fix the vocabulary. Reserve "probability" for the gate. Label the profile number "observed rate (95% CI)" with "descriptive, not predictive" in the same block, and add a tooltip contrasting the two.
+
+## M5 — Calendar and COT are near-empty by default
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+M5 · Calendar and COT are near-empty by default
+MEDIUM
+effort M
+MARKET CONTEXT
+Problem — Without an FMP key the COT fallback is a single CME record and events cap at 10. A headline feature renders nearly blank with no explanation.
+Fix — Add a free fallback source or expand the bundled subset, and render an explicit banner: "Limited calendar — no FMP key configured." Never show an empty panel without a reason.
+
+## M6 — Futures filter offered while futures data is not connected
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+M6 · Futures filter offered while futures data is not connected
+MEDIUM
+effort S
+MARKETS
+Problem — "Built-in futures data is not connected" and router status reports futures:false, yet the category is selectable.
+Fix — Label it "Futures (broker only)" and grey it out when no broker is linked, or hide it until a source is wired.
+
+## M7 — Structural holes: weekly, 4h, and session boxes
+
+**Status:** Aggregation/session projection implemented; genuine missing-session data remains refused.
+
+### Original requirement
+
+M7 · Structural holes: weekly, 4h, and session boxes
+MEDIUM
+effort M
+TIMEFRAMES
+Problem — Weekly is crypto-only, 4h requires exact hourly bars, and session boxes vanish on daily and weekly — so session context disappears exactly where swing traders need it.
+Fix — Aggregate weekly from daily wherever sessions are declared; allow 4h from 1h universally; project session ranges onto daily and weekly bars. Document only genuine refusals.
+
+## M8 — One toggle disables six features and persists
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+M8 · One toggle disables six features and persists
+MEDIUM
+effort S
+SAMPLE MODE
+Problem — Sample mode silently kills forecast, reference matching, historical scenario, alert conditions and photo search, persists to cloud, and looks like an ordinary setting.
+Fix — Show a persistent high-contrast banner whenever Sample is on, listing exactly what is disabled, with a one-tap exit. Do not persist Sample by default; if persisted, require re-confirmation on next launch.
+
+## M9 — Rate limits live in process memory
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+M9 · Rate limits live in process memory
+MEDIUM
+effort M
+INFRASTRUCTURE
+Problem — 6 forecast and 12 coach requests per 10 minutes, held in process memory — so a redeploy silently resets them. Both are low for a learning loop.
+Fix — Move counters to Redis or the database with a TTL. Raise to roughly 20 forecast and 30 coach per 10 minutes, and make them configurable per feature.
+
+## M10 — Metrics can render on 20 observations
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+M10 · Metrics can render on 20 observations
+MEDIUM
+effort M
+STATISTICS
+Problem — The outcome profile caps at 100 cases; the classifier holdout floor is 20 rows. A rate with a confidence interval on n=20 invites over-reading.
+Fix — Show n beside every metric. Below n=30, show "insufficient" instead of a rate. Raise the profile cap to 500 cases via a batched scan.
+
+## M11 — Four live "legacy" code paths in the UI
+
+**Status:** Partial: archived references preserved; exact destructive legacy migration is not silently applied to existing owner records.
+
+### Original requirement
+
+M11 · Four live "legacy" code paths in the UI
+MEDIUM
+effort L
+TECHNICAL DEBT
+Problem — Legacy pending cards, the legacy STDV preset, legacy factor weights and legacy sheet normalisation are all still visible to users.
+Fix — One migration pass: normalise legacy weights into current factors, retire the STDV preset into the eight current IDs, convert legacy pending cards, drop the legacy sheet path. Then delete the word "legacy" from user-facing copy.
+
+## M12 — Strictly single-tenant, no sharing
+
+**Status:** Omitted by explicit owner instruction: everything owner-only, no public links.
+
+### Original requirement
+
+M12 · Strictly single-tenant, no sharing
+MEDIUM
+effort M
+SHARING
+Problem — Owner-gated throughout. You cannot send a rulebook to another person.
+Fix — v1: a read-only share link for a strategy version — signed URL resolving to a version snapshot. Later: real multi-user.
+
+## M13 — Classifier has purging but no embargo or CPCV
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+M13 · Classifier has purging but no embargo or CPCV
+MEDIUM
+effort L
+METHOD
+Problem — Three purged chronological folds exist, which is good. There is no embargo after test folds and no combinatorial path distribution, so the reported metric is a single point estimate.
+Fix — Add an embargo of N bars after each test fold, then implement combinatorial purged CV and report the distribution of accuracy or Sharpe across paths rather than one number. Follow the mlfinlab definitions.
+
+## M14 — 8 MiB ceiling and a 45-second deadline on PDF scans
+
+**Status:** Original-first 25 MiB jobs/progress implemented; interrupted jobs fail visibly and allow explicit retry. Uninterrupted deployed-worker proof pending.
+
+### Original requirement
+
+M14 · 8 MiB ceiling and a 45-second deadline on PDF scans
+MEDIUM
+effort M
+LIBRARY SCAN
+Problem — A large PDF must extract, chunk and analyse inside 45 seconds, or fail. Tight for anything substantial.
+Fix — Make analysis asynchronous (job id plus polling) so it cannot time out, and raise the source ceiling to ~25 MiB. Show page count and a progress bar.
+
+## M15 — 55-second analysis deadline
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+M15 · 55-second analysis deadline
+MEDIUM
+effort S
+SCREENSHOT
+Problem — A single image analysis is bounded at 55 seconds with no async path.
+Fix — Raise to 90 seconds and keep the existing retry-reuses-original behaviour (that part is already correct). Consider async for consistency with M14.
+
+## M16 — 500-record cap with no delete
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+M16 · 500-record cap with no delete
+MEDIUM
+effort S
+LIBRARY
+Problem — The catalog can refuse a full add when capacity is insufficient, and there is no delete path.
+Fix — Add delete for library records and catalog references, and show usage as a progress figure such as "412 / 500".
+
+## M17 — No app lock for a self-described private workspace
+
+**Status:** Optional PIN/native crypto and background mask implemented; physical device resume/re-auth test pending.
+
+### Original requirement
+
+M17 · No app lock for a self-described private workspace
+MEDIUM
+effort S
+PRIVACY
+Problem — Nothing gates the workspace on resume; the app is "private" by policy only.
+Fix — Add optional biometric or PIN unlock on resume, and at minimum a "hide values on background" option for balances and P/L.
+
+## M18 — Sign-out clears only the query cache
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+M18 · Sign-out clears only the query cache
+MEDIUM
+effort S
+PRIVACY
+Problem — What is destroyed and what survives a sign-out is undocumented, which matters when local records are unsaved.
+Fix — Document precisely what sign-out clears, and add a separate explicit "Clear local data" action with a warning about unsaved records.
+
+## M19 — Every limit is "100" and scattered
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+M19 · Every limit is "100" and scattered
+MEDIUM
+effort M
+LIMITS UX
+Problem — Strategies, alerts, screenshots and others all cap at or near 100, described in four different places with four different phrasings.
+Fix — One "Workspace capacity" panel listing each pool with a usage bar and its true limit. Reference it from anywhere a limit is enforced.
+
+## M20 — Clock preference semantics are unexplained
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+M20 · Clock preference semantics are unexplained
+MEDIUM
+effort S
+CLOCKS
+Problem — Changing the clock "changes strategy-clock interpretation, not source bar timestamps" — a subtle distinction left for the user to infer.
+Fix — One line under the control: "Changes how sessions are labelled and evaluated. Source bar timestamps are unchanged."
+
+## M21 — Bare "unavailable" with no route out
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+M21 · Bare "unavailable" with no route out
+MEDIUM
+effort S
+SAMPLE MODE
+Problem — In Sample mode the bias table reads "explicitly unavailable" with no path back.
+Fix — Render "Unavailable in Sample mode — exit Sample to compute" with an inline exit button, matching the pattern used elsewhere.
+
+## M22 — Any unknown blocks eligibility with no triage
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+M22 · Any unknown blocks eligibility with no triage
+MEDIUM
+effort M
+CONFLUENCE GATE
+Problem — Unknown, stale and pending active evidence all block the gate. Combined with a 100-weight requirement, false negatives are easy and the cause is not obvious.
+Fix — Return a blockedReason array with stable codes and plain-language labels, and a "why blocked" sheet that deep-links to the single offending item. Consider an explicit override that records an acknowledgement.
+
+## M23 — No prompt history
+
+**Status:** Conversation transcript persisted/rendered; physical retention/reopen check pending.
+
+### Original requirement
+
+M23 · No prompt history
+MEDIUM
+effort M
+AI COACH
+Problem — The schema already has conversations and a "Clear private conversation" action, but prior turns are not displayed.
+Fix — Persist and render the last N turns per conversation, with the same retention rule as the rest of the workspace.
+
+## M24 — One 3,000-bar cap for everything
+
+**Status:** Separate chart and analogue limits implemented; deeper replay availability remains provider-dependent.
+
+### Original requirement
+
+M24 · One 3,000-bar cap for everything
+MEDIUM
+effort M
+HISTORY DEPTH
+Problem — Replay, analogue search and chart all share a 3,000-bar window, which is thin on low timeframes.
+Fix — Make the cap per-surface: chart stays at 3,000, replay and analogue get a deeper fetch. Coordinate with M1.
+
+## M25 — Weights must total exactly 100
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+M25 · Weights must total exactly 100
+MEDIUM
+effort S
+CONFLUENCE GATE
+Problem — Rejecting an entire rulebook because weights sum to 99.6 is brittle.
+Fix — Auto-normalise on save with a visible note, or accept a ±0.5 tolerance. Never block approval over rounding.
+
+## M26 — New-rule UI allows one strategy, scenario allows three
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+M26 · New-rule UI allows one strategy, scenario allows three
+MEDIUM
+effort S
+RULE CREATION
+Problem — Same asymmetry as H9, on the authoring side.
+Fix — Bring to parity with the 1–3 selection used elsewhere.
+
+## E1 — The opening paragraph is grammatically broken
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+E1 · The opening paragraph is grammatically broken
+EDITORIAL
+effort S
+OPENING
+Problem — "…workspace sequence is: observe a sourced market → select rules → → review your process." Missing words and a doubled arrow.
+Fix — Rewrite: "StratDesk is a private learning, analysis and paper-practice workspace. Its one useful sequence is: observe a sourced market, select rules, check confluence, act on paper, review your process. Nothing here places brokerage orders."
+
+## E2 — The table of contents does not match the body
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+E2 · The table of contents does not match the body
+EDITORIAL
+effort S
+STRUCTURE
+Problem — It omits screenshot evidence and the entire quant studio, and introduces "Foundry" — a term that appears exactly once and is never defined.
+Fix — Generate the TOC from the real headings rather than hand-writing it. Add the missing sections. Either define Foundry in one line or delete it.
+
+## E3 — Headings split mid-word
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+E3 · Headings split mid-word
+EDITORIAL
+effort S
+TYPOGRAPHY
+Problem — "Historical sourc", "Trade journal, deep dive and performanc", "rate-di" plus "fferential model", "Offline order-book label-classification" plus "experiment".
+Fix — Rebuild the heading text and prevent mid-word wrapping with nowrap on headings, or widen the heading column.
+
+## E4 — Numbers jammed against words, everywhere
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+E4 · Numbers jammed against words, everywhere
+EDITORIAL
+effort S
+TYPOGRAPHY
+Problem — "up to100", "at most3000", "lookback10–252", "holding1–100", "than30", "first20". Systematic, not isolated.
+Fix — Global pass with an explicit rule: insert a space between a lowercase letter and a following digit. Decide separately for units (keep "4h", "1w") and apply consistently. Re-read for collateral damage.
+
+## E5 — Stray fragments in the market-making section
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+E5 · Stray fragments in the market-making section
+EDITORIAL
+effort S
+TEXT CORRUPTION
+Problem — Orphaned "w", "ries", "perPlan.legs", "run family making", "positive-millisecond no".
+Fix — Rebuild that section from source and repair: "paperPlan.legs", "run Market making", and reconstruct the truncated sentence.
+
+## E6 — Purpose text has bled into the Feature column
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+E6 · Purpose text has bled into the Feature column
+EDITORIAL
+effort M
+TABLES
+Problem — Several feature tables have collapsed cells, with purpose prose jammed into the feature name and running on.
+Fix — Rebuild the affected tables, then add a check that every row has an identical cell count before publishing.
+
+## E7 — "Manus" is never defined
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+E7 · "Manus" is never defined
+EDITORIAL
+effort S
+TERMINOLOGY
+Problem — It appears in the sign-in flow as if the reader knows it.
+Fix — Define on first use — state what it actually is (identity provider, broker, or host) and link to it.
+
+## E8 — No glossary
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+E8 · No glossary
+EDITORIAL
+effort M
+TERMINOLOGY
+Problem — CE, MSS, OB, FVG, STDV, WR1, Silver Bullet, OTE, PDH/PDL, MAE/MFE, Wilson interval, purge, embargo, CPCV, OOS are all used with partial or no definition.
+Fix — Add a glossary of roughly 25 terms with one-line definitions, and link the first use of each term in the body to its entry.
+
+## E9 — Source file and line references appear on a handful of features only
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+E9 · Source file and line references appear on a handful of features only
+EDITORIAL
+effort M
+CITATIONS
+Problem — paper-service.ts:407-429, tests/trading/…, forecast.md show up inconsistently, so the reader cannot tell when evidence is being cited.
+Fix — Move every reference to a consistent "Evidence" line under each feature, same format, and keep the prose clean.
+
+## E10 — ~1,900 words of duplicated scope boilerplate
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+E10 · ~1,900 words of duplicated scope boilerplate
+EDITORIAL
+effort M
+LENGTH
+Problem — Near-identical "Scope: Implemented in source…" paragraphs repeat across the document, plus around 25 repeats of "not statistical qualification or actual iPhone proof".
+Fix — One evidence-status table with columns: Feature, Implemented in source, Unit fixture, Device-verified, Date. Delete the per-section scope paragraphs, keeping only genuine exceptions. Define the disclaimer once in a legend.
+
+## E11 — Naming drift across surfaces
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+E11 · Naming drift across surfaces
+EDITORIAL
+effort S
+NAMING
+Problem — "AI scenario" vs "AI conditional forecast scenario"; "Paper ticket" vs "Paper order lifecycle"; "loss budget" vs "risk templates"; and three names for one screen — workbench, Quant Lab, Quant model studio.
+Fix — Pick canonical names and find-replace. For the quant screen choose one — "Quant Lab" is shortest and already appears in a user-facing instruction.
+
+## E12 — No version number and no date
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+E12 · No version number and no date
+EDITORIAL
+effort S
+METADATA
+Problem — An audit-grade document with no revision identity, so nothing can be cited or superseded.
+Fix — Add a header block: version, date, supersedes, and a short changelog at the foot.
+
+## E13 — An audit wearing a user guide's clothes
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+E13 · An audit wearing a user guide's clothes
+EDITORIAL
+effort S
+FRAMING
+Problem — The document is titled a Feature and Purpose Guide but is structured as a verification log. The reader meets hedges before they meet the product.
+Fix — Add a one-page "How to use this guide" and a status legend up front so the reader knows what "implemented in source" means before encountering it twenty times.
+
+## E14 — The eight source references are never indexed
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+E14 · The eight source references are never indexed
+EDITORIAL
+effort S
+COMPLETENESS
+Problem — They are referred to throughout but never listed together.
+Fix — Add an index of the eight references with ID, full name, and every surface that uses each one.
+
+## E15 — The same three disclaimers repeat in near-identical wording
+
+**Status:** Implemented source path; see ZAX_UPDATE.md for current diagnostics and regression evidence. A listed source implementation is not an unperformed device acceptance test.
+
+### Original requirement
+
+E15 · The same three disclaimers repeat in near-identical wording
+EDITORIAL
+effort S
+REPETITION
+Problem — "Ready is not validated", "not a forecast", and the insufficient-data caveat appear dozens of times in slightly different phrasing.
+Fix — Define each once in the legend with a stable short tag, then use the tag inline.

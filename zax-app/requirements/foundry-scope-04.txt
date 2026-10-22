@@ -1,0 +1,151 @@
+* real time streaming
+* Add advanced charting
+* Institutional/flow data
+* Pull down to refresh page 
+* Real time streaming 
+* Real time level 2
+* Direct exchange feed
+* 
+Rebuild as an expo go reactive native app so i can use in expo go
+I wanna be able to choose my rr for my tp and sl when I click buy or sell. When I click buy or sell I need to see the risk template, entry, stop, target, units, and keep optimal pre trade thoughts, everything else kinda unnecessary. And when I click on a trade under pending closed or open it should also show entry tp and sl for that trade. I want my library to use ai when you upload a photo or file to scan it, scan for data that is needed like the confluences needed to make the trade or basically anything you need to trade that strategy and make sure I have everything needed to support all trading strategies, quant trading strategies,statistical arbitrage and pairs trading, cross sectional and time series momentum, market making, systematic macro and trend following, machine learning. And remove PWB, quant vault, and sgx references there useless. And on alerts make it to where I choose a strategy and a pair and get alerts when more than a certain amount of confluences align-user picks that. Here's the full spec. I've named it **Foundry** for the sake of writing — the concept is the point.
+
+---
+
+## Positioning
+
+A closed-loop trading system that watches everything you do, finds what actually makes money, kills what doesn't, and re-tests itself continuously so it never confuses luck with edge. It sits on top of a live feed so it can also grade *how* you got filled, not just what you traded.
+
+## The core principle
+
+Most trading apps give you either **data** (charts, feeds) or **journaling** (a notebook). Neither closes the loop. Foundry's whole identity is one sentence: **every insight must survive out-of-sample testing before it's allowed to change a rule.**
+
+That's the difference between an app that says "you win 70% on Mondays" and one that says "you win 70% on Mondays, and that held up on the last 6 months you never tuned on, so size it up."
+
+## Architecture
+
+The diagram above is the skeleton — eight layers, with the feedback arrow being the actual product. Walking it:
+
+**Layer 1 — Ingestion.** Broker API sync (pulls fills, fees, timestamps automatically), CSV/manual import as fallback, and a real-time market data feed over WebSocket carrying Level 1 and Level 2. The feed isn't decoration — it's what lets Layer 4 compute your slippage.
+
+**Layer 2 — Storage.** Trade ledger, tick store, feature store. The feature store is the piece most people skip and it's the one that matters: every trade gets reduced to ~40 numeric features (time of day, spread at entry, ATR, distance from VWAP, regime label, size vs. your average, etc.) so patterns can be mined statistically instead of eyeballed.
+
+**Layer 3 — Enrichment.** Auto-tagging: the model reads each trade and assigns a setup label, which you can correct. Regime labeling tags each trade with market state (trending/choppy, high/low volatility). This is where raw trades become analyzable.
+
+**Layer 4 — Analytics.** Expectancy per tag, R-multiple distribution, profit factor, plus **execution quality** — your fill price vs. the NBBO at order time, in basis points. That last one is the module nobody builds and it's often worth more than any strategy tweak.
+
+**Layer 5 — ML core.** Pattern mining across the feature store, a win-probability model, and the **overfitting guard** (more on this below).
+
+**Layer 6 — Strategy lab.** Backtesting, walk-forward optimization, out-of-sample validation, paper trading.
+
+**Layer 7 — AI advisor.** An LLM with tool access to the feature store. It doesn't guess — it queries the stats, cites sample sizes, and proposes specific rule changes.
+
+**Layer 8 — UI.** Dashboard, alerts, coaching feed.
+
+## Beyond what you asked for
+
+The "and more" that actually earns its place:
+
+- **Execution analytics.** Slippage, fill quality, and whether your entries degrade during high-vol windows. Ties straight into the live feed.
+- **Behavioral module.** Detects revenge trading (re-entry within X minutes of a loss), tilt (size escalation after losses), time-of-day decay, and overtrading. Often finds 3–5x more edge than strategy work.
+- **Risk engine.** Max drawdown, Kelly-fraction position sizing suggestion, correlation between your open setups so you're not accidentally 4x long the same thing.
+- **Regime-aware edge.** The same setup graded separately in trending vs. choppy markets, so you learn *when* to run it, not just *whether*.
+- **Alerts.** "You're about to take your worst-performing setup in your worst-performing regime" — pushed live, before entry.
+
+## The anti-overfit discipline
+
+This is the make-or-break. Four hard rules for ai
+
+1. **Minimum sample gate.** No setup gets a verdict under ~100 trades. Anything less is labeled "insufficient data."
+2. **Walk-forward, not backtest.** Optimize on a window, test on the *next* window, roll forward. Repeat.
+3. **Holdout set.** Reserve the most recent slice of data and never let the tuner touch it.
+4. **Multiple-testing correction.** If you test 200 patterns, some will look great by chance. The guard penalizes for how many hypotheses you burned.
+
+The **overfit score** in the mockup is a single number derived from how much of your backtest edge survived the out-of-sample test. High score = fragile. Low = real.
+
+## UX principles
+
+- **One verdict per setup**: keep, size up, cut, or "not enough data." No walls of numbers.
+- **Every claim shows its sample size and confidence.** No naked percentages.
+- **The AI proposes, you approve.** Nothing changes your rules automatically without a click.
+- **Latency and feed status always visible** so you know if you're on live or delayed data.
+- **The journal is the input.** If tagging is a chore, the whole system starves — so tagging has to be one tap, auto-suggested, correctable.
+
+## Tech stack
+
+- Feed: WebSocket stream, direct exchange feeds where cost allows, consolidated otherwise
+- Store: time-series DB for ticks, relational for ledger, vector/columnar for features
+- ML: gradient-boosted trees for the win-probability model (interpretable, handles tabular features well), not a black-box neural net — you need to explain *why*
+- Advisor: LLM with function-calling into the stats layer
+- Mobile-first, because you tag trades on your phone
+
+## Build order
+
+**MVP :** broker sync → auto-tagging → expectancy per tag → dashboard. This alone beats 90% of journals.
+**V2:** execution analytics + behavioral module + regime tagging.
+**V3:** strategy lab (backtest + walk-forward + holdout).
+**V4:** live AI coach with pre-trade alerts.
+**V5:** paper-trade deployment of AI-proposed rules.
+
+
+Don't let the AI "continuously improve" by retuning constantly. Retune on a schedule (weekly), not on every new trade — otherwise you're chasing noise. The loop should be slow and deliberate, not twitchy. Constant improvement done wrong is just curve-fitting in real time.
+
+
+
+ I need the historical profile on all of them to be updated to where all of them actually work and use historical data, and whatever it’s missing to actually work how it should.
+ONLY STRATEGIES FOR NOW
+Order block retest
+Stdv manipulation
+Core sequence
+SMA
+MACD
+EMA pullback
+Breakout and momentum
+BB
+Statistical arbitrage and pairs trading
+Cross sectional and time series momentum
+Market making
+Systematic macro and trend following 
+Machine learning 
+ 
+Here is a comprehensive blueprint for updating your Foundry app spec to include the Expo Go React Native architecture, the UI components for the trade ticket and library scanner, and the historical profiling engines required to make your diverse strategy suite fully functional with backtesting and historical data.
+1. Expo Go React Native Architecture & UI Upgrades
+To ensure seamless execution in Expo Go, your tech stack should prioritize cross-platform compatibility (avoiding custom native modules that require bare workflow where possible, using libraries like expo-sqlite, react-native-reanimated, and lightweight SVG charting).
+A. Buy/Sell Order Modal Spec
+When the user taps Buy or Sell, a streamlined bottom sheet modal opens featuring:
+* Risk Template Selector: Quick-select presets (e.g., 1% Risk, 2% Risk, Fixed Lot Size).
+* Core Execution Inputs:
+    * Entry Price: Auto-populated with current market price or limit price.
+    * Stop Loss (SL) & Take Profit (TP): Sliders or direct inputs with automatic Risk-to-Reward (RR) ratio calculation dynamically updating as SL/TP move.
+    * Target & Units: Calculated automatically based on the risk template and account equity.
+* Optimal Pre-Trade Thoughts: A quick voice-to-text or text input field tagged directly to the trade ledger for psychological tracking.
+B. Trade Details View (Pending, Open, Closed)
+Tapping any trade in the ledger renders a clean card showing:
+* Status Header: Pending / Open / Closed badge.
+* Key Levels: Visual breakdown of Entry Price, Stop Loss, and Take Profit.
+* Execution Metrics: Slippage (in basis points vs. NBBO), fill timestamp, and realized/unrealized P&L.
+C. AI Library Scanner
+* Input: Multi-modal file/photo upload (screenshots of charts, backtest exports, strategy PDFs).
+* Pipeline: The OCR/Vision model extracts parameters, indicators, and rule sets, parsing them into structured JSON (e.g., indicator thresholds, timeframes, market regimes).
+* Strategy Support: Built to parse parameters for discretionary price action, quantitative models, and machine learning feature sets.
+D. Confluence-Based Alerts
+* Configuration: User selects a specific strategy profile, a trading pair, and a minimum confluence threshold (e.g., "Alert me when 4 out of 5 confluences align").
+* Trigger: The backend evaluates live streaming L1/L2 data against the feature store and pushes a real-time notification before entry.
+2. Historical Profile & Backtesting Engine for Your Strategy Suite
+To make every strategy in your list work reliably with historical data, each requires specific data inputs, feature engineering rules, and validation logic.
+Strategy Category	Required Historical Data	Core Logic & Feature Requirements	Validation & Backtest Rule
+Order Block Retest	1-min / 5-min OHLCV + Tick/Volume	Identify impulse moves leaving unmitigated order blocks; track price return and reaction upon retest.	Minimum 100 historical retests per asset class.
+Stdv Manipulation	1-min OHLCV + Rolling VWAP	Calculate rolling standard deviation bands; detect price spikes exceeding \pm 2.5\sigma mean reversion setups.	Must account for transaction costs and spread widening during volatility spikes.
+Core Sequence	Multi-timeframe OHLCV	Multi-period pattern recognition looking for specific fractal or swing sequences.	Out-of-sample walk-forward validation to filter curve-fitted patterns.
+SMA / EMA Pullback / MACD / BB	1-min to Daily OHLCV	Standard indicator calculations (e.g., 20/50/200 SMA, MACD histogram crossovers, Bollinger Band width expansion/contraction).	Optimization must test across multiple parameter lengths to avoid local maxima.
+Breakout & Momentum	Tick / 1-min Bar Data + Volume	Range boundary identification, ATR breakout confirmation, volume surge filters (> 2x average volume).	Slippage penalty heavily weighted on execution modeling.
+Statistical Arbitrage & Pairs	High-frequency synchronized price series	Cointegration testing (Engle-Granger / Johansen), spread calculation, z-score entry/exit thresholds (\pm 2.0\sigma).	Rolling cointegration window checks to prevent structural break failures.
+Cross-Sectional & Time Series Momentum	Daily multi-asset universe history	Universe ranking, trailing total return lookbacks (1M, 3M, 12M), volatility scaling.	Survivorship bias-free historical asset universe data.
+Market Making	L2 Order Book Snapshot Feed	Queue position tracking, spread capture calculation, inventory risk penalty models.	Tick-level simulation matching order book depth and queue priority.
+Systematic Macro & Trend Following	Daily macroeconomic releases + multi-asset price history	Rate differentials, commodity indices, multi-timeframe trend filters (e.g., 200-day moving average).	Long evaluation horizons (5–10 years) across multiple economic cycles.
+Machine Learning	Feature store (lagged returns, order book imbalance, volatility metrics)	Gradient-boosted decision trees (e.g., LightGBM) trained on feature store outputs to predict win probability.	Strict train/validation/holdout split with walk-forward cross-validation.
+3. What Else to Add? (Pro Extensions for Foundry)
+To elevate Foundry even further as a professional-grade quant and trading system, consider integrating these modules:
+* Transaction Cost Analysis (TCA): Breaks down explicit fees (commissions, exchange fees) vs. implicit costs (market impact and opportunity cost) to show your true net edge.
+* Factor Attribution Engine: Automatically decomposes your portfolio or strategy returns into underlying market factors (e.g., market beta, momentum, volatility, size, liquidity) so you know if you're generating alpha or just riding market beta.
+* Dynamic Correlation & Risk Matrix: A real-time heatmap showing the rolling correlation between all your open positions and active strategies to prevent unintended concentrated risk exposure.
+* Monte Carlo Simulation Lab: Runs thousands of synthetic paths on your historical trade distribution to stress-test your strategy's maximum drawdown probability and ruin risk under adverse market conditions.

@@ -1,0 +1,9 @@
+# Verified quantitative provider contracts — 17 October 2026
+
+Coinbase Exchange historical candles accept granularities60,300,900,3600,21600,86400 seconds and at most300buckets per request. Both start/end must be supplied for a custom window; results can precede start. Historical no-tick intervals are missing, not zero-filled. Use bounded windows/deduplication and filter actual closed bars. Source: https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-candles
+
+Coinbase Exchange `level2` now requires authentication. `level2_batch` is explicitly public/no-auth, delivers50ms batches with the same snapshot/l2update schema. Snapshot contains full aggregated bids/asks; update size replaces the old size (not delta), zero deletes the price level. `l2update.time` is engine time for the latest batch event. Heartbeats are per-product every second; do not mistake heartbeat receipt time for the book’s engine timestamp. Source: https://docs.cdp.coinbase.com/exchange/websocket-feed/channels
+
+REST GET /products/{product_id}/book?level=2 returns a full aggregated L2 book, not pagination. Each [price,size,num-orders] level already contains total size; never multiply size by order count. Book may be auction indicative/crossed when auction_mode true: decline normal-quote/maker interpretation. Level1/2 polling is supported; L3 polling is not appropriate. A polled book must be labelled polled, never passed off as streamed. Source: https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-book
+
+These are real single-venue crypto feeds. They do not supply broker order fills, consolidated equity NBBO, queue position, fill probabilities, guaranteed maker executions, fee tiers, survivorship-free equity universes or macro release vintages. Core runtime model catalog was queried successfully; gpt-5-mini, gpt-5 and gemini-3-flash-preview exist today, but app runtime discovery remains necessary.

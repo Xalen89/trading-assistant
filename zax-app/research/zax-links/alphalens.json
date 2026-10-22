@@ -1,0 +1,34 @@
+{
+  "id": "quantopian/alphalens",
+  "name": "Alphalens",
+  "url": "https://github.com/quantopian/alphalens",
+  "license": "Apache License 2.0",
+  "exists": true,
+  "methods": [
+    "Cross-sectional factor-to-forward-return alignment and five-quantile bucketing",
+    "Mean forward return by quantile and Q5-minus-Q1 spread",
+    "Spearman rank information coefficient by date and forward horizon",
+    "Top/bottom quantile turnover and factor-rank autocorrelation",
+    "Optional factor-weighted long/short and group-neutral return diagnostics"
+  ],
+  "reuseDecision": "Implement the published factor-diagnostics method independently in TypeScript; do not run, embed, or port the dormant Python package. If source is later copied or translated, comply with Apache-2.0 redistribution, notice-retention, and modification-notice obligations.",
+  "requirements": [
+    "Timestamped factor scores, point-in-time universe membership, and aligned historical price/mid series through the largest forward horizon",
+    "Explicit score-known time, entry-price convention, bar interval, instrument identity, and price-field provenance to prevent look-ahead bias",
+    "Optional point-in-time group classification only for user-selected group-neutral analysis",
+    "No Alphalens account, API key, live quote feed, broker credential, or paid data subscription is required",
+    "Any provider authentication, rate limits, historical coverage, data storage/redistribution rights, and paid access are provider-specific and must be verified before Zax fetches data"
+  ],
+  "sources": [
+    "https://github.com/quantopian/alphalens",
+    "https://api.github.com/repos/quantopian/alphalens",
+    "https://raw.githubusercontent.com/quantopian/alphalens/master/LICENSE",
+    "https://raw.githubusercontent.com/quantopian/alphalens/master/README.rst",
+    "https://quantopian.github.io/alphalens/alphalens.html",
+    "https://raw.githubusercontent.com/quantopian/alphalens/master/alphalens/performance.py",
+    "https://raw.githubusercontent.com/quantopian/alphalens/master/alphalens/tears.py",
+    "https://api.github.com/repos/quantopian/alphalens/commits?per_page=1",
+    "https://raw.githubusercontent.com/quantopian/alphalens/master/setup.py"
+  ],
+  "reportPath": "/home/ubuntu/stratdesk/research/zax-links/alphalens.md"
+}

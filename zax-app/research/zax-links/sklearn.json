@@ -1,0 +1,29 @@
+{
+  "id": "scikit-learn/scikit-learn",
+  "name": "scikit-learn",
+  "url": "https://github.com/scikit-learn/scikit-learn",
+  "license": "BSD 3-Clause License (actual repository file: COPYING)",
+  "exists": true,
+  "methods": [
+    "Gap-aware chronological validation informed by TimeSeriesSplit(n_splits, max_train_size, test_size, gap), while retaining Zax's custom label-interval purging",
+    "Weighted decision-stump benchmark equivalent to DecisionTreeClassifier(max_depth=1) with criterion gini/log_loss, min_samples_leaf, balanced class weights, and fixed random seed",
+    "Out-of-fold sigmoid/Platt probability calibration following CalibratedClassifierCV(method='sigmoid', cv=<custom purged chronological splitter>, ensemble=False)"
+  ],
+  "reuseDecision": "Recommend an independent TypeScript implementation of the published methods. Do not run or embed scikit-learn in Expo and do not copy source by default. BSD-3-Clause permits selective source reuse only with retained copyright, conditions, and disclaimer and without endorsement claims.",
+  "requirements": [
+    "Owner-controlled, time-indexed historical feature/label data with timestamp, instrument, decision-time feature values, and forward-label end time or horizon",
+    "Existing custom purged chronological splits retained; configure and persist nSplits, testSize, maxTrainSize, and a gap at least as long as the contiguous forward-label horizon",
+    "No scikit-learn payment, GitHub account, brokerage account, provider registration, user-data upload, or runtime GitHub call is required",
+    "Paid historical market/L2 data is only a separate optional requirement if the owner's current data lacks the desired coverage or depth",
+    "If code is ever redistributed from the repository, retain the BSD 3-Clause notice and disclaimer and do not use project/contributor names for endorsement"
+  ],
+  "sources": [
+    "https://raw.githubusercontent.com/scikit-learn/scikit-learn/main/COPYING",
+    "https://raw.githubusercontent.com/scikit-learn/scikit-learn/main/README.rst",
+    "https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html",
+    "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html",
+    "https://scikit-learn.org/stable/modules/generated/sklearn.calibration.CalibratedClassifierCV.html",
+    "https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api"
+  ],
+  "reportPath": "/home/ubuntu/stratdesk/research/zax-links/sklearn.md"
+}

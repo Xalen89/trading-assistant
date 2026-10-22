@@ -1,0 +1,39 @@
+{
+  "id": "github:Mavarun/stat-arb-pairs",
+  "name": "stat-arb-pairs",
+  "url": "https://github.com/Mavarun/stat-arb-pairs",
+  "license": "No license found: GitHub metadata reports license null, the main tree has no LICENSE file, and pyproject.toml has no license field; default copyright applies.",
+  "exists": true,
+  "methods": [
+    "OLS Engle-Granger cointegration on adjusted price levels with residual z-score mean reversion",
+    "Directional Engle-Granger screening using max of two p-values, Benjamini-Hochberg FDR at 0.05, and Johansen trace confirmation",
+    "252-bar rolling formation and 63-bar non-overlapping trading blocks with frozen OLS hedge or causal Kalman hedge",
+    "Explicit two-leg spread and slippage costs plus dynamic-beta re-hedge cost",
+    "AR(1) OU half-life diagnostics, 2 to 40 bar rank band, optional three-half-life time stop",
+    "Nested q_beta selection on 84/21 inner windows over 1e-8 to 1e-4"
+  ],
+  "reuseDecision": "Do not reuse or port repository code: no actual license is present, so default copyright applies. Independently implement the general published statistical methods in TypeScript with a clean-room design; retain no copied code, tests, prose, identifiers, or notebook material. Add only analysis and PAPER simulation, never brokerage execution.",
+  "requirements": [
+    "Aligned daily price-level history with appropriate corporate-action treatment, retained provider/as-of provenance, symbol mapping, and sufficient 252 plus 63 bar history",
+    "A selected equity universe and current-safe point-in-time policy; use user-provided licensed CSVs or procure a provider credential and plan whose terms cover intended storage/display/use",
+    "Do not use yfinance/Yahoo as a production data contract: it is described as research/education and personal-use only, while Yahoo terms restrict automated collection without permission",
+    "Visible paper assumptions for z thresholds, formation/trading dates, FDR level, costs, borrow/impact limitations, and next-bar timing; no broker credential, order routing, or queue-fill model",
+    "Experimental Kalman mode must expose q_alpha 1e-4, q_beta 1e-6, 60-bar warm-up, and optional nested q_beta grid rather than claiming universal defaults"
+  ],
+  "sources": [
+    "https://github.com/Mavarun/stat-arb-pairs",
+    "https://api.github.com/repos/Mavarun/stat-arb-pairs",
+    "https://api.github.com/repos/Mavarun/stat-arb-pairs/git/trees/main?recursive=1",
+    "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository",
+    "https://raw.githubusercontent.com/Mavarun/stat-arb-pairs/main/src/statarb/screening.py",
+    "https://raw.githubusercontent.com/Mavarun/stat-arb-pairs/main/src/statarb/formation.py",
+    "https://raw.githubusercontent.com/Mavarun/stat-arb-pairs/main/src/statarb/kalman.py",
+    "https://raw.githubusercontent.com/Mavarun/stat-arb-pairs/main/src/statarb/nested.py",
+    "https://raw.githubusercontent.com/Mavarun/stat-arb-pairs/main/src/statarb/rank.py",
+    "https://raw.githubusercontent.com/Mavarun/stat-arb-pairs/main/src/statarb/data.py",
+    "https://ranaroussi.github.io/yfinance/",
+    "https://legal.yahoo.com/us/en/yahoo/terms/otos/index.html",
+    "https://api.composer.trade/docs"
+  ],
+  "reportPath": "/home/ubuntu/stratdesk/research/zax-links/mavarun.md"
+}
