@@ -1,17 +1,16 @@
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'node:url';
-import { Pool } from 'pg';
 import { AIService } from './ai.js';
 import { createApp } from './app.js';
 import { PriceService, type OandaConfig } from './prices.js';
-import { MemoryRepository, PostgresRepository, type Repository } from './repository.js';
+import { createDatabasePool, MemoryRepository, PostgresRepository, type Repository } from './repository.js';
 
 dotenv.config({ path: fileURLToPath(new URL('../.env', import.meta.url)), quiet: true });
 async function main() {
   const mode = process.env.DATABASE_URL ? 'live' : 'demo';
   let repository: Repository;
   if (process.env.DATABASE_URL) {
-    const pg = new PostgresRepository(new Pool({ connectionString: process.env.DATABASE_URL, max: 5,
+    const pg = new PostgresRepository(createDatabasePool({ connectionString: process.env.DATABASE_URL, max: 5,
       connectionTimeoutMillis: 5000, idleTimeoutMillis: 30000, statement_timeout: 10000 }));
     await pg.init(); repository = pg;
   } else repository = new MemoryRepository();

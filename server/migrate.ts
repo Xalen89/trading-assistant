@@ -1,7 +1,6 @@
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'node:url';
-import { Pool } from 'pg';
-import { PostgresRepository } from './repository.js';
+import { createDatabasePool, PostgresRepository } from './repository.js';
 
 dotenv.config({ path: fileURLToPath(new URL('../.env', import.meta.url)), quiet: true });
 async function migrate() {
@@ -9,7 +8,7 @@ async function migrate() {
     console.error('DATABASE_URL is required for migrations. Demo mode needs no migration.');
     process.exitCode = 1; return;
   }
-  const repository = new PostgresRepository(new Pool({ connectionString: process.env.DATABASE_URL,
+  const repository = new PostgresRepository(createDatabasePool({ connectionString: process.env.DATABASE_URL,
     max: 1, connectionTimeoutMillis: 5000, statement_timeout: 10000 }));
   try {
     await repository.init();

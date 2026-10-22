@@ -1,7 +1,15 @@
 import { randomUUID } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
-import { Pool } from 'pg';
+import { Pool, type PoolConfig } from 'pg';
 import { ApiError, type Analysis, type Candle, type Instrument, type Strategy, type Timeframe, type Trade, type TradeFilter } from './types.js';
+
+export function createDatabasePool(config: PoolConfig): Pool {
+  const pool = new Pool(config);
+  pool.on('error', () => {
+    console.error('Database connection interrupted. Subsequent requests will reconnect when available.');
+  });
+  return pool;
+}
 
 export const seeds: Strategy[] = [
   { id: 'WR1', name: 'WR1 — unverified template', description: 'Configurable placeholder only. The proprietary WR1 definition is not known or verified; supply your own documented rules before evaluation.',

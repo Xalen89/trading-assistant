@@ -1,8 +1,24 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import type { Pool } from 'pg';
-import { MemoryRepository, PostgresRepository } from '../repository.js';
+import { createDatabasePool, MemoryRepository, PostgresRepository } from '../repository.js';
 import type { Analysis } from '../types.js';
+
+test('database pools handle idle-client errors before initialization without logging sensitive details', async t => {
+  const logged: unknown[][] = [];
+  t.mock.method(console, 'error', (...args: unknown[]) => { logged.push(args); });
+  const pool = createDatabasePool({ max: 1 });
+  try {
+    assert.equal(pool.totalCount, 0);
+    assert.equal(pool.listenerCount('error'), 1);
+    const sensitive = new Error('sensitive database host, query and password must not be logged');
+    assert.doesNotThrow(() => pool.emit('error', sensitive));
+    assert.deepEqual(logged, [['Database connection interrupted. Subsequent requests will reconnect when available.']]);
+    assert.ok(!JSON.stringify(logged).includes(sensitive.message));
+    assert.doesNotThrow(() => pool.emit('error', sensitive));
+    assert.equal(logged.length, 2);
+  } finally { await pool.end(); }
+});
 
 test('PostgreSQL repository parameterizes all user-controlled values and preserves contract mapping', async () => {
   const calls: { sql: string; values: unknown[] }[] = [];
