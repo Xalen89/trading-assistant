@@ -328,9 +328,10 @@ export function scanSetups(
     }
 
     const changes = countDirectionChanges(candles, Math.max(0, entryIndex - 8), entryIndex - 1)
-    const localRange = candles
-      .slice(Math.max(0, entryIndex - 8), entryIndex + 1)
-      .reduce((range, candle) => Math.max(range, candle.high) - Math.min(range, candle.low), 0)
+    const patternWindow = candles.slice(Math.max(0, entryIndex - 8), entryIndex + 1)
+    const localRange =
+      Math.max(...patternWindow.map((candle) => candle.high)) -
+      Math.min(...patternWindow.map((candle) => candle.low))
     const pattern = changes >= 3 && localRange <= legSize
       ? `${changes} direction changes inside ≤1 leg range`
       : 'Sweep → displacement → OTE retracement'

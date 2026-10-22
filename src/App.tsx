@@ -61,7 +61,7 @@ function ChartSnapshot({ candles, setup }: { candles: Candle[]; setup: Setup }) 
     link.href = url
     link.download = `${setup.market.toLowerCase()}-${setup.direction.toLowerCase()}-${new Date(candles[setup.entryIndex].time).toISOString().slice(0, 10)}.svg`
     link.click()
-    URL.revokeObjectURL(url)
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000)
   }
 
   return (
@@ -212,15 +212,13 @@ function App() {
   const marketWins = marketSetups.filter((setup) => setup.result === 'Win')
   const selectedCandleData = selectedSetup ? data[selectedSetup.market] : bars
   function updateMarketData(changedMarket: Market, candles: Candle[]) {
-    setData((current) => {
-      const updated = { ...current, [changedMarket]: candles.slice(-25000) }
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(updated))
-      } catch {
-        setNotice('The file was scanned, but browser storage is full. Export your data before leaving this page.')
-      }
-      return updated
-    })
+    const updated = { ...data, [changedMarket]: candles.slice(-25000) }
+    setData(updated)
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(updated))
+    } catch {
+      setNotice('The file was scanned, but browser storage is full. Export your data before leaving this page.')
+    }
   }
 
   async function importFile(event: ChangeEvent<HTMLInputElement>) {
@@ -249,7 +247,7 @@ function App() {
     link.href = url
     link.download = 'tape-room-workspace.json'
     link.click()
-    URL.revokeObjectURL(url)
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000)
   }
 
   function clearMarket() {
@@ -416,7 +414,7 @@ function App() {
                   {selectedSetup && selectedCandleData.length ? (
                     <>
                       <div className="panel-heading detail-heading">
-                        <div><span className="eyebrow">SETUP EVIDENCE</span><h2>Why it worked</h2></div>
+                        <div><span className="eyebrow">SETUP EVIDENCE</span><h2>{selectedSetup.result === 'Win' ? 'Why it worked' : selectedSetup.result === 'Loss' ? 'Why it failed' : 'Setup evidence'}</h2></div>
                         <span className={`result-pill ${selectedSetup.result.toLowerCase()}`}>{selectedSetup.result}</span>
                       </div>
                       <ChartSnapshot candles={selectedCandleData} setup={selectedSetup} />
@@ -494,9 +492,9 @@ function App() {
               <article><span>01</span><strong>Liquidity sweep</strong><p>Looks for a break of the prior 20-bar high/low that closes back inside, aligned with the recent 20-bar drift.</p></article>
               <article><span>02</span><strong>Retrace into OTE</strong><p>Measures the next 8 bars as the displacement leg, then waits up to 12 bars for a 70.5% retracement (inside 61.8–79%).</p></article>
               <article><span>03</span><strong>Defined exit</strong><p>Stop is the sweep extreme. Target is configurable in R; otherwise closes at the selected bar limit. Same-bar stop/target ties assume stop first.</p></article>
-              <article><span>04</span><strong>Evidence, not advice</strong><p>FVG, opposing-candle OB proxy, New York session, and time-number checks are heuristic. Gaps, spread, and fees are not modeled.</p></article>
+              <article><span>04</span><strong>Evidence, not advice</strong><p>FVG and opposing-candle OB proxy checks are approximate. SMT, STDV, RDRB, news feeds, and broker pricing are not implemented.</p></article>
             </div>
-            <div className="disclaimer"><span>ⓘ</span><p><strong>Research tool, not financial advice.</strong> This scanner infers candidate setups from historical candles; it does not connect to a broker, guarantee results, or reproduce every discretionary WR1/OTE rule. Positive price points are not the same as account profit.</p></div>
+            <div className="disclaimer"><span>ⓘ</span><p><strong>Research tool, not financial advice.</strong> This scanner infers candidate setups from historical candles; it does not connect to a broker, guarantee results, or reproduce every discretionary WR1/OTE rule. SMT, STDV, RDRB, news-wick detection, and live feeds are not implemented. Positive price points are not the same as account profit.</p></div>
           </section>
           <footer className="page-footer"><span>TAPE ROOM <i>·</i> LOCAL STRATEGY JOURNAL</span><button onClick={exportWorkspace} type="button">Export data</button></footer>
         </div>
