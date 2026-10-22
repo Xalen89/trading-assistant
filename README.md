@@ -27,7 +27,7 @@ Open http://localhost:3000. No credentials are required for demo mode. **Demo ca
 Configure the root `.env`:
 
 - `DATABASE_URL`: PostgreSQL connection string. Run `npm run db:migrate` before starting the API. Without it, storage is in memory.
-- `OANDA_API_KEY`, `OANDA_ACCOUNT_ID`: OANDA credentials with access to the requested instruments. `OANDA_ENV=practice` is the default; use `live` for the live endpoint. Instrument availability depends on your account/jurisdiction. Override `OANDA_NAS100_INSTRUMENT` and `OANDA_XAUUSD_INSTRUMENT` if needed.
+- `OANDA_API_KEY`: OANDA token with access to the requested instruments. `OANDA_ENV=practice` is the default; use `live` for the live endpoint. Instrument availability depends on your account/jurisdiction. Override `OANDA_NAS100_INSTRUMENT` and `OANDA_XAUUSD_INSTRUMENT` if needed. The instrument-candles endpoint does not require an account ID.
 - `ANTHROPIC_API_KEY`: enables Claude analysis. `CLAUDE_MODEL` selects a model available to your account. Claude interprets price data; it is **not** a market-data source.
 - `API_TOKEN`: optional shared bearer token protecting the Express API. Set the same value in `web/.env.local`. Never use a `NEXT_PUBLIC_` variable for secrets.
 
@@ -59,7 +59,7 @@ All routes are under `/api`. If configured, send your `API_TOKEN` as a bearer au
 | GET | `/analyses` | Retrieve saved analysis history |
 | POST | `/backtest` | Review historical journal results and winning patterns |
 
-Instruments: `NAS100`, `XAUUSD`. Timeframes: `5m`, `15m`, `1h`, `4h`, `1d`. Price requests accept `instrument`, `timeframe`, `limit`, and optional ISO `from`/`to`. Analysis requests accept `instrument`, `timeframe`, `strategyId`; backtests also require ISO `from`/`to`.
+Instruments: `NAS100`, `XAUUSD`. Timeframes: `5m`, `15m`, `1h`, `4h`, `1d`. Price requests accept `instrument`, `timeframe`, `limit` (1–1,000), and optional ISO `from`/`to`. Analysis requests accept `instrument`, `timeframe`, `strategyId`; backtests also require ISO `from`/`to`. Date windows must be chronological, end no later than now, and span at most 366 days.
 
 ```sh
 curl 'http://127.0.0.1:4000/api/price-data?instrument=NAS100&timeframe=15m&limit=100'

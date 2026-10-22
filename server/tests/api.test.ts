@@ -7,7 +7,7 @@ import { createApp } from '../app.js';
 import { MemoryRepository } from '../repository.js';
 import { PriceService, demoCandles, completed, type PriceProvider, type PriceResult } from '../prices.js';
 import { TradingService, assertNoLookahead, metrics } from '../services.js';
-import { seconds, type Candle, type PriceQuery, type Trade } from '../types.js';
+import { type Candle, type PriceQuery, type Trade } from '../types.js';
 import { dateRange, iso, priceInput, strategyInput, tradeInput } from '../validation.js';
 
 const entry = {
@@ -17,7 +17,7 @@ const entry = {
 };
 async function fixture(apiToken?: string) {
   const repository = new MemoryRepository();
-  const prices = new PriceService(repository, 'demo');
+  const prices = new PriceService(repository);
   const ai = new AIService();
   const server = createApp({ repository, prices, ai, mode: 'demo', apiToken }).listen(0, '127.0.0.1');
   await once(server, 'listening');
@@ -224,7 +224,7 @@ test('AI structured JSON validates types, bounds and observed price provenance',
 test('configured AI failures return sanitized 502 via Express without silent demo fallback', async () => {
   const repository = new MemoryRepository();
   const ai = new AIService({ transport: async () => { throw new Error('secret-provider-detail'); } });
-  const app = createApp({ repository, prices: new PriceService(repository, 'demo'), ai, mode: 'demo' });
+  const app = createApp({ repository, prices: new PriceService(repository), ai, mode: 'demo' });
   const server = app.listen(0, '127.0.0.1'); await once(server, 'listening');
   try {
     const response = await fetch(`http://127.0.0.1:${(server.address() as AddressInfo).port}/api/analyze`, { method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -245,7 +245,7 @@ test('OANDA uses mapped instruments and only provider-complete bounded candles, 
       { time: '2025-01-01T12:00:00Z', complete: true, mid: { o: '100', h: '105', l: '95', c: '103' }, volume: 20 },
     ] }));
   };
-  const service = new PriceService(repository, 'live', { token: 'test-only', environment: 'practice', nas100: 'CUSTOM_NAS', xauusd: 'XAU_USD' }, fetcher);
+  const service = new PriceService(repository, { token: 'test-only', environment: 'practice', nas100: 'CUSTOM_NAS', xauusd: 'XAU_USD' }, fetcher);
   const result = await service.get({ instrument: 'NAS100', timeframe: '5m', limit: 10 }, now);
   assert.equal(result.source, 'oanda');
   assert.equal(result.candles.length, 1);
@@ -253,18 +253,135 @@ test('OANDA uses mapped instruments and only provider-complete bounded candles, 
   assert.equal(request!.searchParams.get('to'), now.toISOString());
   assert.equal(request!.searchParams.get('count'), '10');
   assert.equal(request!.searchParams.get('granularity'), 'M5');
-  const broken = new PriceService(repository, 'live', { token: 'private-token', environment: 'practice', nas100: 'NAS100_USD', xauusd: 'XAU_USD' },
+  assert.equal(request!.searchParams.get('dailyAlignment'), '0');
+  assert.equal(request!.searchParams.get('alignmentTimezone'), 'UTC');
+  const broken = new PriceService(repository, { token: 'private-token', environment: 'practice', nas100: 'NAS100_USD', xauusd: 'XAU_USD' },
     async () => new Response('private raw provider error', { status: 401 }));
   await assert.rejects(() => broken.get({ instrument: 'NAS100', timeframe: '5m', limit: 10 }, now), error => {
     assert.equal((error as { status: number }).status, 502);
     assert.equal((error as Error).message, 'Market data provider request failed.'); return true;
   });
-  await assert.rejects(() => new PriceService(repository, 'live').get({ instrument: 'NAS100', timeframe: '5m', limit: 10 }), error => {
-    assert.equal((error as { status: number }).status, 503); return true;
-  });
+  assert.equal((await new PriceService(repository).get({ instrument: 'NAS100', timeframe: '5m', limit: 10 })).source, 'demo');
 });
 test('empty statistics do not invent outcomes or divide by zero', () => {
   assert.deepEqual(metrics([]), { totalTrades: 0, wins: 0, losses: 0, winRate: null, netPnl: 0 });
   const trade = { ...entry, id: 'test', direction: 'short', entry: 110, exit: 100, quantity: 3 } as Trade;
   assert.equal(metrics([trade]).netPnl, 30);
+});
+test('review endpoints share six-per-minute and thirty-per-hour budgets independently of normal reads', async t => {
+  let clock = Date.now();
+  const initial = clock;
+  t.mock.method(Date, 'now', () => clock);
+  const api = await fixture();
+  const body = { instrument: 'NAS100', timeframe: '5m', strategyId: 'OTE', from: '2025-01-01T00:00:00Z', to: '2025-02-01T00:00:00Z' };
+  try {
+    for (let minute = 0; minute < 5; minute++) {
+      for (let i = 0; i < 6; i++) assert.equal((await api.request('/api/backtest', body)).status, 200);
+      assert.equal((await api.request('/api/analyze', body)).status, 429);
+      assert.equal((await api.request('/api/health')).status, 200);
+      clock += 60001;
+    }
+    const hourly = await fetch(api.base + '/api/backtest', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    assert.equal(hourly.status, 429);
+    assert.ok(Number(hourly.headers.get('retry-after')) > 3000);
+    clock = initial + 3600001;
+    assert.equal((await api.request('/api/backtest', body)).status, 200);
+  } finally { await api.close(); t.mock.restoreAll(); }
+});
+test('concurrency cap remains occupied after a client aborts until provider work finishes', async () => {
+  const repository = new MemoryRepository();
+  let release!: () => void; let ready!: () => void; let calls = 0;
+  const gate = new Promise<void>(resolve => { release = resolve; });
+  const started = new Promise<void>(resolve => { ready = resolve; });
+  const ai = new AIService({ transport: async () => {
+    if (++calls === 3) ready();
+    await gate;
+    return JSON.stringify({ summary: 'Demonstration only.', confidence: 0, direction: 'wait', patterns: [], levels: [] });
+  } });
+  const server = createApp({ repository, prices: new PriceService(repository), ai, mode: 'demo' }).listen(0, '127.0.0.1');
+  await once(server, 'listening');
+  const url = `http://127.0.0.1:${(server.address() as AddressInfo).port}/api/analyze`;
+  const controller = new AbortController();
+  const request = (signal?: AbortSignal) => fetch(url, { method: 'POST', signal, headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ instrument: 'NAS100', timeframe: '5m', strategyId: 'OTE' }) });
+  const pending = [request(controller.signal).catch(() => undefined), request(), request()];
+  try {
+    await started;
+    controller.abort();
+    const denied = await request();
+    assert.equal(denied.status, 429);
+    assert.equal(calls, 3);
+    release();
+    const results = await Promise.all(pending);
+    assert.ok(results.slice(1).every(r => r?.status === 200));
+    assert.equal((await request()).status, 200);
+  } finally {
+    release(); await Promise.allSettled(pending);
+    server.closeAllConnections(); await new Promise<void>(resolve => server.close(() => resolve()));
+  }
+});
+test('market provider response memory is bounded and upstream requests carry an abort signal', async () => {
+  const repository = new MemoryRepository();
+  let cancelled = false;
+  const body = new ReadableStream<Uint8Array>({
+    start(controller) {
+      controller.enqueue(new Uint8Array(1_000_000));
+      controller.enqueue(new Uint8Array(1_000_001));
+    },
+    cancel() { cancelled = true; },
+  });
+  const fetcher: typeof fetch = async (_input, init) => {
+    assert.ok(init?.signal instanceof AbortSignal);
+    assert.equal(init?.redirect, 'error');
+    return new Response(body);
+  };
+  const prices = new PriceService(repository, {
+    token: 'test-only', environment: 'practice', nas100: 'NAS100_USD', xauusd: 'XAU_USD',
+  }, fetcher);
+  await assert.rejects(() => prices.get({ instrument: 'NAS100', timeframe: '5m', limit: 10 }), error => {
+    assert.equal((error as { status: number }).status, 502); return true;
+  });
+  assert.equal(cancelled, true);
+});
+test('market source is independent of health storage mode for all four configurations', async () => {
+  for (const storageMode of ['demo', 'live'] as const) {
+    for (const configured of [false, true]) {
+      const repository = new MemoryRepository();
+      const oanda = configured ? { token: 'test-only', environment: 'practice' as const, nas100: 'NAS100_USD', xauusd: 'XAU_USD' } : undefined;
+      const prices = new PriceService(repository, oanda, async () => new Response(JSON.stringify({ candles: [
+        { time: '2025-01-01T11:50:00Z', complete: true, mid: { o: '100', h: '105', l: '95', c: '103' }, volume: 20 },
+      ] })));
+      const server = createApp({ repository, prices, ai: new AIService(), mode: storageMode }).listen(0, '127.0.0.1');
+      await once(server, 'listening');
+      const base = `http://127.0.0.1:${(server.address() as AddressInfo).port}`;
+      try {
+        assert.equal((await (await fetch(base + '/api/health')).json()).mode, storageMode);
+        const result = await (await fetch(base + '/api/price-data?instrument=NAS100&timeframe=5m&limit=1')).json();
+        assert.equal(result.source, configured ? 'oanda' : 'demo');
+        assert.equal(result.candles.length, 1);
+      } finally { server.closeAllConnections(); await new Promise<void>(resolve => server.close(() => resolve())); }
+    }
+  }
+});
+test('OANDA D/H4 requests use UTC midnight alignment and fixed completion boundaries on DST days', async () => {
+  const repository = new MemoryRepository();
+  for (const day of ['2025-03-09', '2025-11-02']) {
+    for (const timeframe of ['1d', '4h'] as const) {
+      const start = Date.parse(`${day}T00:00:00Z`);
+      const duration = timeframe === '1d' ? 86400000 : 14400000;
+      const prices = new PriceService(repository, {
+        token: 'test-only', environment: 'practice', nas100: 'NAS100_USD', xauusd: 'XAU_USD',
+      }, async input => {
+        const url = new URL(String(input));
+        assert.equal(url.searchParams.get('dailyAlignment'), '0');
+        assert.equal(url.searchParams.get('alignmentTimezone'), 'UTC');
+        assert.equal(url.searchParams.get('granularity'), timeframe === '1d' ? 'D' : 'H4');
+        return new Response(JSON.stringify({ candles: [
+          { time: `${day}T00:00:00Z`, complete: true, mid: { o: '100', h: '105', l: '95', c: '103' }, volume: 20 },
+        ] }));
+      });
+      assert.equal((await prices.get({ instrument: 'NAS100', timeframe, limit: 1 }, new Date(start + duration - 1000))).candles.length, 0);
+      assert.equal((await prices.get({ instrument: 'NAS100', timeframe, limit: 1 }, new Date(start + duration))).candles.length, 1);
+    }
+  }
 });

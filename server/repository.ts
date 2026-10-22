@@ -1,6 +1,5 @@
 import { randomUUID } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
-import path from 'node:path';
 import { Pool } from 'pg';
 import { ApiError, type Analysis, type Candle, type Instrument, type Strategy, type Timeframe, type Trade, type TradeFilter } from './types.js';
 
@@ -58,7 +57,7 @@ export class MemoryRepository implements Repository {
 export class PostgresRepository implements Repository {
   constructor(private pool: Pool) {}
   async init() {
-    await this.pool.query(await readFile(path.join(__dirname, 'schema.sql'), 'utf8'));
+    await this.pool.query(await readFile(new URL('./schema.sql', import.meta.url), 'utf8'));
     for (const seed of seeds) await this.pool.query('INSERT INTO strategies(id,name,description,rules,parameters) VALUES($1,$2,$3,$4,$5) ON CONFLICT(id) DO NOTHING',
       [seed.id, seed.name, seed.description, JSON.stringify(seed.rules), JSON.stringify(seed.parameters)]);
   }

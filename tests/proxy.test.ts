@@ -41,6 +41,20 @@ test("proxy rejects cross-origin and non-JSON mutations", async () => {
   assert.equal((await POST(request("analyze", { method: "POST", body: "{}" }), context("analyze"))).status, 415);
 });
 
+test("proxy accepts browser origin when Next normalizes its internal hostname", async () => {
+  globalThis.fetch = async () => Response.json({ trade: { id: "example" } });
+  const response = await POST(request("trades", {
+    method: "POST",
+    headers: {
+      host: "127.0.0.1:3000",
+      origin: "http://127.0.0.1:3000",
+      "content-type": "application/json",
+    },
+    body: "{}",
+  }), context("trades"));
+  assert.equal(response.status, 200);
+});
+
 test("proxy enforces configured password", async () => {
   process.env.APP_PASSWORD = "test-only-password";
   assert.equal((await GET(request("trades"), context("trades"))).status, 401);

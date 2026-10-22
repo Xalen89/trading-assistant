@@ -28,13 +28,26 @@ export function createApp(options: AppOptions) {
   });
   // Process-wide bounds are intentional for a single-user, local-first MVP.
   let windowStart = Date.now(); let requests = 0; let expensiveRequests = 0;
+  let reviewMinuteStart = Date.now(); let reviewHourStart = Date.now();
+  let reviewsThisMinute = 0; let reviewsThisHour = 0;
   app.use('/api', (_req, res, next) => {
     if (Date.now() - windowStart >= 60000) { windowStart = Date.now(); requests = 0; }
     if (++requests > 240) { res.set('Retry-After', '60').status(429).json({ error: 'Request limit reached; retry shortly.' }); return; }
     next();
   });
-  const bounded = (handler: RequestHandler): RequestHandler => async (req, res, next) => {
+  const bounded = (handler: RequestHandler, review = false): RequestHandler => async (req, res, next) => {
     if (expensiveRequests >= 3) { res.set('Retry-After', '5').status(429).json({ error: 'Analysis capacity reached; retry shortly.' }); return; }
+    if (review) {
+      const now = Date.now();
+      if (now - reviewMinuteStart >= 60000) { reviewMinuteStart = now; reviewsThisMinute = 0; }
+      if (now - reviewHourStart >= 3600000) { reviewHourStart = now; reviewsThisHour = 0; }
+      if (reviewsThisMinute >= 6 || reviewsThisHour >= 30) {
+        const resetAt = reviewsThisHour >= 30 ? reviewHourStart + 3600000 : reviewMinuteStart + 60000;
+        res.set('Retry-After', String(Math.max(1, Math.ceil((resetAt - now) / 1000))))
+          .status(429).json({ error: 'Review budget reached; retry after the indicated delay.' }); return;
+      }
+      reviewsThisMinute++; reviewsThisHour++;
+    }
     expensiveRequests++;
     try { await handler(req, res, next); }
     finally { expensiveRequests--; }
@@ -63,7 +76,7 @@ export function createApp(options: AppOptions) {
     const data = record(req.body);
     const analysis = await trading.analyze(instrument(data.instrument), timeframe(data.timeframe), identifier(data.strategyId));
     res.json({ analysis });
-  }));
+  }, true));
   app.get('/api/analyses', async (req, res) => {
     res.json({ analyses: await repository.analyses(
       req.query.instrument === undefined ? undefined : instrument(req.query.instrument),
@@ -73,7 +86,7 @@ export function createApp(options: AppOptions) {
     const data = record(req.body);
     const range = dateRange(data.from, data.to);
     res.json(await trading.backtest(instrument(data.instrument), timeframe(data.timeframe), identifier(data.strategyId), range.from, range.to));
-  }));
+  }, true));
   app.use((_req, res) => { res.status(404).json({ error: 'Route not found.' }); });
   const onError: ErrorRequestHandler = (error: unknown, _req, res, _next) => {
     if (error instanceof ApiError) { res.status(error.status).json({ error: error.message }); return; }

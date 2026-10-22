@@ -8,3 +8,6 @@ coverage/
 *.log
 *.tsbuildinfo
 .DS_Store
+.browser-profile/
+.bp/
+.dashboard-check.png

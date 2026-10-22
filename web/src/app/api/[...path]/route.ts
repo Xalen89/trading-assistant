@@ -40,7 +40,8 @@ async function proxy(
   }
   if (request.method === "POST") {
     const origin = request.headers.get("origin");
-    if (origin && origin !== request.nextUrl.origin) {
+    const expectedOrigin = `${request.nextUrl.protocol}//${request.headers.get("host") || request.nextUrl.host}`;
+    if (origin && origin !== expectedOrigin) {
       return Response.json({ error: "Cross-origin request rejected" }, { status: 403 });
     }
     if (!request.headers.get("content-type")?.startsWith("application/json")) {

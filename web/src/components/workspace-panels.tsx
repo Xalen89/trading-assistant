@@ -65,12 +65,13 @@ export function Journal({ strategies }: { strategies: Strategy[] }) {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [revision, setRevision] = useState(0);
+  const [defaultTimes] = useState(() => ({ entry: localDate(new Date(Date.now() - 3600000)), exit: localDate(new Date()) }));
   useEffect(() => {
     const controller = new AbortController();
     const query = new URLSearchParams();
     if (filter) query.set("instrument", filter);
     if (strategyFilter) query.set("strategyId", strategyFilter);
-    api<{ trades: Trade[] }>(`/trades?${query}`, { signal: controller.signal }).then((result) => { setTrades(result.trades); setError(""); }).catch((error) => {
+    api<{ trades: Trade[] }>(`/trades?${query}`, { signal: controller.signal }).then((result) => { if (!controller.signal.aborted) { setTrades(result.trades); setError(""); } }).catch((error) => {
       if (!controller.signal.aborted) setError(errorMessage(error));
     }).finally(() => { if (!controller.signal.aborted) setLoading(false); });
     return () => controller.abort();
@@ -99,8 +100,8 @@ export function Journal({ strategies }: { strategies: Strategy[] }) {
     {showForm && <form className="editor-form journal-form" onSubmit={save}>
       <div className="form-grid four"><label>Instrument<select name="instrument" defaultValue={instrument}><option>NAS100</option><option>XAUUSD</option></select></label><label>Timeframe<select name="timeframe" defaultValue={timeframe}>{["5m", "15m", "1h", "4h", "1d"].map((value) => <option key={value}>{value}</option>)}</select></label><label>Strategy<select name="strategyId" required defaultValue={strategyId}>{strategies.map((strategy) => <option key={strategy.id} value={strategy.id}>{strategy.name}</option>)}</select></label><label>Direction<select name="direction"><option value="long">Long</option><option value="short">Short</option></select></label></div>
       <div className="form-grid three"><label>Entry price<input name="entry" type="number" min="0.000001" step="any" required /></label><label>Exit price<input name="exit" type="number" min="0.000001" step="any" required /></label><label>Quantity<input name="quantity" type="number" min="0.000001" step="any" defaultValue={1} required /></label></div>
-      <div className="form-grid"><label>Entry time (local)<input name="entryTime" type="datetime-local" defaultValue={localDate(new Date(Date.now() - 3600000))} required /></label><label>Exit time (local)<input name="exitTime" type="datetime-local" defaultValue={localDate(new Date())} required /></label></div>
-      <label>Trade notes<textarea name="notes" rows={2} placeholder="What did you see? What would you change?" maxLength={5000} /></label>
+      <div className="form-grid"><label>Entry time (local)<input name="entryTime" type="datetime-local" defaultValue={defaultTimes.entry} required /></label><label>Exit time (local)<input name="exitTime" type="datetime-local" defaultValue={defaultTimes.exit} required /></label></div>
+      <label>Trade notes<textarea name="notes" rows={2} placeholder="What did you see? What would you change?" maxLength={4000} /></label>
       <Message error={saveError} /><div className="form-actions"><button className="button primary" disabled={saving}>{saving ? "Saving…" : "Save trade"}</button></div>
     </form>}
     <div className="filter-row"><select aria-label="Filter trades by instrument" value={filter} onChange={(event) => { setFilter(event.target.value); setLoading(true); }}><option value="">All instruments</option><option>NAS100</option><option>XAUUSD</option></select><select aria-label="Filter trades by strategy" value={strategyFilter} onChange={(event) => { setStrategyFilter(event.target.value); setLoading(true); }}><option value="">All strategies</option>{strategies.map((strategy) => <option value={strategy.id} key={strategy.id}>{strategy.name}</option>)}</select><span className="journal-total">{trades.length} trades <span className={pnl >= 0 ? "positive" : "negative"}>{pnl >= 0 ? "+" : ""}{number(pnl)} P&L</span></span></div>
@@ -117,15 +118,19 @@ export function BacktestPanel() {
   const [resultContext, setResultContext] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  const [defaultDates] = useState(() => ({ from: new Date(Date.now() - 30 * 86400000).toISOString().slice(0, 10), to: new Date().toISOString().slice(0, 10) }));
   const request = useRef(0);
   useEffect(() => () => { request.current += 1; }, []);
   async function run(event: FormEvent<HTMLFormElement>) {
     event.preventDefault(); setError(""); setBusy(true);
     const id = ++request.current;
     const data = new FormData(event.currentTarget);
-    const from = `${data.get("from")}T00:00:00.000Z`;
-    const to = `${data.get("to")}T23:59:59.999Z`;
     try {
+      const now = new Date();
+      const from = `${data.get("from")}T00:00:00.000Z`;
+      const endDate = String(data.get("to"));
+      if (endDate > now.toISOString().slice(0, 10)) throw new Error("The review end date cannot be in the future.");
+      const to = new Date(Math.min(new Date(`${endDate}T23:59:59.999Z`).getTime(), now.getTime())).toISOString();
       if (new Date(from) >= new Date(to)) throw new Error("Choose an end date on or after the start date.");
       const response = await api<Backtest>("/backtest", { method: "POST", body: JSON.stringify({ instrument, timeframe, strategyId, from, to }) });
       if (id === request.current) { setResult(response); setResultContext(`${instrument} · ${timeframe} · ${data.get("from")} → ${data.get("to")}`); }
@@ -134,7 +139,7 @@ export function BacktestPanel() {
   return <section>
     <div className="section-heading"><div><h2>Historical review</h2><p>Review observed journal outcomes within a date window.</p></div><span className="badge purple">RESEARCH TOOL</span></div>
     <div className="notice"><Icon name="info" size={17} /><span>This is a review of recorded trades, not an automated strategy simulation. Unlogged setups are not tested. Past outcomes do not predict future returns.</span></div>
-    <form onSubmit={run} className="backtest-form"><label>From (UTC)<input type="date" name="from" defaultValue={new Date(Date.now() - 30 * 86400000).toISOString().slice(0, 10)} required /></label><label>To (UTC)<input type="date" name="to" defaultValue={new Date().toISOString().slice(0, 10)} required /></label><button className="button primary" disabled={busy || !strategyId}><Icon name="flask" size={17} />{busy ? "Reviewing…" : "Run review"}</button></form>
+    <form onSubmit={run} className="backtest-form"><label>From (UTC)<input type="date" name="from" defaultValue={defaultDates.from} max={defaultDates.to} required /></label><label>To (UTC)<input type="date" name="to" defaultValue={defaultDates.to} max={defaultDates.to} required /></label><button className="button primary" disabled={busy || !strategyId}><Icon name="flask" size={17} />{busy ? "Reviewing…" : "Run review"}</button></form>
     <Message error={error} />
     {result ? <div className="backtest-results"><div className="inline space-between"><span className="tiny muted">{resultContext}</span><span className={`badge ${result.source === "demo" ? "amber" : "purple"}`}>{result.source === "demo" ? "DEMO REVIEW" : "AI-ASSISTED REVIEW"}</span></div><div className="stats-grid">{[["Recorded trades", result.totalTrades], ["Wins / losses", `${result.wins} / ${result.losses}`], ["Observed win rate", result.winRate === null ? "N/A" : `${number(result.winRate, 1)}%`], ["Raw net P&L", number(result.netPnl)]].map(([label, value]) => <div key={label}><span>{label}</span><strong>{value}</strong></div>)}</div><p className="body-copy">{result.summary}</p><div className="pattern-tags">{result.patterns.map((pattern) => <span key={pattern}>{pattern}</span>)}</div><h4 className="limitations-title">Know the limitations</h4><ul className="limitations">{result.limitations.map((limitation, index) => <li key={index}>{limitation}</li>)}</ul></div> : <div className="empty-state compact"><Icon name="flask" size={28} /><h3>Turn hindsight into insight</h3><p>Select a date window and review your recorded trades.</p></div>}
   </section>;
@@ -148,12 +153,12 @@ export function SavedAnalyses({ onSelect }: { onSelect: (analysis: Analysis) => 
   const [revision, setRevision] = useState(0);
   useEffect(() => {
     const controller = new AbortController();
-    api<{ analyses: Analysis[] }>(`/analyses?instrument=${instrument}&timeframe=${timeframe}`, { signal: controller.signal }).then((result) => { setAnalyses(result.analyses); setError(""); }).catch((error) => { if (!controller.signal.aborted) setError(errorMessage(error)); }).finally(() => { if (!controller.signal.aborted) setLoading(false); });
+    api<{ analyses: Analysis[] }>(`/analyses?instrument=${instrument}&timeframe=${timeframe}`, { signal: controller.signal }).then((result) => { if (!controller.signal.aborted) { setAnalyses(result.analyses); setError(""); } }).catch((error) => { if (!controller.signal.aborted) setError(errorMessage(error)); }).finally(() => { if (!controller.signal.aborted) setLoading(false); });
     return () => controller.abort();
   }, [instrument, timeframe, revision]);
   return <section>
     <div className="section-heading"><div><h2>Saved analyses</h2><p>Your research trail for {instrument} · {timeframe}.</p></div><button className="button secondary small" disabled={loading} onClick={() => { setLoading(true); setRevision((value) => value + 1); }}><Icon name="refresh" size={15} /> Refresh</button></div>
     <Message error={error} />
-    {loading ? <div className="empty-state compact">Loading saved analyses…</div> : analyses.length ? <div className="saved-list">{analyses.map((analysis) => <button key={analysis.id} className="saved-item" onClick={() => onSelect(analysis)}><div className="inline"><Icon name="spark" size={18} /><strong>{analysis.instrument} <span className="muted">{analysis.timeframe}</span></strong><span className={`badge ${analysis.direction === "long" ? "green" : analysis.direction === "short" ? "red" : "neutral"}`}>{analysis.direction}</span><span className="tiny muted">{analysis.source === "demo" ? "Synthetic demo" : "Claude"}</span></div><p>{analysis.summary}</p><div className="inline space-between tiny muted"><span>{dateTime(analysis.createdAt)}</span><span>{analysis.confidence}% AI confidence · View <Icon name="arrow" size={13} /></span></div></button>)}</div> : <div className="empty-state"><Icon name="history" size={28} /><h3>Keep your perspective</h3><p>Run an analysis to save your first research snapshot.</p></div>}
+    {loading ? <div className="empty-state compact">Loading saved analyses…</div> : analyses.length ? <div className="saved-list">{analyses.map((analysis) => <button key={analysis.id} className="saved-item" onClick={() => onSelect(analysis)}><div className="inline"><Icon name="spark" size={18} /><strong>{analysis.instrument} <span className="muted">{analysis.timeframe}</span></strong><span className={`badge ${analysis.direction === "long" ? "green" : analysis.direction === "short" ? "red" : "neutral"}`}>{analysis.direction}</span><span className="tiny muted">{analysis.source === "demo" ? "Demo analysis" : "Claude"}</span></div><p>{analysis.summary}</p><div className="inline space-between tiny muted"><span>{dateTime(analysis.createdAt)}</span><span>{analysis.confidence}% AI confidence · View <Icon name="arrow" size={13} /></span></div></button>)}</div> : <div className="empty-state"><Icon name="history" size={28} /><h3>Keep your perspective</h3><p>Run an analysis to save your first research snapshot.</p></div>}
   </section>;
 }

@@ -9,6 +9,30 @@ export interface OandaConfig {
   token: string; environment: 'practice' | 'live'; nas100: string; xauusd: string;
 }
 const granularity: Record<Timeframe, string> = { '5m': 'M5', '15m': 'M15', '1h': 'H1', '4h': 'H4', '1d': 'D' };
+async function boundedBody(response: Response): Promise<string> {
+  const limit = 2_000_000;
+  if (Number(response.headers.get('content-length')) > limit) {
+    await response.body?.cancel();
+    throw new Error('Oversized response');
+  }
+  const reader = response.body?.getReader();
+  if (!reader) throw new Error('Missing provider response');
+  const chunks: Uint8Array[] = [];
+  let size = 0;
+  try {
+    while (true) {
+      const chunk = await reader.read();
+      if (chunk.done) break;
+      size += chunk.value.byteLength;
+      if (size > limit) throw new Error('Oversized response');
+      chunks.push(chunk.value);
+    }
+    return Buffer.concat(chunks, size).toString('utf8');
+  } finally {
+    await reader.cancel().catch(() => {});
+    reader.releaseLock();
+  }
+}
 
 export function completed(candles: Candle[], timeframe: Timeframe, asOf: Date): Candle[] {
   const cutoff = asOf.getTime() / 1000;
@@ -52,15 +76,14 @@ function parseOanda(value: unknown): Candle[] {
 }
 export class PriceService implements PriceProvider {
   readonly source: 'demo' | 'oanda';
-  constructor(private repository: Repository, private mode: 'demo' | 'live', private oanda?: OandaConfig, private fetcher: typeof fetch = fetch) {
-    this.source = mode === 'demo' ? 'demo' : 'oanda';
+  constructor(private repository: Repository, private oanda?: OandaConfig, private fetcher: typeof fetch = fetch) {
+    this.source = oanda ? 'oanda' : 'demo';
   }
   async get(query: PriceQuery, asOf = new Date()): Promise<PriceResult> {
     const effectiveAsOf = new Date(Math.min(asOf.getTime(), Date.now(), query.to ? Date.parse(query.to) : Infinity));
     let candles: Candle[];
-    if (this.mode === 'demo') candles = demoCandles(query, effectiveAsOf);
+    if (!this.oanda) candles = demoCandles(query, effectiveAsOf);
     else {
-      if (!this.oanda) throw new ApiError(503, 'Live market data is not configured.');
       const providerInstrument = query.instrument === 'NAS100' ? this.oanda.nas100 : this.oanda.xauusd;
       const host = this.oanda.environment === 'live' ? 'https://api-fxtrade.oanda.com' : 'https://api-fxpractice.oanda.com';
       const url = new URL(`/v3/instruments/${encodeURIComponent(providerInstrument)}/candles`, host);
@@ -68,11 +91,13 @@ export class PriceService implements PriceProvider {
       url.searchParams.set('price', 'M');
       url.searchParams.set('count', String(query.limit));
       url.searchParams.set('to', effectiveAsOf.toISOString());
+      // UTC alignment keeps D/H4 durations fixed across New York DST transitions.
+      url.searchParams.set('dailyAlignment', '0');
+      url.searchParams.set('alignmentTimezone', 'UTC');
       try {
         const response = await this.fetcher(url, { headers: { Authorization: 'Bearer ' + this.oanda.token }, signal: AbortSignal.timeout(10000), redirect: 'error' });
-        if (!response.ok) throw new Error('Provider failure');
-        const body = await response.text();
-        if (body.length > 2_000_000) throw new Error('Oversized response');
+        if (!response.ok) { await response.body?.cancel(); throw new Error('Provider failure'); }
+        const body = await boundedBody(response);
         candles = parseOanda(JSON.parse(body));
       } catch {
         throw new ApiError(502, 'Market data provider request failed.');
@@ -81,7 +106,7 @@ export class PriceService implements PriceProvider {
     candles = completed(candles, query.timeframe, effectiveAsOf)
       .filter(c => !query.from || c.time >= Date.parse(query.from) / 1000)
       .slice(-query.limit);
-    const source = this.mode === 'demo' ? 'demo' : 'oanda';
+    const source = this.source;
     await this.repository.saveCandles(query.instrument, query.timeframe, source, candles);
     return { candles, instrument: query.instrument, timeframe: query.timeframe, source, asOf: effectiveAsOf.toISOString() };
   }

@@ -26,7 +26,8 @@ export class TradingService {
     for (const trade of trades.filter(t => pnl(t) > 0).slice(0, 5)) {
       const result = await this.prices.get({ instrument: trade.instrument, timeframe: trade.timeframe, limit: 60, to: trade.entryTime }, new Date(trade.entryTime));
       assertNoLookahead(result.candles, trade.timeframe, trade.entryTime);
-      if (result.candles.length) successful.push({ tradeId: trade.id, entryTime: trade.entryTime, candles: result.candles });
+      if (result.candles.length) successful.push({ tradeId: trade.id, entryTime: trade.entryTime,
+        direction: trade.direction, entryPrice: trade.entry, candles: result.candles });
     }
     return successful;
   }
@@ -67,6 +68,7 @@ export class TradingService {
       'Win rate is the observed share of logged trades with positive gross P&L, not a predictive probability. Breakeven trades count in the denominator, not as wins or losses.',
       'Gross P&L = (exit - entry) × quantity × direction. Fees, financing, slippage, contract multipliers, and currency conversion are excluded.',
       'Patterns use at most five most recent successful entries, each with at most 60 candles completed by entry; selection bias and small samples limit conclusions.',
+      `Historical entry windows supplied for pattern extraction: ${successfulEntries.length}; journal metrics cover ${stats.totalTrades} matching closed trades.`,
       'WR1 has no verified proprietary definition here; both strategy seeds require user configuration and independent validation.',
       ...(this.prices.source === 'demo' ? ['Market data is deterministic synthetic demonstration data, not historical market prices.'] : []),
       ...(result.source === 'demo' ? ['AI is not configured. Pattern output is a demonstration only; no real recommendations are provided.'] : []),

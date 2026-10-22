@@ -3,7 +3,9 @@ import { ApiError, type Analysis, type Candle, type Strategy, type Trade } from 
 import { number, record, stringList, text } from './validation.js';
 
 export type AIFields = Pick<Analysis, 'summary' | 'confidence' | 'direction' | 'patterns' | 'levels'>;
-export interface HistoricalSample { tradeId: string; entryTime: string; candles: Candle[] }
+export interface HistoricalSample {
+  tradeId: string; entryTime: string; direction: Trade['direction']; entryPrice: number; candles: Candle[];
+}
 export interface AIContext {
   strategy: Strategy; candles: Candle[]; asOf: string; successfulEntries: HistoricalSample[];
   sampleSize: number; historicalWinRate: number | null; marketSource: 'demo' | 'oanda';
