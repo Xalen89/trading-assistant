@@ -1,0 +1,16 @@
+node_modules
+.env
+.env.*
+!.env.example
+.venv
+.cache
+.expo
+__pycache__
+**/__pycache__
+*.pyc
+dist
+web-dist
+artifacts
+uploads
+downloads
+.git

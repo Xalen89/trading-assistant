@@ -9,8 +9,10 @@ import { createContext } from "./context";
 import { createCorsMiddleware } from "./cors";
 import { registerTradingScheduler } from "../trading/notifications";
 import { registerWebApp } from "./web-app";
+import { migrateDatabase } from "./migrate";
 
 async function startServer() {
+  await migrateDatabase();
   const app = express();
   const server = createServer(app);
 
@@ -54,4 +56,5 @@ async function startServer() {
 
 startServer().catch(() => {
   console.error("[api] server failed to start");
+  process.exitCode = 1;
 });
